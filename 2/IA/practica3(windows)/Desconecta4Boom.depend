@@ -1,0 +1,604 @@
+# depslib dependency file v1.0
+1461945874 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4_windows\conexion.cpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<winsock2.h>
+	"conexion.h"
+
+1430474350 c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4_windows\conexion.h
+	<winsock2.h>
+
+1152200576 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4_windows\include\glui.cpp
+	"glui_internal_control.h"
+
+1152201212 c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4_windows\include\glui_internal_control.h
+	"GL/glui.h"
+	"glui_internal.h"
+
+1208858522 c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4_windows\include\gl\glui.h
+	"openglut.h"
+	<cstdlib>
+	<cstdio>
+	<cstring>
+	<string>
+	<vector>
+
+1207922190 c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4_windows\include\gl\openglut.h
+	"openglut_std.h"
+	"openglut_ext.h"
+
+1208460342 c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4_windows\include\gl\openglut_std.h
+	<windows.h>
+	"gl.h"
+	"glu.h"
+
+1107063320 c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4_windows\include\gl\gl.h
+
+1208460414 c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4_windows\include\gl\glu.h
+	<stddef.h>
+	"gl.h"
+
+1207922190 c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4_windows\include\gl\openglut_ext.h
+
+1120528640 c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4_windows\include\glui_internal.h
+	<cstdio>
+	<cmath>
+
+1152200576 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4_windows\include\glui_bitmap_img_data.cpp
+
+1152200576 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4_windows\include\glui_bitmaps.cpp
+	"GL/glui.h"
+	"glui_internal.h"
+	<cassert>
+
+1152200576 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4_windows\include\glui_button.cpp
+	"glui_internal_control.h"
+
+1152200576 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4_windows\include\glui_column.cpp
+	"glui_internal_control.h"
+
+1152200576 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4_windows\include\glui_control.cpp
+	"glui_internal_control.h"
+
+1152200576 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4_windows\include\glui_edittext.cpp
+	"glui_internal_control.h"
+	<cassert>
+
+1240413832 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4_windows\include\glui_filebrowser.cpp
+	"GL/glui.h"
+	"glui_internal.h"
+	<sys/types.h>
+	<dirent.h>
+	<unistd.h>
+	<windows.h>
+	<sys/stat.h>
+	<iostream>
+
+1152200576 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4_windows\include\glui_list.cpp
+	"glui_internal_control.h"
+	<cmath>
+	<sys/timeb.h>
+
+1120535008 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4_windows\include\glui_node.cpp
+	"GL/glui.h"
+	"glui_internal.h"
+
+1208456570 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4_windows\include\glui_panel.cpp
+	"glui_internal_control.h"
+
+1152200576 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4_windows\include\glui_radio.cpp
+	"glui_internal_control.h"
+	<cassert>
+
+1152200576 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4_windows\include\glui_rollout.cpp
+	"glui_internal_control.h"
+
+1152200576 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4_windows\include\glui_scrollbar.cpp
+	"glui_internal_control.h"
+	<cmath>
+	<cassert>
+
+1152200576 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4_windows\include\glui_spinner.cpp
+	"glui_internal_control.h"
+	<cmath>
+	<cassert>
+
+1152200576 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4_windows\include\glui_statictext.cpp
+	"glui_internal_control.h"
+
+1120535008 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4_windows\include\glui_string.cpp
+	"GL/glui.h"
+	<stdarg.h>
+
+1120535008 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4_windows\include\glui_window.cpp
+	"GL/glui.h"
+	"glui_internal.h"
+
+1401648200 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4_windows\main.cpp
+	"GUI.h"
+
+1430127082 c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4_windows\gui.h
+	<fstream>
+	"include/GL/glui.h"
+
+1461945874 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\conexion.cpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<winsock2.h>
+	"conexion.h"
+
+1430474350 c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\conexion.h
+	<winsock2.h>
+
+1461947047 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\environment.cpp
+	<iostream>
+	<cmath>
+	<iomanip>
+	<string>
+	"stdlib.h"
+	"environment.h"
+	"include/GL/glui.h"
+
+1461950791 c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\environment.h
+	<string>
+	<fstream>
+
+1208858522 c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\gl\glui.h
+	"openglut.h"
+	<cstdlib>
+	<cstdio>
+	<cstring>
+	<string>
+	<vector>
+
+1207922190 c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\gl\openglut.h
+	"openglut_std.h"
+	"openglut_ext.h"
+
+1208460342 c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\gl\openglut_std.h
+	<windows.h>
+	"gl.h"
+	"glu.h"
+
+1107063320 c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\gl\gl.h
+
+1208460414 c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\gl\glu.h
+	<stddef.h>
+	"gl.h"
+
+1207922190 c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\gl\openglut_ext.h
+
+1462096418 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\gui.cpp
+	<fstream>
+	<sstream>
+	<iomanip>
+	<iostream>
+	<string>
+	"GUI.h"
+	<stdlib.h>
+	"environment.h"
+	"player.h"
+	"conexion.h"
+
+1430127082 c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\gui.h
+	<fstream>
+	"include/GL/glui.h"
+
+1401648200 c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\player.h
+	"environment.h"
+
+1152200576 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui.cpp
+	"glui_internal_control.h"
+
+1152201212 c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_internal_control.h
+	"GL/glui.h"
+	"glui_internal.h"
+
+1120528640 c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_internal.h
+	<cstdio>
+	<cmath>
+
+1152200576 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_bitmap_img_data.cpp
+
+1152200576 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_bitmaps.cpp
+	"GL/glui.h"
+	"glui_internal.h"
+	<cassert>
+
+1152200576 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_button.cpp
+	"glui_internal_control.h"
+
+1152200576 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_column.cpp
+	"glui_internal_control.h"
+
+1152200576 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_control.cpp
+	"glui_internal_control.h"
+
+1152200576 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_edittext.cpp
+	"glui_internal_control.h"
+	<cassert>
+
+1240413832 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_filebrowser.cpp
+	"GL/glui.h"
+	"glui_internal.h"
+	<sys/types.h>
+	<dirent.h>
+	<unistd.h>
+	<windows.h>
+	<sys/stat.h>
+	<iostream>
+
+1152200576 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_list.cpp
+	"glui_internal_control.h"
+	<cmath>
+	<sys/timeb.h>
+
+1120535008 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_node.cpp
+	"GL/glui.h"
+	"glui_internal.h"
+
+1208456570 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_panel.cpp
+	"glui_internal_control.h"
+
+1152200576 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_radio.cpp
+	"glui_internal_control.h"
+	<cassert>
+
+1152200576 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_rollout.cpp
+	"glui_internal_control.h"
+
+1152200576 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_scrollbar.cpp
+	"glui_internal_control.h"
+	<cmath>
+	<cassert>
+
+1152200576 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_spinner.cpp
+	"glui_internal_control.h"
+	<cmath>
+	<cassert>
+
+1152200576 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_statictext.cpp
+	"glui_internal_control.h"
+
+1120535008 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_string.cpp
+	"GL/glui.h"
+	<stdarg.h>
+
+1120535008 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_window.cpp
+	"GL/glui.h"
+	"glui_internal.h"
+
+1401648200 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\main.cpp
+	"GUI.h"
+
+1461946357 source:c:\documents and settings\a\mis documentos\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\player.cpp
+	<iostream>
+	<cstdlib>
+	<vector>
+	<queue>
+	"player.h"
+	"environment.h"
+
+1461949474 source:c:\users\usuario\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\conexion.cpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<winsock2.h>
+	"conexion.h"
+
+1430477950 c:\users\usuario\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\conexion.h
+	<winsock2.h>
+
+1461950647 source:c:\users\usuario\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\environment.cpp
+	<iostream>
+	<cmath>
+	<iomanip>
+	<string>
+	"stdlib.h"
+	"environment.h"
+	"include/GL/glui.h"
+
+1461954391 c:\users\usuario\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\environment.h
+	<string>
+	<fstream>
+
+1208862122 c:\users\usuario\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\gl\glui.h
+	"openglut.h"
+	<cstdlib>
+	<cstdio>
+	<cstring>
+	<string>
+	<vector>
+
+1207925790 c:\users\usuario\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\gl\openglut.h
+	"openglut_std.h"
+	"openglut_ext.h"
+
+1208463942 c:\users\usuario\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\gl\openglut_std.h
+	<windows.h>
+	"gl.h"
+	"glu.h"
+
+1107063320 c:\users\usuario\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\gl\gl.h
+
+1208464014 c:\users\usuario\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\gl\glu.h
+	<stddef.h>
+	"gl.h"
+
+1207925790 c:\users\usuario\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\gl\openglut_ext.h
+
+1462100018 source:c:\users\usuario\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\gui.cpp
+	<fstream>
+	<sstream>
+	<iomanip>
+	<iostream>
+	<string>
+	"GUI.h"
+	<stdlib.h>
+	"environment.h"
+	"player.h"
+	"conexion.h"
+
+1430130682 c:\users\usuario\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\gui.h
+	<fstream>
+	"include/GL/glui.h"
+
+1401651800 c:\users\usuario\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\player.h
+	"environment.h"
+
+1152204176 source:c:\users\usuario\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui.cpp
+	"glui_internal_control.h"
+
+1152204812 c:\users\usuario\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_internal_control.h
+	"GL/glui.h"
+	"glui_internal.h"
+
+1120532240 c:\users\usuario\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_internal.h
+	<cstdio>
+	<cmath>
+
+1152204176 source:c:\users\usuario\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_bitmap_img_data.cpp
+
+1152204176 source:c:\users\usuario\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_bitmaps.cpp
+	"GL/glui.h"
+	"glui_internal.h"
+	<cassert>
+
+1152204176 source:c:\users\usuario\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_button.cpp
+	"glui_internal_control.h"
+
+1152204176 source:c:\users\usuario\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_column.cpp
+	"glui_internal_control.h"
+
+1152204176 source:c:\users\usuario\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_control.cpp
+	"glui_internal_control.h"
+
+1152204176 source:c:\users\usuario\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_edittext.cpp
+	"glui_internal_control.h"
+	<cassert>
+
+1240417432 source:c:\users\usuario\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_filebrowser.cpp
+	"GL/glui.h"
+	"glui_internal.h"
+	<sys/types.h>
+	<dirent.h>
+	<unistd.h>
+	<windows.h>
+	<sys/stat.h>
+	<iostream>
+
+1152204176 source:c:\users\usuario\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_list.cpp
+	"glui_internal_control.h"
+	<cmath>
+	<sys/timeb.h>
+
+1120538608 source:c:\users\usuario\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_node.cpp
+	"GL/glui.h"
+	"glui_internal.h"
+
+1208460170 source:c:\users\usuario\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_panel.cpp
+	"glui_internal_control.h"
+
+1152204176 source:c:\users\usuario\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_radio.cpp
+	"glui_internal_control.h"
+	<cassert>
+
+1152204176 source:c:\users\usuario\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_rollout.cpp
+	"glui_internal_control.h"
+
+1152204176 source:c:\users\usuario\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_scrollbar.cpp
+	"glui_internal_control.h"
+	<cmath>
+	<cassert>
+
+1152204176 source:c:\users\usuario\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_spinner.cpp
+	"glui_internal_control.h"
+	<cmath>
+	<cassert>
+
+1152204176 source:c:\users\usuario\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_statictext.cpp
+	"glui_internal_control.h"
+
+1120538608 source:c:\users\usuario\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_string.cpp
+	"GL/glui.h"
+	<stdarg.h>
+
+1120538608 source:c:\users\usuario\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\include\glui_window.cpp
+	"GL/glui.h"
+	"glui_internal.h"
+
+1401651800 source:c:\users\usuario\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\main.cpp
+	"GUI.h"
+
+1461949957 source:c:\users\usuario\google drive\ia 2015-2016 carpeta compartida_\practicas\practica3\software\windows\desconecta4boom_windows\player.cpp
+	<iostream>
+	<cstdlib>
+	<vector>
+	<queue>
+	"player.h"
+	"environment.h"
+
+1461949476 source:c:\users\xkuzz\desktop\ia-p3\conexion.cpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<winsock2.h>
+	"conexion.h"
+
+1430477950 c:\users\xkuzz\desktop\ia-p3\conexion.h
+	<winsock2.h>
+
+1462468728 source:c:\users\xkuzz\desktop\ia-p3\environment.cpp
+	<iostream>
+	<cmath>
+	<iomanip>
+	<string>
+	"stdlib.h"
+	"environment.h"
+	"include/GL/glui.h"
+
+1461954392 c:\users\xkuzz\desktop\ia-p3\environment.h
+	<string>
+	<fstream>
+
+1208862122 c:\users\xkuzz\desktop\ia-p3\include\gl\glui.h
+	"openglut.h"
+	<cstdlib>
+	<cstdio>
+	<cstring>
+	<string>
+	<vector>
+
+1207925790 c:\users\xkuzz\desktop\ia-p3\include\gl\openglut.h
+	"openglut_std.h"
+	"openglut_ext.h"
+
+1208463942 c:\users\xkuzz\desktop\ia-p3\include\gl\openglut_std.h
+	<windows.h>
+	"gl.h"
+	"glu.h"
+
+1107066920 c:\users\xkuzz\desktop\ia-p3\include\gl\gl.h
+
+1208464014 c:\users\xkuzz\desktop\ia-p3\include\gl\glu.h
+	<stddef.h>
+	"gl.h"
+
+1207925790 c:\users\xkuzz\desktop\ia-p3\include\gl\openglut_ext.h
+
+1462100018 source:c:\users\xkuzz\desktop\ia-p3\gui.cpp
+	<fstream>
+	<sstream>
+	<iomanip>
+	<iostream>
+	<string>
+	"GUI.h"
+	<stdlib.h>
+	"environment.h"
+	"player.h"
+	"conexion.h"
+
+1430130682 c:\users\xkuzz\desktop\ia-p3\gui.h
+	<fstream>
+	"include/GL/glui.h"
+
+1465043101 c:\users\xkuzz\desktop\ia-p3\player.h
+	"environment.h"
+
+1152204176 source:c:\users\xkuzz\desktop\ia-p3\include\glui.cpp
+	"glui_internal_control.h"
+
+1152204812 c:\users\xkuzz\desktop\ia-p3\include\glui_internal_control.h
+	"GL/glui.h"
+	"glui_internal.h"
+
+1120532240 c:\users\xkuzz\desktop\ia-p3\include\glui_internal.h
+	<cstdio>
+	<cmath>
+
+1152204176 source:c:\users\xkuzz\desktop\ia-p3\include\glui_bitmap_img_data.cpp
+
+1152204176 source:c:\users\xkuzz\desktop\ia-p3\include\glui_bitmaps.cpp
+	"GL/glui.h"
+	"glui_internal.h"
+	<cassert>
+
+1152204176 source:c:\users\xkuzz\desktop\ia-p3\include\glui_button.cpp
+	"glui_internal_control.h"
+
+1152204176 source:c:\users\xkuzz\desktop\ia-p3\include\glui_column.cpp
+	"glui_internal_control.h"
+
+1152204176 source:c:\users\xkuzz\desktop\ia-p3\include\glui_control.cpp
+	"glui_internal_control.h"
+
+1152204176 source:c:\users\xkuzz\desktop\ia-p3\include\glui_edittext.cpp
+	"glui_internal_control.h"
+	<cassert>
+
+1240417432 source:c:\users\xkuzz\desktop\ia-p3\include\glui_filebrowser.cpp
+	"GL/glui.h"
+	"glui_internal.h"
+	<sys/types.h>
+	<dirent.h>
+	<unistd.h>
+	<windows.h>
+	<sys/stat.h>
+	<iostream>
+
+1152204176 source:c:\users\xkuzz\desktop\ia-p3\include\glui_list.cpp
+	"glui_internal_control.h"
+	<cmath>
+	<sys/timeb.h>
+
+1120538608 source:c:\users\xkuzz\desktop\ia-p3\include\glui_node.cpp
+	"GL/glui.h"
+	"glui_internal.h"
+
+1208460170 source:c:\users\xkuzz\desktop\ia-p3\include\glui_panel.cpp
+	"glui_internal_control.h"
+
+1152204176 source:c:\users\xkuzz\desktop\ia-p3\include\glui_radio.cpp
+	"glui_internal_control.h"
+	<cassert>
+
+1152204176 source:c:\users\xkuzz\desktop\ia-p3\include\glui_rollout.cpp
+	"glui_internal_control.h"
+
+1152204176 source:c:\users\xkuzz\desktop\ia-p3\include\glui_scrollbar.cpp
+	"glui_internal_control.h"
+	<cmath>
+	<cassert>
+
+1152204176 source:c:\users\xkuzz\desktop\ia-p3\include\glui_spinner.cpp
+	"glui_internal_control.h"
+	<cmath>
+	<cassert>
+
+1152204176 source:c:\users\xkuzz\desktop\ia-p3\include\glui_statictext.cpp
+	"glui_internal_control.h"
+
+1120538608 source:c:\users\xkuzz\desktop\ia-p3\include\glui_string.cpp
+	"GL/glui.h"
+	<stdarg.h>
+
+1120538608 source:c:\users\xkuzz\desktop\ia-p3\include\glui_window.cpp
+	"GL/glui.h"
+	"glui_internal.h"
+
+1401651800 source:c:\users\xkuzz\desktop\ia-p3\main.cpp
+	"GUI.h"
+
+1465043096 source:c:\users\xkuzz\desktop\ia-p3\player.cpp
+	<iostream>
+	<cstdlib>
+	<limits>
+	"player.h"
+	"environment.h"
+
