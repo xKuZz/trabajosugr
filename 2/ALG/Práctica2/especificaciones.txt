@@ -1,0 +1,2 @@
+Intel(R) Core(TM) i3-3217U CPU @ 1.80GHz
+4 GB RAM

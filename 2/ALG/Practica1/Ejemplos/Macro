@@ -1,0 +1,9 @@
+#!/bin/bash
+echo "" > salida.dat 
+i=500
+while [$i - lt 30000]
+do
+./heapsort $i >> salida.dat
+i=$(($i+500))
+#echo $i
+done

@@ -1,0 +1,151 @@
+
+
+*******************************************************************************
+Mon Apr 04 16:34:22 2016
+
+
+FIT:    data read from 'fuerzabruta.dat'
+        format = z
+        #datapoints = 30
+        residuals are weighted equally (unit weight)
+
+function used for fitting: fuerza_bruta(x)
+	fuerza_bruta(x)=a1*x^2+a2*x+a3
+fitted parameters initialized with current variable values
+
+
+
+*******************************************************************************
+Mon Apr 04 16:35:04 2016
+
+
+FIT:    data read from 'fuerzabruta.dat'
+        format = z
+        #datapoints = 30
+        residuals are weighted equally (unit weight)
+
+function used for fitting: fuerza_bruta(x)
+	fuerza_bruta(x)=a1*x*x+a2*x+a3
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a1            a2            a3           
+   0 5.2744290685e+18  0.00e+00 2.42e+08  1.000000e+00  1.000000e+00  1.000000e+00
+  11 3.3253191055e+02 -4.57e-01 2.42e-03  2.210728e-07  2.125060e-04 -7.407928e-01
+
+After 11 iterations the fit converged.
+final sum of squares of residuals : 332.532
+rel. change during last iteration : -4.57135e-006
+
+degrees of freedom    (FIT_NDF)                        : 27
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 3.50942
+variance of residuals (reduced chisquare) = WSSR/ndf   : 12.316
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a1              = 2.21073e-007     +/- 9.578e-009   (4.333%)
+a2              = 0.000212506      +/- 0.000306     (144%)
+a3              = -0.740793        +/- 2.058        (277.8%)
+
+correlation matrix of the fit parameters:
+                a1     a2     a3     
+a1              1.000 
+a2             -0.970  1.000 
+a3              0.770 -0.882  1.000 
+
+
+*******************************************************************************
+Mon Apr 04 16:41:29 2016
+
+
+FIT:    data read from 'dyv.dat'
+        format = z
+        #datapoints = 30
+        residuals are weighted equally (unit weight)
+
+function used for fitting: dyv(x)
+	dyv(x)=a1*x*log(x)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a1           
+   0 1.7649084441e-01  0.00e+00 3.92e-02  2.210728e-07
+   3 2.8323100075e-03 -7.08e-04 3.92e-05  6.497464e-07
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 0.00283231
+rel. change during last iteration : -7.08435e-009
+
+degrees of freedom    (FIT_NDF)                        : 29
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.0098826
+variance of residuals (reduced chisquare) = WSSR/ndf   : 9.76659e-005
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a1              = 6.49746e-007     +/- 1.017e-008   (1.565%)
+
+
+*******************************************************************************
+Mon Apr 04 16:45:29 2016
+
+
+FIT:    data read from 'dyv.dat'
+        format = z
+        #datapoints = 30
+        residuals are weighted equally (unit weight)
+
+function used for fitting: dyv(x)
+	dyv(x)=a0*log(x)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a0           
+   0 2.6112036785e+03  0.00e+00 9.43e+00  1.000000e+00
+   3 7.6691813219e-02 -3.93e-01 9.43e-03  1.103510e-02
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 0.0766918
+rel. change during last iteration : -3.9339e-006
+
+degrees of freedom    (FIT_NDF)                        : 29
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.0514251
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.00264455
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a0              = 0.0110351        +/- 0.0009953    (9.019%)
+
+
+*******************************************************************************
+Mon Apr 04 16:45:40 2016
+
+
+FIT:    data read from 'fuerzabruta.dat'
+        format = z
+        #datapoints = 30
+        residuals are weighted equally (unit weight)
+
+function used for fitting: fuerza_bruta(x)
+	fuerza_bruta(x)=a1*x*x+a2*x+a3
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a1            a2            a3           
+   0 9.6948812928e+05  0.00e+00 1.57e+02  6.497464e-07  2.125060e-04 -7.407928e-01
+   3 3.3253192364e+02 -5.57e-01 1.57e-01  2.210817e-07  2.122472e-04 -7.398293e-01
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 332.532
+rel. change during last iteration : -5.56775e-006
+
+degrees of freedom    (FIT_NDF)                        : 27
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 3.50942
+variance of residuals (reduced chisquare) = WSSR/ndf   : 12.316
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a1              = 2.21082e-007     +/- 9.578e-009   (4.332%)
+a2              = 0.000212247      +/- 0.000306     (144.2%)
+a3              = -0.739829        +/- 2.058        (278.2%)
+
+correlation matrix of the fit parameters:
+                a1     a2     a3     
+a1              1.000 
+a2             -0.970  1.000 
+a3              0.770 -0.882  1.000 

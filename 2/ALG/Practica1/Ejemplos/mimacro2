@@ -1,0 +1,13 @@
+#!/bin/bash
+
+echo "" >> salida2.dat
+i=5
+while [ $i -lt 35 ]
+do
+#echo $i >> prueba.dat
+#echo "   " >> prueba.dat
+./hanoi $i >> salida2.dat
+i=$(($i+1))
+
+
+done

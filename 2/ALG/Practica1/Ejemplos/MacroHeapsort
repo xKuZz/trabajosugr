@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo "" > prueba.dat
+i=1000
+while [ $i -lt 100000 ]
+do
+./heapsort $i >> prueba.dat
+i=$(($i+1000))
+#echo $i
+done

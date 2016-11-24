@@ -1,0 +1,7 @@
+#!/bin/bash -vx
+echo "" >> salida.dat
+@ i=1000
+while ($i < 10000)
+./mergesort $i >> salida.dat
+@ i+=1000
+end

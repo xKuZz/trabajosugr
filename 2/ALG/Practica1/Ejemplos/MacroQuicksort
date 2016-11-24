@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo "" > pruebaQuick.dat
+i=1000
+while [ $i -lt 100000 ]
+do
+./quicksort $i >> pruebaQuick.dat
+i=$(($i+1000))
+#echo $i
+done
