@@ -1,0 +1,89 @@
+#include <stdio.h>
+#include <errno.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <string.h>
+
+int main(int argc, char* argv[]){
+   char buffer[80];
+   char* printbloque;
+   int fd_in;
+   int fd_out;
+   ssize_t rstatus=80;
+   int bloque;
+
+    /* Configuro fd_in como archivo o entrada estándar */
+    if(argc==2){
+      if((fd_in=open(argv[1],O_RDONLY))<0){
+        printf("Error: %d, al abrir el archivo %s\n", errno, argv[1]);
+        perror("Error al abrir el archivo\n");
+        exit(EXIT_FAILURE);
+      }
+    }
+    else if (argc==1){
+      fd_in=STDIN_FILENO;
+    }
+    else {
+      printf("Número de argumentos inválido\n");
+      perror("Número de argumentos inválido\n");
+      exit(EXIT_FAILURE);
+    }
+    
+    /* Creo o sobreescribo archivo de salida */
+    if((fd_out=open("salida.txt",O_CREAT|O_TRUNC|O_WRONLY,S_IRUSR|S_IWUSR))<0){
+      printf("Error %d, al crear archivo salida.txt.\n", errno);
+      perror("Error al crear archivo de salida.\n");
+      exit(EXIT_FAILURE);
+    }
+
+    /* Lectura/escritura a través de buffer */
+    for (bloque=1; rstatus==80; ++bloque){
+        rstatus=read(fd_in,buffer,80);
+        if (rstatus<0){
+          printf("Error: %d, al leer.\n", errno);
+          perror("Error al leer.\n");
+          exit(EXIT_FAILURE);
+        }
+
+        if (bloque==1){
+          asprintf(&printbloque, "Bloque %d\n", bloque);
+          }
+        else {
+          asprintf(&printbloque, "\nBloque %d\n", bloque);
+        }
+        if ((write(fd_out,printbloque,strlen(printbloque)))!=strlen(printbloque)){
+          printf("Error: %d, al escribir el número de bloque %d.\n",errno, bloque);
+          perror("Error al escribir número de bloque.\n");
+          exit(EXIT_FAILURE);
+        }
+
+        if ((write(fd_out,buffer,rstatus))!=rstatus){
+          printf("Error: %d, al escribir bloque número %d.\n",errno, bloque);
+          perror("Error al escribir un bloque.\n");
+          exit(EXIT_FAILURE);
+        }
+      
+    }
+
+      /* Cerramos archivos y liberamos memoria dinámica */
+        free(printbloque);
+        if (argc==2 && close(fd_in)<0){
+          printf("Error: %d, al cerrar archivo de entrada.\n", errno);
+          perror("Error al cerrar archivo de entrada.\n");
+          exit(EXIT_FAILURE);          
+        }
+
+        if (close(fd_out)<0){
+          printf("Error: %d, al cerrar archivo de salida.\n", errno);
+          perror("Error al cerrar archivo de salida.\n");
+          exit(EXIT_FAILURE);
+        }
+
+    return EXIT_SUCCESS;
+
+    
+
+}

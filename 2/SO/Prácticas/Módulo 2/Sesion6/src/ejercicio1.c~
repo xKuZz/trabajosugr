@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <fcntl.h>
+#include <unistd.h>
+
+int main(int argc, char* argv[]) {
+  if (argc != 4) {
+    printf("Número de argumentos invalido\n");
+    exit(-1);
+  }
+
+  char  caracter = argv[2][0];
+  char* orden    = argv[1];
+  char* path     = argv[3];
+  int   fd_old   = (caracter=='<') ? STDIN_FILENO : STDOUT_FILENO;
+  int   fd_new;
+
+  if (caracter != '<' && caracter != '>') {
+    printf("El segundo argumento debe ser < ó >\n");
+    exit(-1);
+  }
+
+  if (fd_old == STDIN_FILENO)
+    fd_new = open(path, O_RDONLY);
+  else
+    fd_new = open(path, O_CREAT |O_TRUNC | O_WRONLY,S_IRUSR |S_IWUSR);
+
+  if (fd_new < 0) {
+    printf("Error al crear archivo.\n");
+    exit(-1);
+  }
+
+  close(fd_old);
+  if ( (fcntl(fd_new,F_DUPFD,fd_old)) < 0) {
+    printf("Error al duplicar el descriptor de archivos.\n");
+    exit(-1);
+  }
+
+  execl(orden,orden,NULL);
+  exit(0);
+}
+
+
+
