@@ -1,0 +1,819 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+<category>
+<pattern>SHOW TOPIC</pattern>
+<template><get name="topic"/></template>
+</category>
+
+<category>
+<pattern>^ responder ^</pattern>
+<that>QUIERES ADIVINAR EL PERSONAJE O RESPONDER A LAS PREGUNTAS</that>
+<template>
+  <think>
+    <set name="topic">responder</set>
+    <set name="desconocimiento">pelo piel gafas ojos genero bigote barba</set>
+    <set name="tpelo">moreno blanco rubio calvo pelirrojo marron</set>
+    <set name="tpiel">clara oscura</set>
+    <set name="tojos">claros oscuros</set>
+    <set name="tgenero">hombre mujer</set>
+    <set name="tbigote">si no</set>
+    <set name="tbarba">si no</set>
+    <set name="tgafas">si no</set>
+    <set name="l_personajes"><get name="lista"/></set>
+  </think>
+<srai>NEXT QUESTION</srai></template>
+</category>
+
+<topic name="responder">
+<category>
+  <pattern>SHOW POSIBLE</pattern>
+  <template><get name="l_personajes"/></template>
+</category>
+
+<category>
+  <pattern>SHOW POSIBLE PELO</pattern>
+  <template><get name="tpelo"/></template>
+</category>
+
+<category>
+  <pattern>SHOW KNOWN</pattern>
+  <template><get name="cono"/></template>
+</category>
+
+<category>
+  <pattern>SHOW DEDUCED</pattern>
+  <template><get name="deducido"/></template>
+</category>
+
+<category>
+  <pattern>SHOW UNKNOWN</pattern>
+  <template><get name="desconocimiento"/></template>
+</category>
+
+<!-- COMPRUEBA SI YA SABE QUE PERSONAJE ES -->
+<category>
+  <pattern>CHECK KNOWLEDGE</pattern>
+  <template>
+  <think>
+    <set var="num"><srai>COUNT <get name="l_personajes"/></srai></set>
+  </think>
+  <condition var="num">
+    <li value="0">Eres un tramposo ninguno de los personajes responde a los rasgos dados, quien era?</li>
+    <li value="1">Es <get name="l_personajes"/></li>
+    <li><srai>SMART DISCARD</srai></li>
+  </condition>
+  </template>
+</category>
+
+<!-- COMPROBACION ACIERTO IA -->
+<category>
+  <pattern>no ^ <set>personajes</set> ^</pattern>
+  <that>ES <set>personajes</set></that>
+  <template>
+  <think>
+    <set name="fake_p"><star index="2"/></set>
+  </think>
+  Eres un tramposo.
+  <srai>CONFIRM LIER CHAR</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>si ^</pattern>
+  <that>Es <set>personajes</set></that>
+  <template>
+  Genial quieres jugar de nuevo?</template>
+</category>
+
+<category>
+  <pattern>^ <set>personajes</set> ^</pattern>
+  <that>Eres un tramposo ninguno de los personajes responde a los rasgos dados, quien era</that>
+  <template>
+    <think><set name="fake_p"><star index="2"/></set></think>
+    <srai>CONFIRM LIER NOCHAR</srai>
+  </template>
+</category>
+
+<!-- DEMOSTRACION TRAMPOSO -->
+<category>
+  <pattern>CONFIRM LIER CHAR</pattern>
+  <template>
+    <think><set var="t_actual"><srai>ITERATE <get name="cono"/></srai></set></think>
+    <condition var="t_actual">
+      <li value="end"></li>
+      <li>
+        <think>
+        <condition var="t_actual">
+          <li value="GENERO"><set var="check"><srai>COMPARE <map name="genero"><get name="fake_p"/></map> WITH <get name="tgenero"/></srai></set></li>
+          <li value="PELO"><set var="check"><srai>COMPARE <map name="pelo"><get name="fake_p"/></map> WITH <get name="tpelo"/></srai></set></li>
+          <li value="PIEL"><set var="check"><srai>COMPARE <map name="piel"><get name="fake_p"/></map> WITH <get name="tpiel"/></srai></set></li>
+          <li value="OJOS"><set var="check"><srai>COMPARE <map name="ojos"><get name="fake_p"/></map> WITH <get name="tojos"/></srai></set></li>
+          <li value="BIGOTE"><set var="check"><srai>COMPARE <map name="bigote"><get name="fake_p"/></map> WITH <get name="tbigote"/></srai></set></li>
+          <li value="BARBA"><set var="check"><srai>COMPARE <map name="barba"><get name="fake_p"/></map> WITH <get name="tbarba"/></srai></set></li>
+          <li value="GAFAS"><set var="check"><srai>COMPARE <map name="gafas"><get name="fake_p"/></map> WITH <get name="tgafas"/></srai></set></li>
+        </condition>
+        </think>
+        <condition var="check">
+          <li value="NO">
+            <condition var="t_actual">
+              <li value="GENERO">Me dijiste que el personaje era <get name="tgenero"/> pero <get name="fake_p"/> es <map name="genero"><get name="fake_p"/></map></li>
+              <li value="PELO">Me dijiste que el personaje tenia el pelo <get name="tpelo"/> pero <get name="fake_p"/> tiene el pelo <map name="pelo"><get name="fake_p"/></map></li>
+              <li value="PIEL">Me dijiste que el personaje tenia la piel <get name="tpiel"/> pero la piel de <get name="fake_p"/> es <map name="piel"><get name="fake_p"/></map></li>
+              <li value="OJOS">Me dijiste que el personaje tenia los ojos <get name="tojos"/> pero los ojos de <get name="fake_p"/> son <map name="ojos"><get name="fake_p"/></map></li>
+              <li value="BIGOTE">Me dijiste que el personaje <get name="tbigote"/> tenia bigote pero <get name="fake_p"/> <map name="bigote"><get name="fake_p"/></map> tiene bigote</li>
+              <li value="BARBA">Me dijiste que el personaje <get name="tbarba"/> tenia barba pero <get name="fake_p"/> <map name="barba"><get name="fake_p"/></map> tiene barba</li>
+              <li value="GAFAS">Me dijiste que el personaje <get name="tgafas"/> tenia gafas pero <get name="fake_p"/> <map name="gafas"><get name="fake_p"/></map> tiene gafas</li>
+            </condition>
+          </li>
+        </condition>
+        <think><set var="t_actual"><srai>NEXT</srai></set></think>
+        <loop/>
+      </li>
+    </condition>
+  </template>
+</category>
+
+<!-- JUGAR DE NUEVO -->
+<category>
+  <pattern>^ si ^</pattern>
+  <that>Genial quieres jugar de nuevo</that>
+  <template>
+    <think><set name="topic">unknown</set></think>
+    <srai>QUIEN ES QUIEN</srai></template>
+</category>
+
+<category>
+  <pattern>^ no ^</pattern>
+  <that>Genial quieres jugar de nuevo</that>
+  <template>
+  <think><set name="topic">unknown</set></think>
+  Como quieras, que mas necesitas?</template>
+</category>
+
+<!-- DESCARTE INTELIGENTE DE PREGUNTAS INUTILES -->
+<category>
+  <pattern>SMART DISCARD</pattern>
+  <template><think>
+    <set var="sd_genero"><srai>FINDITEM GENERO IN <get name="desconocimiento"/></srai></set>
+    <set var="sd_pelo"><srai>FINDITEM PELO IN <get name="desconocimiento"/></srai></set>
+    <set var="sd_piel"><srai>FINDITEM PIEL IN <get name="desconocimiento"/></srai></set>
+    <set var="sd_ojos"><srai>FINDITEM OJOS IN <get name="desconocimiento"/></srai></set>
+    <set var="sd_bigote"><srai>FINDITEM BIGOTE IN <get name="desconocimiento"/></srai></set>
+    <set var="sd_barba"><srai>FINDITEM BARBA IN <get name="desconocimiento"/></srai></set>
+    <set var="sd_gafas"><srai>FINDITEM GAFAS IN <get name="desconocimiento"/></srai></set>
+    <condition var="sd_genero">
+      <li value="0"></li>
+      <li><srai>SMART DISCARD GENERO</srai></li>
+    </condition>
+    <condition var="sd_pelo">
+      <li value="0"></li>
+      <li><srai>SMART DISCARD PELO</srai>
+          <srai>SMART DISCARD TIPO PELO</srai>
+          </li>
+    </condition>
+    <condition var="sd_piel">
+      <li value="0"></li>
+      <li><srai>SMART DISCARD PIEL</srai></li>
+    </condition>
+    <condition var="sd_ojos">
+      <li value="0"></li>
+      <li><srai>SMART DISCARD OJOS</srai></li>
+    </condition>
+    <condition var="sd_bigote">
+      <li value="0"></li>
+      <li><srai>SMART DISCARD BIGOTE</srai></li>
+    </condition>
+    <condition var="sd_barba">
+      <li value="0"></li>
+      <li><srai>SMART DISCARD BARBA</srai></li>
+    </condition>
+    <condition var="sd_gafas">
+      <li value="0"></li>
+      <li><srai>SMART DISCARD GAFAS</srai></li>
+    </condition>
+  </think>
+  <srai>NEXT QUESTION</srai>
+  </template>
+</category>
+
+<!-- SD1: GENERO -->
+<category>
+  <pattern>SMART DISCARD GENERO</pattern>
+  <template><think>
+    <set var="p_actual"><srai>ITERATE <get name="l_personajes"/></srai></set>
+    <set var="dato"><map name="genero"><get var="p_actual"/></map></set>
+    <set var="continue">YES</set>
+    <condition var="continue">
+      <li value="NO"></li>
+      <li value="YES">
+        <condition var="p_actual">
+          <li value="end"><set var="continue">NO</set></li>
+          <li>
+            <set var="check"><srai>COMPARE <map name="genero"><get var="p_actual"/></map> WITH <get var="dato"/></srai></set>
+            <set var="continue"><get var="check"/></set>
+            <set var="p_actual"><srai>NEXT</srai></set>
+          </li>
+        </condition>
+      <loop/>
+    </li>
+  </condition>
+  <condition var="check">
+    <li value="YES">
+      <set var="num_r"><srai>FINDITEM GENERO in <get name="desconocimiento"/></srai></set>
+      <set name="desconocimiento"><srai>REMOVEITEM <get var="num_r"/> in <get name="desconocimiento"/></srai></set>
+      <set name="deducido"><srai>ADDITEM GENERO IN <get name="deducido"/></srai></set>
+      <set name="tgenero"><get var="dato"/></set>
+    </li>
+  </condition>
+  </think></template>
+</category>
+
+<!-- SD2: PELO -->
+<category>
+  <pattern>SMART DISCARD PELO</pattern>
+  <template><think>
+    <set var="p_actual"><srai>ITERATE <get name="l_personajes"/></srai></set>
+    <set var="dato"><map name="pelo"><get var="p_actual"/></map></set>
+    <set var="continue">YES</set>
+    <condition var="continue">
+      <li value="NO"></li>
+      <li value="YES">
+        <condition var="p_actual">
+          <li value="end"><set var="continue">NO</set></li>
+          <li>
+            <set var="check"><srai>COMPARE <map name="pelo"><get var="p_actual"/></map> WITH <get var="dato"/></srai></set>
+            <set var="continue"><get var="check"/></set>
+            <set var="p_actual"><srai>NEXT</srai></set>
+          </li>
+        </condition>
+      <loop/>
+    </li>
+  </condition>
+  <condition var="check">
+    <li value="YES">
+      <set var="num_r"><srai>FINDITEM PELO in <get name="desconocimiento"/></srai></set>
+      <set name="desconocimiento"><srai>REMOVEITEM <get var="num_r"/> in <get name="desconocimiento"/></srai></set>
+      <set name="deducido"><srai>ADDITEM PELO IN <get name="deducido"/></srai></set>
+      <set name="tpelo"><get var="dato"/></set>
+    </li>
+  </condition>
+  </think></template>
+</category>
+
+<category>
+  <pattern>SMART DISCARD TIPO PELO</pattern>
+  <template>
+    <set var="p_actual"><srai>ITERATE <get name="l_personajes"/></srai></set>
+    <set var="tipos"><map name="pelo"><get var="p_actual"/></map></set>
+    <condition var="p_actual">
+      <li value="end"></li>
+      <li>
+          <set var="tipos"><srai>ADDITEM <map name="pelo"><get var="p_actual"/></map> IN <get var="tipos"/></srai></set>
+          <set var="p_actual"><srai>NEXT</srai></set>
+      <loop/>
+      </li>
+    </condition>
+    <set var="d_actual"><srai>ITERATE <get name="tpelo"/></srai></set>
+    <condition var="d_actual">
+      <li value="end"></li>
+      <li>
+          <set var="r"><srai>FINDITEM <get var="d_actual"/> IN <get var="tipos"/></srai></set>
+          <condition var="r">
+            <li value="0"><set var="pos_r"><srai>FINDITEM <get var="d_actual"/> IN <get name="tpelo"/></srai></set>
+            <set name="tpelo"><srai>REMOVEITEM <get var="pos_r"/> IN <get name="tpelo"/></srai></set>
+            <set name="nopelo"><srai>ADDITEM <get var="d_actual"/> IN <get name="deducido"/></srai></set></li>
+            <li></li>
+          </condition>
+        <set var="d_actual"><srai>NEXT</srai></set>
+      <loop/>
+      </li>
+    </condition>
+  </template>
+</category>
+
+<!-- SD3: PIEL -->
+<category>
+  <pattern>SMART DISCARD PIEL</pattern>
+  <template><think>
+    <set var="p_actual"><srai>ITERATE <get name="l_personajes"/></srai></set>
+    <set var="dato"><map name="piel"><get var="p_actual"/></map></set>
+    <set var="continue">YES</set>
+    <condition var="continue">
+      <li value="NO"></li>
+      <li value="YES">
+        <condition var="p_actual">
+          <li value="end"><set var="continue">NO</set></li>
+          <li>
+            <set var="check"><srai>COMPARE <map name="piel"><get var="p_actual"/></map> WITH <get var="dato"/></srai></set>
+            <set var="continue"><get var="check"/></set>
+            <set var="p_actual"><srai>NEXT</srai></set>
+          </li>
+        </condition>
+      <loop/>
+    </li>
+  </condition>
+  <condition var="check">
+    <li value="YES">
+      <set var="num_r"><srai>FINDITEM PIEL in <get name="desconocimiento"/></srai></set>
+      <set name="desconocimiento"><srai>REMOVEITEM <get var="num_r"/> in <get name="desconocimiento"/></srai></set>
+      <set name="deducido"><srai>ADDITEM PIEL IN <get name="deducido"/></srai></set>
+      <set name="tpiel"><get var="dato"/></set>
+    </li>
+  </condition>
+  </think></template>
+</category>
+
+<!-- SD4: OJOS -->
+<category>
+  <pattern>SMART DISCARD OJOS</pattern>
+  <template><think>
+    <set var="p_actual"><srai>ITERATE <get name="l_personajes"/></srai></set>
+    <set var="dato"><map name="ojos"><get var="p_actual"/></map></set>
+    <set var="continue">YES</set>
+    <condition var="continue">
+      <li value="NO"></li>
+      <li value="YES">
+        <condition var="p_actual">
+          <li value="end"><set var="continue">NO</set></li>
+          <li>
+            <set var="check"><srai>COMPARE <map name="ojos"><get var="p_actual"/></map> WITH <get var="dato"/></srai></set>
+            <set var="continue"><get var="check"/></set>
+            <set var="p_actual"><srai>NEXT</srai></set>
+          </li>
+        </condition>
+      <loop/>
+    </li>
+  </condition>
+  <condition var="check">
+    <li value="YES">
+      <set var="num_r"><srai>FINDITEM OJOS in <get name="desconocimiento"/></srai></set>
+      <set name="desconocimiento"><srai>REMOVEITEM <get var="num_r"/> in <get name="desconocimiento"/></srai></set>
+      <set name="deducido"><srai>ADDITEM OJOS IN <get name="deducido"/></srai></set>
+      <set name="tojos"><get var="dato"/></set>
+    </li>
+  </condition>
+  </think></template>
+</category>
+
+<!-- SD5: BIGOTE -->
+<category>
+  <pattern>SMART DISCARD BIGOTE</pattern>
+  <template><think>
+    <set var="p_actual"><srai>ITERATE <get name="l_personajes"/></srai></set>
+    <set var="dato"><map name="bigote"><get var="p_actual"/></map></set>
+    <set var="continue">YES</set>
+    <condition var="continue">
+      <li value="NO"></li>
+      <li value="YES">
+        <condition var="p_actual">
+          <li value="end"><set var="continue">NO</set></li>
+          <li>
+            <set var="check"><srai>COMPARE <map name="bigote"><get var="p_actual"/></map> WITH <get var="dato"/></srai></set>
+            <set var="continue"><get var="check"/></set>
+            <set var="p_actual"><srai>NEXT</srai></set>
+          </li>
+        </condition>
+      <loop/>
+    </li>
+  </condition>
+  <condition var="check">
+    <li value="YES">
+      <set var="num_r"><srai>FINDITEM BIGOTE in <get name="desconocimiento"/></srai></set>
+      <set name="deducido"><srai>ADDITEM BIGOTE IN <get name="deducido"/></srai></set>
+      <set name="desconocimiento"><srai>REMOVEITEM <get var="num_r"/> in <get name="desconocimiento"/></srai></set>
+      <set name="tbigote"><get var="dato"/></set>
+    </li>
+  </condition>
+  </think></template>
+</category>
+
+<!-- SD6: BARBA -->
+<category>
+  <pattern>SMART DISCARD BARBA</pattern>
+  <template><think>
+    <set var="p_actual"><srai>ITERATE <get name="l_personajes"/></srai></set>
+    <set var="dato"><map name="barba"><get var="p_actual"/></map></set>
+    <set var="continue">YES</set>
+    <condition var="continue">
+      <li value="NO"></li>
+      <li value="YES">
+        <condition var="p_actual">
+          <li value="end"><set var="continue">NO</set></li>
+          <li>
+            <set var="check"><srai>COMPARE <map name="barba"><get var="p_actual"/></map> WITH <get var="dato"/></srai></set>
+            <set var="continue"><get var="check"/></set>
+            <set var="p_actual"><srai>NEXT</srai></set>
+          </li>
+        </condition>
+      <loop/>
+    </li>
+  </condition>
+  <condition var="check">
+    <li value="YES">
+      <set var="num_r"><srai>FINDITEM BARBA in <get name="desconocimiento"/></srai></set>
+      <set name="deducido"><srai>ADDITEM BARBA IN <get name="deducido"/></srai></set>
+      <set name="desconocimiento"><srai>REMOVEITEM <get var="num_r"/> in <get name="desconocimiento"/></srai></set>
+      <set name="tbarba"><get var="dato"/></set>
+    </li>
+  </condition>
+  </think></template>
+</category>
+
+<!-- SD7: GAFAS -->
+<category>
+  <pattern>SMART DISCARD GAFAS</pattern>
+  <template>
+    <set var="p_actual"><srai>ITERATE <get name="l_personajes"/></srai></set>
+    <set var="dato"><map name="gafas"><get var="p_actual"/></map></set>
+    <set var="continue">YES</set>
+    <condition var="continue">
+      <li value="NO"></li>
+      <li value="YES">
+        <condition var="p_actual">
+          <li value="end"><set var="continue">NO</set></li>
+          <li>
+            <set var="check"><srai>COMPARE <map name="gafas"><get var="p_actual"/></map> WITH <get var="dato"/></srai></set>
+            <set var="continue"><get var="check"/></set>
+            <set var="p_actual"><srai>NEXT</srai></set>
+          </li>
+        </condition>
+      <loop/>
+    </li>
+  </condition>
+  <condition var="check">
+    <li value="YES">
+      <set var="num_r"><srai>FINDITEM GAFAS in <get name="desconocimiento"/></srai></set>
+      <set name="deducido"><srai>ADDITEM GAFAS IN <get name="deducido"/></srai></set>
+      <set name="desconocimiento"><srai>REMOVEITEM <get var="num_r"/> in <get name="desconocimiento"/></srai></set>
+      <set name="tgafas"><get var="dato"/></set>
+    </li>
+  </condition>
+  </template>
+</category>
+
+<!-- ESCOGE LA SIGUIENTE PREGUNTA DE ENTRE LOS DATOS DESCONOCIDOS -->
+<category>
+  <pattern>NEXT QUESTION</pattern>
+  <template>
+  <think>
+    <set var="num"><srai>COUNT <get name="desconocimiento"/></srai></set>
+    <set var="eleccion"><srai>RANDOM <get var="num"/></srai></set>
+  </think>
+  <srai>QUESTION <srai>SELECTITEM <get var="eleccion"/> IN <get name="desconocimiento"/></srai></srai>
+  </template>
+</category>
+
+<!-- P1: GENERO -->
+<category>
+  <pattern>QUESTION GENERO</pattern>
+  <template>
+  <think>
+    <set var="num"><srai>COUNT <get name="tgenero"/></srai></set>
+    <set var="eleccion"><srai>RANDOM <get var="num"/></srai></set>
+    <set name="actual"><srai>SELECTITEM <get var="eleccion"/> IN <get name="tgenero"/></srai></set>
+  </think>
+  Es <get name="actual"/>?
+  </template>
+</category>
+
+<!-- A1: GENERO -->
+<category>
+  <pattern><set>sino</set> ^</pattern>
+  <that>ES <set>genero</set></that>
+  <template>
+  <think>
+    <set var="r"><star/></set>
+    <set name="cono"><srai>ADDITEM GENERO IN <get name="cono"/></srai></set>
+    <set var="num_r"><srai>FINDITEM GENERO in <get name="desconocimiento"/></srai></set>
+    <set name="desconocimiento"><srai>REMOVEITEM <get var="num_r"/> in <get name="desconocimiento"/></srai></set>
+    <condition var="r">
+      <li value="si">
+        <set var="valido"><get name="actual"/></set>
+      </li>
+      <li value="no">
+        <set var="pos_r"><srai>FINDITEM <get name="actual"/> in <get name="tgenero"/></srai></set>
+        <set var="valido"><srai>REMOVEITEM <get var="pos_r"/> in <get name="tgenero"/></srai></set>
+      </li>
+    </condition>
+    <!-- Actualiza la lista con los personajes de genero valido -->
+    <set name="tgenero"><get var="valido"/></set>
+    <set var="p_actual"><srai>ITERATE <get name="l_personajes"/></srai></set>
+    <condition var="p_actual">
+      <li value="end"></li>
+      <li>
+      <set var="rr"><srai>COMPARE <map name="genero"><get var="p_actual"/></map> WITH <get var="valido"/></srai></set>
+        <condition var="rr">
+          <li value="NO">
+            <set var="pos_e"><srai>FINDITEM <get var="p_actual"/> in <get name="l_personajes"/></srai></set>
+            <set name="l_personajes"><srai>REMOVEITEM <get var="pos_e"/> in <get name="l_personajes"/></srai></set>
+          </li>
+        </condition>
+        <set var="p_actual"><srai>NEXT</srai></set>
+        <loop/>
+      </li>
+    </condition>
+    </think>
+  <srai>CHECK KNOWLEDGE</srai>
+  </template>
+</category>
+
+<!-- P2: PELO -->
+<category>
+  <pattern>QUESTION PELO</pattern>
+  <template>
+  <think>
+    <set var="num"><srai>COUNT <get name="tpelo"/></srai></set>
+    <set var="eleccion"><srai>RANDOM <get var="num"/></srai></set>
+    <set name="actual"><srai>SELECTITEM <get var="eleccion"/> in <get name="tpelo"/></srai></set>
+  </think>
+  Tiene el pelo <get name="actual"/>?
+  </template>
+</category>
+
+<!-- A2: PELO -->
+<category>
+  <pattern><set>sino</set> ^</pattern>
+  <that>TIENE EL PELO <set>pelo</set></that>
+  <template>
+  <think>
+    <set var="r"><star/></set>
+    <condition var="r">
+      <li value="si">
+        <set name="cono"><srai>ADDITEM PELO IN <get name="cono"/></srai></set>
+        <set var="num_r"><srai>FINDITEM PELO in <get name="desconocimiento"/></srai></set>
+        <set name="tpelo"><get name="actual"/></set>
+        <set name="desconocimiento"><srai>REMOVEITEM <get var="num_r"/> in <get name="desconocimiento"/></srai></set>
+        <!-- Actualiza la lista con los personajes de pelo actual -->
+        <set var="p_actual"><srai>ITERATE <get name="l_personajes"/></srai></set>
+        <condition var="p_actual">
+          <li value="end"></li>
+          <li>
+          <set var="rr"><srai>COMPARE <map name="pelo"><get var="p_actual"/></map> WITH <get name="actual"/></srai></set>
+            <condition var="rr">
+              <li value="NO">
+                <set var="pos_e"><srai>FINDITEM <get var="p_actual"/> in <get name="l_personajes"/></srai></set>
+                <set name="l_personajes"><srai>REMOVEITEM <get var="pos_e"/> in <get name="l_personajes"/></srai></set>
+              </li>
+            </condition>
+            <set var="p_actual"><srai>NEXT</srai></set>
+            <loop/>
+          </li>
+        </condition>
+      </li>
+      <li value="no">
+        <set name="pelono"><srai>ADDITEM <get name="actual"/> IN <get name="pelono"/></srai></set>
+        <set var="num_r"><srai>FINDITEM <get name="actual"/> in <get name="tpelo"/></srai></set>
+        <set name="tpelo"><srai>REMOVEITEM <get var="num_r"/> in <get name="tpelo"/></srai></set>
+        <!-- Quito los personajes de pelo actual -->
+        <set var="p_actual"><srai>ITERATE <get name="l_personajes"/></srai></set>
+        <condition var="p_actual">
+          <li value="end"></li>
+          <li>
+          <set var="rr"><srai>COMPARE <map name="pelo"><get var="p_actual"/></map> WITH <get name="actual"/></srai></set>
+            <condition var="rr">
+              <li value="YES">
+                <set var="pos_e"><srai>FINDITEM <get var="p_actual"/> in <get name="l_personajes"/></srai></set>
+                <set name="l_personajes"><srai>REMOVEITEM <get var="pos_e"/> in <get name="l_personajes"/></srai></set>
+              </li>
+            </condition>
+            <set var="p_actual"><srai>NEXT</srai></set>
+            <loop/>
+          </li>
+        </condition>
+      </li>
+    </condition>
+  </think>
+  <srai>CHECK KNOWLEDGE</srai>
+  </template>
+</category>
+
+
+<!-- P3: PIEL -->
+<category>
+  <pattern>QUESTION PIEL</pattern>
+  <template>
+  <think>
+  <set var="num"><srai>COUNT <get name="tgenero"/></srai></set>
+  <set var="eleccion"><srai>RANDOM <get var="num"/></srai></set>
+  <set name="actual"><srai>SELECTITEM <get var="eleccion"/> IN <get name="tpiel"/></srai></set>
+  </think>
+  Tiene la piel <get name="actual"/>?
+  </template>
+</category>
+
+<!-- A3: PIEL -->
+<category>
+  <pattern><set>sino</set> ^</pattern>
+  <that>TIENE LA PIEL <set>piel</set></that>
+  <template>
+  <think>
+  <set var="r"><star/></set>
+  <set name="cono"><srai>ADDITEM PIEL IN <get name="cono"/></srai></set>
+  <set var="num_r"><srai>FINDITEM PIEL in <get name="desconocimiento"/></srai></set>
+  <set name="desconocimiento"><srai>REMOVEITEM <get var="num_r"/> in <get name="desconocimiento"/></srai></set>
+  <condition var="r">
+    <li value="si">
+      <set var="valido"><get name="actual"/></set>
+    </li>
+    <li value="no">
+      <set var="pos_r"><srai>FINDITEM <get name="actual"/> in <get name="tpiel"/></srai></set>
+      <set var="valido"><srai>REMOVEITEM <get var="pos_r"/> in <get name="tpiel"/></srai></set>
+    </li>
+  </condition>
+  <!-- Actualiza la lista con los personajes de piel valido -->
+  <set var="p_actual"><srai>ITERATE <get name="l_personajes"/></srai></set>
+  <set name="tpiel"><get var="valido"/></set>
+  <condition var="p_actual">
+    <li value="end"></li>
+    <li>
+    <set var="rr"><srai>COMPARE <map name="piel"><get var="p_actual"/></map> WITH <get var="valido"/></srai></set>
+      <condition var="rr">
+        <li value="NO">
+          <set var="pos_e"><srai>FINDITEM <get var="p_actual"/> in <get name="l_personajes"/></srai></set>
+          <set name="l_personajes"><srai>REMOVEITEM <get var="pos_e"/> in <get name="l_personajes"/></srai></set>
+        </li>
+      </condition>
+      <set var="p_actual"><srai>NEXT</srai></set>
+      <loop/>
+    </li>
+  </condition>
+  </think>
+<srai>CHECK KNOWLEDGE</srai>
+</template>
+</category>
+
+<!-- P4: OJOS -->
+<category>
+  <pattern>QUESTION OJOS</pattern>
+  <template>
+  <think>
+  <set var="num"><srai>COUNT <get name="tojos"/></srai></set>
+  <set var="eleccion"><srai>RANDOM <get var="num"/></srai></set>
+  <set name="actual"><srai>SELECTITEM <get var="eleccion"/> IN <get name="tojos"/></srai></set>
+  </think>
+  Tiene los ojos <get name="actual"/>?
+  </template>
+</category>
+
+<!-- A4: OJOS -->
+<category>
+  <pattern><set>sino</set> ^</pattern>
+  <that>TIENE LOS OJOS <set>ojos</set></that>
+  <template>
+  <think>
+  <set var="tojos"><star/></set>
+  <set var="r"><star/></set>
+  <set var="num_r"><srai>FINDITEM OJOS in <get name="desconocimiento"/></srai></set>
+  <set name="cono"><srai>ADDITEM OJOS IN <get name="cono"/></srai></set>
+  <set name="desconocimiento"><srai>REMOVEITEM <get var="num_r"/> in <get name="desconocimiento"/></srai></set>
+  <condition var="r">
+    <li value="si">
+      <set var="valido"><get name="actual"/></set>
+    </li>
+    <li value="no">
+      <set var="pos_r"><srai>FINDITEM <get name="actual"/> in <get name="tojos"/></srai></set>
+      <set var="valido"><srai>REMOVEITEM <get var="pos_r"/> in <get name="tojos"/></srai></set>
+    </li>
+  </condition>
+  <!-- Actualiza la lista con los personajes de ojos valido -->
+  <set name="tojos"><get var="valido"/></set>
+  <set var="p_actual"><srai>ITERATE <get name="l_personajes"/></srai></set>
+  <condition var="p_actual">
+    <li value="end"></li>
+    <li>
+    <set var="rr"><srai>COMPARE <map name="ojos"><get var="p_actual"/></map> WITH <get var="valido"/></srai></set>
+      <condition var="rr">
+        <li value="NO">
+          <set var="pos_e"><srai>FINDITEM <get var="p_actual"/> in <get name="l_personajes"/></srai></set>
+          <set name="l_personajes"><srai>REMOVEITEM <get var="pos_e"/> in <get name="l_personajes"/></srai></set>
+        </li>
+      </condition>
+      <set var="p_actual"><srai>NEXT</srai></set>
+      <loop/>
+    </li>
+  </condition>
+  </think>
+<srai>CHECK KNOWLEDGE</srai>
+</template>
+</category>
+
+<!-- P5: BIGOTE -->
+<category>
+  <pattern>QUESTION BIGOTE</pattern>
+  <template>
+  Tiene bigote?
+  </template>
+</category>
+
+<!-- A5: BIGOTE -->
+<category>
+  <pattern> <set>sino</set> ^</pattern>
+  <that>Tiene bigote</that>
+  <template><think>
+    <set name="cono"><srai>ADDITEM BIGOTE IN <get name="cono"/></srai></set>
+    <set var="num_r"><srai>FINDITEM BIGOTE in <get name="desconocimiento"/></srai></set>
+    <set name="desconocimiento"><srai>REMOVEITEM <get var="num_r"/> in <get name="desconocimiento"/></srai></set>
+    <set var="valido"><star/></set>
+    <!-- Actualiza la lista con los personajes de bigote valido -->
+    <set name="tbigote"><star/></set>
+    <set var="p_actual"><srai>ITERATE <get name="l_personajes"/></srai></set>
+    <condition var="p_actual">
+      <li value="end"></li>
+      <li>
+      <set var="rr"><srai>COMPARE <map name="bigote"><get var="p_actual"/></map> WITH <get var="valido"/></srai></set>
+        <condition var="rr">
+          <li value="NO">
+            <set var="pos_e"><srai>FINDITEM <get var="p_actual"/> in <get name="l_personajes"/></srai></set>
+            <set name="l_personajes"><srai>REMOVEITEM <get var="pos_e"/> in <get name="l_personajes"/></srai></set>
+          </li>
+        </condition>
+        <set var="p_actual"><srai>NEXT</srai></set>
+        <loop/>
+      </li>
+    </condition>
+    </think>
+  <srai>CHECK KNOWLEDGE</srai>
+  </template>
+</category>
+
+<!-- P6: BARBA -->
+<category>
+  <pattern>QUESTION BARBA</pattern>
+  <template>
+  Tiene barba?
+  </template>
+</category>
+
+<!-- A6: BARBA -->
+<category>
+  <pattern> <set>sino</set> ^</pattern>
+  <that>Tiene barba</that>
+  <template><think>
+    <set name="cono"><srai>ADDITEM BARBA IN <get name="cono"/></srai></set>
+    <set var="num_r"><srai>FINDITEM BARBA in <get name="desconocimiento"/></srai></set>
+    <set name="desconocimiento"><srai>REMOVEITEM <get var="num_r"/> in <get name="desconocimiento"/></srai></set>
+    <set var="valido"><star/></set>
+    <!-- Actualiza la lista con los personajes de barba valido -->
+    <set name="tbarba"><star/></set>
+    <set var="p_actual"><srai>ITERATE <get name="l_personajes"/></srai></set>
+    <condition var="p_actual">
+      <li value="end"></li>
+      <li>
+      <set var="rr"><srai>COMPARE <map name="barba"><get var="p_actual"/></map> WITH <get var="valido"/></srai></set>
+        <condition var="rr">
+          <li value="NO">
+            <set var="pos_e"><srai>FINDITEM <get var="p_actual"/> in <get name="l_personajes"/></srai></set>
+            <set name="l_personajes"><srai>REMOVEITEM <get var="pos_e"/> in <get name="l_personajes"/></srai></set>
+          </li>
+        </condition>
+        <set var="p_actual"><srai>NEXT</srai></set>
+        <loop/>
+      </li>
+    </condition>
+    </think>
+  <srai>CHECK KNOWLEDGE</srai>
+  </template>
+</category>
+
+<!-- P7: GAFAS -->
+<category>
+  <pattern>QUESTION GAFAS</pattern>
+  <template>
+  Tiene gafas?
+  </template>
+</category>
+
+<!-- A7: GAFAS -->
+<category>
+  <pattern> <set>sino</set> ^</pattern>
+  <that>Tiene gafas</that>
+  <template><think>
+    <set name="cono"><srai>ADDITEM GAFAS IN <get name="cono"/></srai></set>
+    <set var="num_r"><srai>FINDITEM GAFAS in <get name="desconocimiento"/></srai></set>
+    <set name="desconocimiento"><srai>REMOVEITEM <get var="num_r"/> in <get name="desconocimiento"/></srai></set>
+    <set var="valido"><star/></set>
+    <!-- Actualiza la lista con los personajes de gafas valido -->
+    <set name="tgafas"><star/></set>
+    <set var="p_actual"><srai>ITERATE <get name="l_personajes"/></srai></set>
+    <condition var="p_actual">
+      <li value="end"></li>
+      <li>
+      <set var="rr"><srai>COMPARE <map name="gafas"><get var="p_actual"/></map> WITH <get var="valido"/></srai></set>
+        <condition var="rr">
+          <li value="NO">
+            <set var="pos_e"><srai>FINDITEM <get var="p_actual"/> in <get name="l_personajes"/></srai></set>
+            <set name="l_personajes"><srai>REMOVEITEM <get var="pos_e"/> in <get name="l_personajes"/></srai></set>
+          </li>
+        </condition>
+        <set var="p_actual"><srai>NEXT</srai></set>
+        <loop/>
+      </li>
+    </condition>
+    </think>
+  <srai>CHECK KNOWLEDGE</srai>
+  </template>
+</category>
+
+</topic>
+</aiml>

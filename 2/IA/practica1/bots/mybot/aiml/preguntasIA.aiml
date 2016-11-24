@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+<!-- Pregunta 1, Pregunta 14 -->
+<category>
+	<pattern>* <set>aprobar</set> ^ <set>asignatura</set></pattern>
+        <template>Hay que sacar al menos un 5 en la nota final y un 3 en cada una de las partes. </template>
+</category>
+
+<!-- Pregunta 2 -->
+<category>
+	<pattern>* <set>aprobar</set> ^ <set>teoria</set></pattern>
+	<template>Necesitas que la nota del examen final mas la nota de las pruebas sea al menos 5.</template>
+</category>
+
+<!-- Pregunta 3 -->
+<category>
+	<pattern>* <set>aprobar</set> ^ <set>practica</set></pattern>
+	<template>Necesitas que la nota sea de al menos 3 sobre 10. Un 10 por ciento vale la asistencia y participacion.
+	El resto se reparte equitativamente entre el examen de problemas y las 3 practicas.</template>
+</category>
+
+<!-- Pregunta 4 -->
+<category>
+	<pattern>* evalua * junio</pattern>
+	<template>Valdra un 50 por ciento la parte teoria y un 50 por ciento la parte practica en junio.</template>
+</category>
+
+<!-- Pregunta 5 -->
+<category>
+	<pattern>* septiembre</pattern>
+	<template>Realizaras un unico examen en el que se contemplaran aspectos teoricos y practicos.</template>
+</category>
+
+<!-- Pregunta 6 -->
+<category>
+	<pattern>* <set>practica</set> * septiembre</pattern>
+	<template>No hay examen ni entrega de practicas aparte. El contenido practico sera incluido en el unico examen teorico-practico.</template>
+</category>
+
+<!-- Pregunta 7 -->
+<category>
+	<pattern>^ no ^ <set>asistir</set> ^ clase ^</pattern>
+	<template>Deberias solicitar evaluacion unica final al departamento</template>
+</category>
+
+<!-- Pregunta 8 -->
+<category>
+	<pattern>* minima * <set>aprobar</set></pattern>
+        <template>5. Es tambien necesario un 3 en cada una de las partes</template>
+</category>
+
+<!-- Pregunta 9 -->
+<category>
+	<pattern>^ <set>practica</set> * obligatorias ^</pattern>
+	<template>Si en el caso de estar en evaluacion continua.</template>
+</category>
+
+<!-- Pregunta 10, Pregunta 12 -->
+<category>
+	<pattern>* <set>practica</set> * nota final</pattern>
+	<template>Cada practica vale 1,125 respecto de la califacion final.</template>
+</category>
+
+<!-- Pregunta 11 -->
+<category>
+	<pattern>* <set>asistir</set> * nota final</pattern>
+        <template>La asistencia y participacion valen 0,5 respecto de la califiacion final.</template>
+</category>
+
+<!-- Pregunta 13 -->
+<category>
+	<pattern>* puntos por participacion</pattern>
+        <template>Acudiendo a clase y participando activamente.</template>
+</category>
+
+<!-- Pregunta 15 -->
+<category>
+	<pattern>* <set>practica</set> ^ individuales ^</pattern>
+	<template>Si, las practicas son individuales.</template>
+</category>
+
+<!-- Pregunta 16 -->
+<category>
+	<pattern>* <set>practica</set> ^ grupo ^</pattern>
+	<template>No, las practicas son individuales.</template>
+</category>
+
+<!-- Pregunta 17 -->
+<category>
+	<pattern>* entregar ^ relaciones de problemas</pattern>
+	<template>No es necesario.</template>
+</category>
+
+<!-- Pregunta 18 -->
+<category>
+	<pattern>por que * estudiar</pattern>
+	<template>Para adquirir los conocimientos necesarios para poder aprobar la asignatura</template>
+</category>
+
+<!-- Pregunta 19, Pregunta 34 -->
+<category>
+	<pattern>^ vale ^ primer ^ <set>teoria</set> ^ </pattern>
+	<template>El primer examen teorico otorgara hasta 0,5 que se sumaran a la nota del examen final de junio (max 10 p)</template>
+</category>
+
+<category>
+	<pattern>^ vale ^ primera ^ <set>teoria</set> ^ </pattern>
+	<template><srai>VALE PRIMER TEORIA</srai></template>
+</category>
+
+<!-- Pregunta 20 -->
+<category>
+	<pattern>* nota mayor * 10</pattern>
+	<template>Aunque puedas acumular mas de 10 puntos durante la evaluacion la nota maxima final es de 10 puntos</template>
+</category>
+
+<!-- Pregunta 21 -->
+<category>
+	<pattern>^ recuperar ^ practica ^</pattern>
+        <template>No es posible recuperar practicas ni examenes</template>
+</category>
+
+<category>
+	<pattern>^ recuperar ^ examen ^</pattern>
+        <template>No es posible recuperar practicas ni examenes</template>
+</category>
+
+<!-- Pregunta 22 -->
+<category>
+	<pattern>* copio * estudiante ^</pattern>
+        <template>Tanto el estudiante que se copia como el que se deja copiar suspenderan IA</template>
+</category>	
+
+<!-- Pregunta 23 -->
+<category>
+	<pattern>* dejo copiar ^</pattern>
+	<template><srai> P22 COPIO P22 ESTUDIANTE</srai></template>
+</category>
+
+<!-- Pregunta 24 -->
+<category>
+        <pattern>* <set>suspender</set> * junio</pattern>
+	<template>Tendras una nueva oportunidad en un examen teorico-practico en la convocatoria de septiembre</template>
+</category>
+
+<!-- Pregunta 25 -->
+<category>
+	<pattern> * <set>practica</set> * <set>teoria</set> ^</pattern>
+	<template><srai>P4 EVALUA P4 JUNIO</srai></template>
+</category>
+
+<category>
+	<pattern> * <set>teoria</set> * <set>practica</set> ^</pattern>
+	<template><srai>P4 EVALUA P4 JUNIO</srai></template>
+</category>
+
+<!-- Pregunta 26 -->
+<category>
+	<pattern> * horario * tutorias * <set>practica</set> ^</pattern>
+	<template>Martes y miercoles ambos dias de 8:30-9:30 y de 11:30-13:30 en el despacho D40</template>
+</category>
+
+<!-- Pregunta 27 -->
+<category>
+	<pattern> * correo * <set>teoria</set> ^</pattern>
+	<template>a.gonzalez@decsai.ugr.es</template>
+</category>
+
+<!-- Pregunta 28 -->
+<category>
+	<pattern> * <set>aprobar</set> ^ <set>practica</set> ^ no presento una practica</pattern>
+	<template>Si, es posible.</template>
+</category>
+
+<!-- Pregunta 29 -->
+<category>
+	<pattern> * <set>nota</set> minima * cada parte ^</pattern>
+	<template>Debes sacar un 3 sobre 10 en cada parte para que haga media</template>
+</category>
+
+<!-- Pregunta 30 -->
+<category>
+	<pattern>* <set>nota</set> * practica 1 * nivel 3 * no ^ <set>aprobar</set></pattern>
+	<template>Obtendras la nota del nivel 1</template>
+</category>
+
+<category>
+	<pattern>* <set>nota</set> * practica 1 * no ^<set>aprobar</set>nivel 3 ^ </pattern>
+	<template>Obtendras la nota del nivel 1</template>
+</category>
+
+<category>
+        <pattern>* <set>nota</set> * practica 1 * nivel 3 * <set>suspender</set></pattern>
+	<template>Obtendras la nota del nivel 1</template>
+</category>
+
+<category>
+	<pattern>* <set>nota</set> * practica 1 * <set>suspender</set>nivel 3 ^ </pattern>
+	<template>Obtendras la nota del nivel 1</template>
+</category>
+
+<!-- Pregunta 31 -->
+<category>
+	<pattern>* entregar ^ practica 1 sin ^ nivel 0 ^</pattern>
+	<template>Es necesario realizar el nivel 0 para empezar, si no se entrega la calificacion de la practica es de 0</template>
+</category>
+
+<!-- Pregunta 32 -->
+<category>
+	<pattern> * no ^ <set>asistir</set> * defensa * practica ^</pattern>
+	<template>Deberas comunicarte con tu profesor antes de la fecha en concreto para poder dar solucion al problema.</template>
+</category>
+
+<!-- Pregunta 33 -->
+<category>
+	<pattern> * <set>examen</set> ^ <set>teoria</set> * curso</pattern>
+	<template>Tendras 4 pruebas teoricas. 3 que puntuaran sobre el examen final a lo largo del curso y 1 examen final en junio.</template>
+</category>
+
+<!-- Pregunta 35 -->
+<category>
+	<pattern> * <set>teoria</set> * <set>asistir</set></pattern>
+	<template>No se controla la asistencia a teoria.</template>
+</category>
+
+<category>
+	<pattern> * <set>asistir</set> * <set>teoria</set></pattern>
+	<template>No se controla la asistencia a teoria.</template>
+</category>
+
+<!-- Pregunta 36 -->
+<category>
+	<pattern> * consiste ^ <set>examen</set> ^ ejercicios ^</pattern>
+        <template>Sera examen con varios problemas de los dados a lo largo del curso que puntuara en la parte practica de la asignatura</template>
+</category>
+
+<!-- Pregunta 37 -->
+<category>
+	<pattern> * no * defender * practica ^</pattern>
+	<template>Si la practica no es defendida obtendras una calificacion de 0 en ella.</template>
+</category>
+
+<!-- Pregunta 38 -->
+<category>
+        <pattern> * hacer si no ^ <set>aprobar</set> ^ nivel 3 ^ practica 1</pattern>
+	<template>Deberias de quedarte en el nivel 2 para asegurarte una buena puntuacion</template>
+</category>
+
+<!-- Pregunta 39 -->
+<category>
+	<pattern>cuantas practicas ^</pattern>
+	<template>Hay 3 practicas entregables a lo largo del curso</template>
+</category>
+
+<!-- Pregunta 40, Pregunta 41 -->
+<category>
+        <pattern>^ programo ^ * practicas * lenguaje ^</pattern>
+        <template>Las practicas han de realizarse en el lenguaje indicado por el profesor.</template>
+</category>
+
+<category>
+        <pattern> ^ * practicas ^ otro lenguaje ^</pattern>
+	<template><srai>PROGRAMO P40 PRACTICAS P40 LENGUAJE</srai></template>
+</category>
+
+<!-- Pregunta 42, Pregunta 43 -->
+<category>
+	<pattern> donde * <set>despacho</set> * profesor ^</pattern>
+	<template>El despacho es el D40 de la cuarta planta de la ETSIIT.</template>
+</category>
+
+<!-- Pregunta 44 -->
+<category>
+        <pattern> * <set>number</set> puntos ^ <set>practica</set> * <set>aprobar</set> ^ <set>practica</set></pattern>
+        <template>
+          <think><set var="n"><star index="2"/></set></think>
+          <condition var="n">
+            <li value="23">Si sumas suficientes puntos para aprobar la parte practica.</li>
+            <li value="0">No sumas suficientes puntos para aprobar la parte practica.</li>
+            <li><think><set var="n"><map name="predecessor"><get var="n"/></map></set></think><loop/></li>
+          </condition>
+</template>
+</category>
+
+<!-- Pregunta 45 -->
+<category>
+        <pattern> * <set>number</set> puntos * <set>practica</set> * <set>aprobar</set> ^ <set>asignatura</set></pattern>
+	<template>No, es necesario obtener una puntuacion lo suficientemente alta en teoria para que la nota final sea mayor que 5 y la nota de practicas sea mayor de 3 sobre 10</template>
+</category>
+
+
+<!-- Pregunta 47 -->
+<category>
+        <pattern> * no * hacer la practica 1 ^  * <set>aprobar</set> ^ <set>practica</set></pattern>
+        <template>Si, solo que esa practica contara como un 0.</template>
+</category>
+
+<!-- Pregunta 48 -->
+<category>
+	<pattern>* usar agentes conversacionales * defensa ^</pattern>
+	<template>No, has de ir tu en persona a hacer la defensa</template>
+</category>
+
+<!-- Pregunta 49 -->
+<category>
+	<pattern>* practicas * programar ^</pattern>
+        <template>Si, en las siguientes practicas hay que programar.</template>
+</category>
+
+<!-- Pregunta 50 -->
+<category>
+        <pattern> * ^ * resto de la practica se complica mucho</pattern>
+	<template>Los siguientes niveles son un poco mas dificiles pero no demasiado.</template>
+</category>
+
+</aiml>

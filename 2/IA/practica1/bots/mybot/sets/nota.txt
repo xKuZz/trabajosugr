@@ -1,0 +1,4 @@
+nota
+puntuacion
+calificacion
+valor

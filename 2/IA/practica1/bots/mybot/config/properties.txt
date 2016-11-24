@@ -1,0 +1,9 @@
+url:http://www.alicebot.org
+name:myBot
+email:myBot@gmail.com
+gender:male
+botmaster:Raul	
+organization:ugr
+version:0.0.4
+
+

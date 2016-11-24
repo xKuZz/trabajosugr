@@ -1,0 +1,16 @@
+alejandro:moreno
+alfonso:moreno
+antonio:moreno
+cristina:moreno
+gabriela:blanco
+ivan:rubio
+javier:moreno
+juan:calvo
+laura:rubio
+luis:pelirrojo
+marco:calvo
+maria:pelirrojo
+paco:rubio
+pepe:pelirrojo
+sofia:marron
+sonia:moreno

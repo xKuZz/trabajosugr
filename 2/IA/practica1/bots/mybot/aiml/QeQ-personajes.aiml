@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+<!-- Conocimiento de los personajes -->
+<!-- C01: Genero -->
+<category>
+  <pattern>Es <set>personajes</set> ^ <set>genero</set></pattern>
+  <template>
+    <think>
+      <set var="genero"><map name="genero"><star/></map></set>
+      <set var="result"><srai>FINDITEM <star index="3"/> IN <get var="genero"/></srai></set>
+    </think>
+    <condition var="result">
+      <li value="0">No.</li>
+      <li>Si.</li>
+    </condition>
+  </template>
+</category>
+
+<!-- C02: Pelo -->
+<category>
+  <pattern>Es <set>personajes</set> ^ <set>pelo</set></pattern>
+  <template>
+    <think>
+      <set var="pelo"><map name="pelo"><star/></map></set>
+      <set var="result"><srai>FINDITEM <star index="3"/> IN <get var="pelo"/></srai></set>
+    </think>
+    <condition var="result">
+      <li value="0"></li>
+      <li>Si.</li>
+    </condition>
+  </template>
+</category>
+
+<category>
+  <pattern>Tiene <set>personajes</set> ^ pelo <set>pelo</set></pattern>
+  <template><srai>ES <star/> <star index="3"/></srai></template>
+</category>
+
+<category>
+  <pattern>Tiene <set>personajes</set> <set>pelo</set> ^ pelo </pattern>
+  <template><srai>ES <star/> <star index="2"/></srai></template>
+</category>
+
+<category>
+  <pattern>Tiene <set>pelo</set> ^ pelo <set>personajes</set></pattern>
+  <template><srai>ES <star index="3"/> <star index="1"/></srai></template>
+</category>
+
+<category>
+  <pattern>Tiene ^ pelo <set>pelo</set> <set>personajes</set></pattern>
+  <template><srai>ES <star index="3"/> <star index="2"/></srai></template>
+</category>
+
+<!-- C03: Piel -->
+<category>
+  <pattern>Tiene <set>personajes</set> ^ piel <set>piel</set></pattern>
+  <template>
+    <think>
+      <set var="piel"><map name="piel"><star/></map></set>
+      <set var="result"><srai>FINDITEM <star index="3"/> IN <get var="piel"/></srai></set>
+    </think>
+    <condition var="result">
+      <li value="0">No.</li>
+      <li>Si.</li>
+    </condition>
+  </template>
+</category>
+
+<category>
+  <pattern>Tiene <set>personajes</set> <set>piel</set> ^ piel </pattern>
+  <template><srai>TIENE <star/> PIEL <star index="2"/></srai></template>
+</category>
+
+<category>
+  <pattern>Tiene <set>piel</set> ^ piel <set>personajes</set></pattern>
+  <template><srai>TIENE <star index="3"/> PIEL <star index="1"/></srai></template>
+</category>
+
+<category>
+  <pattern>Tiene ^ piel <set>piel</set> <set>personajes</set></pattern>
+  <template><srai>TIENE <star index="3"/> PIEL <star index="2"/></srai></template>
+</category>
+
+<!-- C04: Ojos -->
+<category>
+  <pattern>Tiene <set>personajes</set> ^ ojos <set>ojos</set></pattern>
+  <template>
+    <think>
+      <set var="ojos"><map name="ojos"><star/></map></set>
+      <set var="result"><srai>FINDITEM <star index="3"/> IN <get var="ojos"/></srai></set>
+    </think>
+    <condition var="result">
+      <li value="0">No.</li>
+      <li>Si.</li>
+    </condition>
+  </template>
+</category>
+
+<category>
+  <pattern>Tiene <set>personajes</set> <set>ojos</set> ^ ojos </pattern>
+  <template><srai>TIENE <star/> OJOS <star index="2"/></srai></template>
+</category>
+
+<category>
+  <pattern>Tiene <set>ojos</set> ^ ojos <set>personajes</set></pattern>
+  <template><srai>TIENE <star index="3"/> OJOS <star index="1"/></srai></template>
+</category>
+
+<category>
+  <pattern>Tiene ^ ojos <set>ojos</set> <set>personajes</set></pattern>
+  <template><srai>TIENE <star index="3"/> OJOS <star index="2"/></srai></template>
+</category>
+
+<!-- C05: Bigote -->
+<category>
+  <pattern>Tiene <set>personajes</set> bigote</pattern>
+  <template><map name="bigote"><star/></map></template>
+</category>
+
+<category>
+  <pattern>Tiene bigote <set>personajes</set></pattern>
+  <template><srai>TIENE <star/> BIGOTE</srai></template>
+</category>
+
+<!-- C06: Barba -->
+<category>
+  <pattern>Tiene <set>personajes</set> barba</pattern>
+  <template><map name="barba"><star/></map></template>
+</category>
+
+<category>
+  <pattern>Tiene barba <set>personajes</set></pattern>
+  <template><srai>TIENE <star/> BARBA</srai></template>
+</category>
+
+<!-- C07: Gafas -->
+<category>
+  <pattern>Tiene <set>personajes</set> gafas</pattern>
+  <template><map name="gafas"><star/></map></template>
+</category>
+
+<category>
+  <pattern>Tiene gafas <set>personajes</set></pattern>
+  <template><srai>TIENE <star/> GAFAS</srai></template>
+</category>
+
+</aiml>

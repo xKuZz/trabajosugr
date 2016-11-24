@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+<topic name="unknown">
+<category>
+<pattern>^ quien es quien ^</pattern>
+
+<template>
+  <think>
+    <set name="lista">Alejandro Alfonso Antonio Cristina Gabriela Ivan Javier Juan Laura Luis Marco Maria Paco Pepe Sofia Sonia</set>
+  </think>
+Quieres adivinar el personaje o responder a las preguntas?
+</template>
+</category>
+</topic>
+
+<category>
+<pattern>^ adivinar ^</pattern>
+<that>QUIERES ADIVINAR EL PERSONAJE O RESPONDER A LAS PREGUNTAS</that>
+<template>
+  <think>
+    <set var="num"><srai>RANDOM 16</srai></set>
+    <set name="personaje"><srai>SELECTITEM <get var="num"/> IN <get name="lista"/></srai></set>
+    <set name="ppelo"><map name="pelo"><get name="personaje"/></map></set>
+    <set name="pojos"><map name="ojos"><get name="personaje"/></map></set>
+    <set name="ppiel"><map name="piel"><get name="personaje"/></map></set>
+    <set name="pbigote"><map name="bigote"><get name="personaje"/></map></set>
+    <set name="pbarba"><map name="barba"><get name="personaje"/></map></set>
+    <set name="pgenero"><map name="genero"><get name="personaje"/></map></set>
+    <set name="pgafas"><map name="gafas"><get name="personaje"/></map></set>
+    <set name="topic">adivinar</set>
+</think>
+Vamos a jugar. Ya he escogido un personaje al azar.
+</template>
+</category>
+
+<category>
+  <pattern>NEW GAME</pattern>
+  <template><think><set name="topic">newgame</set></think>Quieres jugar de nuevo?</template>
+</category>
+
+<topic name="adivinar">
+<category>
+  <pattern>Es <set>personajes</set></pattern>
+  <template>
+    <think>
+      <set var="result"><srai>FINDITEM <star index="1"/> IN <get name="personaje"/></srai></set>
+      <set name="topic">unknown</set>
+    </think>
+    <condition var="result">
+      <li value="0">No, era <get name="personaje"/>.</li>
+      <li>Si.</li>
+    </condition>
+    <srai>NEW GAME</srai>
+    </template>
+</category>
+
+<category>
+  <pattern>Es <set>genero</set></pattern>
+  <template>
+    <think>
+      <set var="result"><srai>FINDITEM <star index="1"/> IN <get name="pgenero"/></srai></set>
+    </think>
+    <condition var="result">
+      <li value="0">No.</li>
+      <li>Si.</li>
+    </condition></template>
+</category>
+
+
+<category>
+  <pattern>Tiene el pelo <set>pelo</set></pattern>
+  <template>
+    <think>
+      <set var="result"><srai>FINDITEM <star/> IN <get name="ppelo"/></srai></set>
+    </think>
+    <condition var="result">
+      <li value="0">No.</li>
+      <li>Si.</li>
+    </condition>
+  </template>
+</category>
+
+<category>
+  <pattern>Es <set>pelo</set></pattern>
+  <template><srai>TIENE EL PELO <star/></srai></template>
+</category>
+
+<category>
+  <pattern>Tiene los ojos <set>ojos</set></pattern>
+  <template>
+    <think>
+      <set var="result"><srai>FINDITEM <star/> IN <get name="pojos"/></srai></set>
+    </think>
+    <condition var="result">
+      <li value="0">No.</li>
+      <li>Si.</li>
+    </condition>
+  </template>
+</category>
+
+<category>
+  <pattern>Tiene la piel <set>piel</set></pattern>
+  <template>
+    <think>
+      <set var="result"><srai>FINDITEM <star/> IN <get name="ppiel"/></srai></set>
+    </think>
+    <condition var="result">
+      <li value="0">No.</li>
+      <li>Si.</li>
+    </condition>
+  </template>
+</category>
+
+<category>
+  <pattern>Tiene bigote</pattern>
+  <template>
+    <get name="pbigote"/>.
+  </template>
+</category>
+
+<category>
+  <pattern>Tiene barba</pattern>
+  <template>
+    <get name="pbarba"/>.
+  </template>
+</category>
+
+<category>
+  <pattern>Tiene gafas</pattern>
+  <template>
+  <get name="pgafas"/>
+  </template>
+</category>
+
+</topic>
+<topic name="newgame">
+<category>
+  <pattern>^ si ^</pattern>
+  <template>
+    <think><set name="topic">unknown</set></think>
+    <srai>QUIEN ES QUIEN</srai></template>
+</category>
+
+<category>
+  <pattern>^ no ^</pattern>
+  <template>
+  <think><set name="topic">unknown</set></think>
+  Como quieras, que mas necesitas?</template>
+</category>
+</topic>
+
+
+</aiml>
