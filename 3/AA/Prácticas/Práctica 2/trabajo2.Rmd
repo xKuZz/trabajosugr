@@ -1,0 +1,667 @@
+---
+title: "Trabajo Prácticas 2 - Aprendizaje Automático"
+author: "David Criado Ramón"
+date: "30 de marzo de 2017"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+knitr::opts_chunk$set
+set.seed(10)
+```
+```{r puntoParada, include=FALSE, echo = FALSE, eval=FALSE}
+invisible(readline(prompt = "Pulsar [enter] para continuar"))
+```
+
+# 1. Gradiente descendente. Implementar el algoritmo de gradiente descendente 
+Para la implementación del algoritmo recibimos los dos valores iniciales: el vector con el punto inicial (w_inicial) y la tasa de aprendizaje (eta), las dos posibles condiciones de parada: alcanzar el umbral deseado o el límite máximo de iteraciones que hayamos impuesto y la función a evaluar, que será pasada como una función en R que al aplicarse sobre dos puntos devolverá su valor de f y sus derivadas parciales. La implementación del algoritmo es simple y sigue los pasos explicados en el pseudocódigo visto en las diapositivas de teoría.
+```{r}
+gradiente_descendente = function(w_inicial = c(1,1), eta = 0.1, 
+                                 umbral= 0, maximo_iteraciones = 10000, funcion) {
+  # Inicializamos el vector de pesos w
+  w = w_inicial
+  # Iteración inicial
+  iteracion_actual = 0
+  diferencia = Inf 
+  actual = 0
+  evolucionf = c()
+  while (iteracion_actual < maximo_iteraciones & diferencia > umbral) {
+    # 1a. Calculamos el valor de la función para el w actual
+    previo = actual
+    actual = funcion(w[1],w[2])
+    evolucionf = c(evolucionf, actual$f)
+    # 1b. Medimos la diferencia en los valore de f para ver si alcanzamos el umbral
+    if (iteracion_actual == 0)
+        diferencia = Inf
+    else
+        diferencia = abs(actual$f - previo$f)
+    
+    # 2. Calculamos el gradiente
+    # 3. La dirección viene determinada por el signo contrario
+    v = c(-actual$dx, -actual$dy)
+
+    # 4. Modifico los pesos
+    w = w + eta * v
+    
+    # 5. Pasamos a la siguiente iteración
+    iteracion_actual = iteracion_actual + 1
+  }
+  
+  c(w, iteracion_actual, evolucionf)
+}
+```
+
+\newpage
+##a) Considerar la función no lineal $E(u,v) = (u^2e^v - 2v^2e^{-u})^2$. Usar gradiente descedente y para encontrar un mínimo de esta función, comenzando desde el punto $(u,v) = (1,1)$ y una tasa de aprendizaje $\eta=0.1$.
+
+###1) Calcular analíticamente y mostrar la expresión del gradiente de la función $E(u,v)$
+Primero calculamos las derivadas parciales de la función respecto a $u$ y $v$.
+\begin{align}
+\nonumber
+\frac{\delta}{\delta u} &= 2 \cdot (u^2e^v - 2v^2e^{-u}) \cdot (u^2e^v - 2v^2e^{-u})^\prime = \\
+\nonumber
+&= 2 \cdot (u^2e^v - 2v^2e^{-u}) \cdot (2ue^v +2v^2e^{-u}) = \\
+\nonumber
+&= 2 \cdot (2u^3e^{2v} + 2u^2v^2e^{v-u}-4uv^2e^{v-u}-4v^4e^{-2u}) = \\
+\nonumber
+&=4u^3e^{2v}+4u^2v^2e^{v-u}-8uv^2e^{v-u}-8v^4e^{-2u}
+\end{align}
+
+\begin{align}
+\nonumber
+\frac{\delta}{\delta v} &= 2 \cdot (u^2e^v - 2v^2e^{-u}) \cdot (u^2e^v - 2v^2e^{-u})^\prime = \\
+\nonumber
+&= 2 \cdot (u^2e^v - 2v^2e^{-u}) \cdot (u^2e^v-4ve^{-u}) = \\
+\nonumber
+&= 2 \cdot (u^4e^{2v} - 4u^2ve^{v-u}-2u^2v^2e^{v-u}+8v^3e^{-2u}) = \\
+\nonumber
+&= 2u^4e^{2v} - 8u^2ve^{v-u}-4u^2v^2e^{v-u}+16v^3e^{-2u}
+\end{align}
+
+Una vez calculadas analíticamente las dejamos escritas en la función que pasaremos al gradiente descendente más adelante.
+```{r}
+funcion_E = function(u,v) {
+  f = function() {
+    ((u^2)*exp(v) - 2* (v^2)*exp(-u))^2
+  }
+  dx = function() {
+    4*(u^3)*exp(2*v) + 4*(u^2)*(v^2)*exp(v-u) - 8*u*(v^2)*exp(v-u) - 8*(v^4)*exp(-2*u)
+  }
+  dy = function() {
+    2*(u^4)*exp(2*v) - 4*(u^2)*(v^2)*exp(v-u) - 8*(u^2)*v*exp(v-u) + 16*(v^3)*exp(-2*u)
+  } 
+  list(f = f(), dx = dx(), dy = dy())
+}
+
+```
+Con esto tenemos todos los requisitos necesarios para mostrar la expresión del gradiente en el punto inicial.
+```{r}
+u = 1
+v = 1
+gradiente1a = funcion_E(u,v)
+cat("El gradiente de la función E en el punto (", u, ",", v, ") es",
+    " du: ", gradiente1a$dx, " dv: ", gradiente1a$dy, "\n", sep = "")
+```
+
+
+Así pues los valores que acabamos de obtener son las derivadas parciales de la función $E$ para dicho punto.
+\newpage
+
+###2) ¿Cuántas iteraciones tarda el algoritmo en obtener por primera vez un valor de E(u,v) inferior a $10^{-4}$. (Usar flotantes de 64 bits)
+Utilizando la función de gradiente descente previamente desarrollado sobre la función que acabamos de utilizar obtenemos el punto inicial y su número de iteraciones.
+```{r}
+gradientedescente_E = gradiente_descendente(w_inicial=c(1,1), eta = 0.1, umbral = 10^-4,
+                                            funcion = funcion_E)
+cat("[Gradiente descendente función E] -> iteraciones:", gradientedescente_E[3], "\n")
+```
+```{r puntoParada, include=FALSE}
+```
+Como podemos observar con tan sólo 5 iteraciones del gradiente descendente hemos alcanzado un mínimo local de esta función no lineal. No obstante, la selección del umbral ha jugado un factor fundamental en que paremos. Si nos encontramos con una función que va llaneando hacia el mínimo local y con un umbral demasiado pequeño el número de iteraciones será mucho más elevado y es posible que no mejoren mucho los resultados con respecto a un umbral mayor.
+
+###3) ¿Qué valores de (u,v) obtuvo en el apartado anterior cuando alcanzó el error de $10^{-4}$?
+```{r 11a3, eval = FALSE}
+u = gradientedescente_E[1]
+v = gradientedescente_E[2]
+cat("[Gradiente descendente función E] -> u:", u, "\n")
+cat("[Gradiente descendente función E] -> v:", v, "\n")
+cat("[Valor de F en el punto]: ", funcion_E(u,v)$f, "\n")
+```
+```{r 11a3, echo = FALSE}
+```
+
+```{r include=FALSE}
+invisible(readline(prompt = "Pulsar [enter] para continuar"))
+```
+## b) Considerar ahora la función $f(x,y) = (x-2)^2 +2(y-2)^2+2sin(2\pi x)sin(2\pi y)$
+Primero volvemos a calcular de manera analítica sus derivadas parciales y las juntamos junto a la función original en una función única en R.
+\begin{align}
+\nonumber
+\frac{\delta}{\delta x} = 2(x-2) + 4\pi\cos(2\pi x)\sin(2\pi y) \\
+\nonumber
+\frac{\delta}{\delta y} = 4(y-2) + 4\pi\cos(2\pi y)\sin(2\pi x)
+\end{align}
+```{r}
+funcion_f = function(x,y) {
+  f = function() {
+    (x-2)^2 + 2*(y-2)^2+2*sin(2*pi*x)*sin(2*pi*y)
+  }
+  dx = function() {
+    2*(x-2) + 4*pi*cos(2*pi*x)*sin(2*pi*y)
+  }
+  dy = function() {
+    4*(y-2) + 4*pi*cos(2*pi*y)*sin(2*pi*x)
+  } 
+  list(f = f(), dx = dx(), dy = dy())
+}
+```
+### 1) Usar gradiente descendente para minimizar esta función. Usar como punto inicial \newline ($x_0 = 1, y_0 = 1$), tasa de aprendizaje $\eta = 0.01$ y un máximo de 50 iteraciones. Generar un gráfico de cómo desciende el valor de la función con las iteraciones. Repetir el experimento pero usando $\eta=0.1$, comentar las diferencias.
+Vamos a crear una función que pinte los puntos que conforman la evolución de la función evaluada sobre los puntos que obtenemos en el gradiente descendente.
+```{r}
+gd_draw_lines = function(gradienteDesc, col, pch = 19) {
+  # Un punto está formado por x = num iteración y = valor f
+  puntos = gradienteDesc[3:length(gradienteDesc)]
+  puntos = cbind(1:length(puntos), puntos)
+  lines(x=puntos, col=col)
+}
+```
+Aplicamos el gradiente descendente para ambos casos y pintamos ambos en la misma gráfica para comparar cómo evolucionan:
+```{r}
+inicio = c(0,1)
+gradiente_001 = gradiente_descendente(w_inicial = inicio, eta = 0.01,
+                                      maximo_iteraciones = 50, funcion = funcion_f)
+gradiente_01 = gradiente_descendente(w_inicial = inicio, eta = 0.1,
+                                      maximo_iteraciones = 50, funcion = funcion_f)
+
+plot(x=c(1,50), y=range(range(gradiente_001[4:length(gradiente_001)]),
+                        range(gradiente_01 [4:length(gradiente_01)])),
+     xlab = "Iteraciones", ylab = "Función f", type = "n", 
+     main = "Comparativa de tasas de aprendizaje en la función f")
+gd_draw_lines(gradiente_001, col = 18) # Color rojo
+gd_draw_lines(gradiente_01, col = 36) # Color azul
+```
+
+En el caso de la tasa de aprendizaje 0.01 (en color rojo) convergemos rápidamente en la linea 32 hacia un mínimo en el que el umbral es 0 (hemos alcanzado un punto en el que no hay diferencia en la función o no es apreciable por la precisión aritmética del ordenador).
+
+En el caso de la tasa de aprendizaje 0.1 (en color azul) observamos que las variaciones producidas por el gradiente son mucho más altas y en las 50 iteraciones que hemos puesto como límite la función no converge en un mínimo. No obstante, podemos observar que durante su ejecución ha encontrado un mínimo en $f$ mucho más bajo que el obtenido en el punto de convergencia de la tasa de aprendizaje de 0.01.
+
+### 2) Obtener el valor mínimo y los valores de las variables que lo alcanzan cuando el punto de inicio se fija en: (2.1, 2.1), (3, 3), (1.5, 1.5), (1, 1). Generar una tabla con los valores obtenidos.
+
+```{r echo = TRUE}
+# La siguiente función pasa a texto un punto concreto para poder escribirlo
+# en las tablas
+str_punto = function(w) {
+  paste("(", format(round(w[1], 2), nsmall = 2), ",", 
+             format(round(w[1], 2), nsmall = 2), ")", sep = "")
+}
+
+# Declaramos los puntos iniciales
+puntosini = c(2.1,3,1.5,1)
+puntosini = cbind(puntosini, puntosini)
+puntosiniciales = apply(X = puntosini, MARGIN = 1, FUN = str_punto)
+
+# Aplicamos los gradientes de los puntos para la tasa 0.1
+crear_tabla = function(tasa) {
+  gradientes = apply(X=puntosini, MARGIN = 1, FUN = gradiente_descendente, eta = tasa,
+                      funcion = funcion_f, maximo_iteraciones = 50)
+  gradientes = unlist(gradientes)
+  gradientes = t(gradientes)
+
+  puntosfinales = apply(X=gradientes, MARGIN = 1, FUN = str_punto)
+
+  gradientes =cbind(puntosiniciales, puntosfinales, 
+                    gradientes[,3], gradientes[,ncol(gradientes)])
+
+  # Pintamos la tabla
+  col_names = c("Punto inicial", "Punto final", "Iteraciones", "F en el punto")
+  kable(gradientes, col.names = col_names,  
+        caption = paste("Gradiente descendente para tasa de aprendizaje ", tasa))
+}
+crear_tabla(0.1)
+crear_tabla(0.01)
+```
+
+En el caso de la tabla con tasa de aprendizaje 0.1 vemos que no alcanzamos un mínimo local en el que converger durante las 50 iteraciones. Los puntos en los que paramos son variables y depende del punto de partida inicial y obtenemos resultados mucho más variables: la mayoría son valores de f bastante más bajos qu elos obtenidos con la otra tasa de aprendizaje y uno que acaba en un punto muy superior. Una tasa de aprendizaje más alta nos lleva a evoluciones con mucha más variabilidad y es más difícil que converja en un punto concreto si hay un umbral muy pequeño o nulo, como en este experimento.
+
+La tasa de aprendizaje 0.01 converge siempre en 24 iteraciones hacia el mismo punto, que es un mínimo de menor calidad que el que hemos obtenido parando en 50 iteraciones de la tasa de aprendizaje 0.01.
+
+Podemos concluir de este experimento que la selección de los puntos iniciales y la tasa de aprendizaje es fundamental para encontrar un óptimo de cierta calidad. Una selección de una tasa de aprendizaje demasiado baja acabará llevándonos a un mínimo local aunque puede que requiramos muchas iteraciones para encontrar el mínimo. Una tasa de aprendizaje demasiado alta puede llevarnos a demasiada variabilidad y evitar que encontremos un mínimo local dependiendo del umbral que hayamos seleccionado.
+
+## c) ¿Cuál sería su conclusión sobre la verdadera dificultad de encontrar el mínimo global de una función arbitraria?
+Es evidente que es extremadamente difícil encontrar el mínimo global de la función sin conocimiento previo de la misma. Encontrar un mínimo local de cierta calidad también puede llegar a ser difícil, la selección de la tasa de aprendizaje, como hemos visto en el apartado anterior, así como los puntos de partida influyen considerablemente en los resultados obtenidos por el gradiente descendente. La forma de la función también influye significativamente, partir de un punto con una buena pendiente descedente facilita encontrar un óptimo que puede, o no, ser de cierta calidad y llaneos excesivos que no sean acotados por el umbral alargan el proceso con la posibilidad de que no haya una solución mejor tras gastar muchas iteraciones.
+
+\newpage
+# 2) Regresión Logística: En este ejercicio crearemos nuestra propia función objetivo $f$ (una probabilidad en este caso) y nuestro conjunto de datos $D$ para ver cómo funciona regresión logística. Supondremos por simplicidad que $f$ es una probabilidad con valores 0/1 y por tanto que la etiqueta $y$ es una función determinista de $x$.
+
+# Consideremos d = 2 para que los datos sean visualizables, y sea $\chi = [0,2] x [0,2]$ con probabilidad uniforme de elegir cada $x \in \chi$. Elegir una línea en el plano que pase por $\chi$ como la frontera entre ${f(x) = 1}$ (donde $y$ toma valores +1) y $f(x) = 0$ (donde $y$ toma valores -1), para ello seleccionar dos puntos aleatorios del plano y calcular la línea que pasa por ambos. Seleccionar $N = 100$ puntos aleatorios $\{x_n\}$ de $\chi$ y evaluar las repuestas $\{y_n\}$ de todos ellos respecto de la frontera elegida.
+
+Para coger dos puntos aleatorios y obtener su recta, obtener puntos aleatorios, meter ruido en ellas y etiquetar puntos según la frontera utilizamos las funciones que ya hemos usado en el trabajo anterior.
+```{r}
+# Obtiene puntos de una distribución uniforme
+simula_unif = function (N=2,dims=2, rango = c(0,1)){
+ m = matrix(runif(N*dims, min=rango[1], max=rango[2]),
+ nrow = N, ncol=dims, byrow=T)
+ m
+}
+# Dados dos puntos obtiene una recta
+simula_recta = function (intervalo = c(-1,1), visible=F){
+   ptos = simula_unif(2,2,intervalo) # se generan 2 puntos
+   a = (ptos[1,2] - ptos[2,2]) / (ptos[1,1]-ptos[2,1]) # calculo de la pendiente
+   b = ptos[1,2]-a*ptos[1,1]  # calculo del punto de corte
+
+   if (visible) {  # pinta la recta y los 2 puntos
+       if (dev.cur()==1) # no esta abierto el dispositivo lo abre con plot
+           plot(1, type="n", xlim=intervalo, ylim=intervalo)
+       points(ptos,col=3)  #pinta en verde los puntos
+       abline(b,a,col=3)   # y la recta
+   }
+   c(a,b) # devuelve el par pendiente y punto de corte
+}
+# Etiquetación binaria en función de la frontera determinada por la recta
+etiquetar = function(punto, recta) {
+    sign(punto[2] - recta[1] * punto[1] - recta[2])
+  }
+# Mete un porcentaje de ruido en los puntos pasados
+mete_ruido = function(etiquetas, porcentaje) {
+    # Apuntamos los índice cuales son positivos y cuales son negativos
+    positivos = which(etiquetas == 1)
+    negativos = which(etiquetas == -1)
+    # Cogemos una muestra del porcentaje de cada uno
+    muestra_positivos = sample(positivos, length(positivos) * porcentaje)
+    muestra_negativos = sample(negativos, length(negativos) * porcentaje)
+    # Alteramos la etiqueta
+    etiquetas[muestra_positivos] = -1
+    etiquetas[muestra_negativos] =  1
+    etiquetas
+}
+# Pone las etiquetas obtenidas por regresión
+etiquetar_regresion = function(x, w) {
+  x = c(1,x) # Añadimos 1 al principio del vector de características
+  # La etiqueta viene dada por el signo de la sumatoria de xi * wi
+  sign(sum(x*w))
+}
+# Pinta y/o calcula una recta dado el vector w
+calcula_recta = function(w, pintar = F) {
+  a = -w[2]/w[3]
+  b = -w[1]/w[3]
+  abline(b,a, col = "red")
+  list(a = a, b = b)
+}
+```
+
+Obtengamos nuestros 100 puntos.
+```{r}
+recta2 = simula_recta(c(0,2))
+puntos2_train = simula_unif(N = 100, dims = 2, rango = c(0,2))
+etiquetas2_train = apply(X=puntos2_train, MARGIN = 1, FUN = etiquetar, recta = recta2)
+
+```
+## a) Implementar Regresión Logística (RL) con Gradiente Descendente Estocástico (SGD) bajo las siguientes condiciones:
+## - Inicializar el vector de pesos con valores 0.
+## - Parar el algoritmo cuando $||w^{(t-1)}-w^{t}|| < 0.01$ donde $w^{(t)}$ denota el vector de pesos al final de la época T. Una época es un pase completo a través de los N datos
+## - Aplicar una permutación aleatoria, 1, 2, ..., N, en el orden de los datos antes de usarlos en cada época del algoritmo.
+## - Usar la tasa de aprendizaje $\eta = 0.01$
+```{r}
+# Los datos contienen las etiquetas en la última columna.
+rlsgd = function(w_inicial, tasa, umbral, datos) {
+  w = w_inicial
+  diferencia = Inf
+  primeraiteracion = T
+  # Añadimos la columna de unos
+  datos = cbind(1, datos)
+  
+  # Comprobamos la condición de parada
+  
+  while (diferencia > umbral) {
+    # Hacemos una permutación aleatoria de los datos
+    indices = sample(nrow(datos))
+    datos = datos[indices,]
+    x = datos[,1:ncol(datos)-1]
+    y = as.vector(datos[,ncol(datos)])
+    # Calculamos el gradiente
+    w_anterior = w
+    suma = c(0,0,0)
+    for (n in 1:nrow(x)) {
+       numerador = -y[n] * x[n, ] # Fila tam 3
+       denominador = y[n] * (w %*% x[n, ])
+       denominador = exp(denominador) +1
+       suma = suma + numerador/denominador
+    }
+    gradiente = suma/n
+    v = -gradiente
+    w = w + tasa * v
+    
+    
+    if (primeraiteracion) {
+      primeraiteracion = F
+    }
+    else {
+      diferencia = abs(sqrt((sum(w-w_anterior)^2)))
+      #print (diferencia)
+    }
+    
+  }
+ 
+  w
+}
+
+
+```
+## b) Usar los muestra de datos etiquetada para encontrar nuestra solución $g$ y estimar $E_out$ usando para ello un número suficientemente grande de nuevas muestras
+
+```{r}
+
+error_logistico = function(w, datos, etiquetasOriginales) {
+  datos = cbind(1,datos)
+  errores = sapply(X=1:nrow(datos), 
+        FUN = function(i) log(1+exp(-etiquetasOriginales[i]*w%*%datos[i,])))
+  mean(errores)
+}
+
+w = rlsgd(w_inicial = c(0,0,0), tasa = 0.01, umbral = 0.01,
+      datos = cbind(puntos2_train, etiquetas2_train))
+
+# Calculamos los puntos de test
+puntos2_test = simula_unif(N = 1000, dims = 2, rango = c(0,2))
+etiquetas2_test = apply(X=puntos2_test, MARGIN = 1, FUN = etiquetar, recta = recta2)
+etiquetas2_nuevas = apply(puntos2_test, 1, etiquetar_regresion, w)
+
+# Mostramos los errores
+cat ("El error logístico dentro de la muestra (Ein) es de",
+     error_logistico(w, puntos2_train, etiquetas2_train), '\n')
+cat("El error Eout (logístico) es de ", error_logistico(w, puntos2_test, etiquetas2_test))
+cat("El error Eout (de clasificación) es de ",
+    sum(etiquetas2_nuevas != etiquetas2_test)*100/nrow(puntos2_test), '\n')
+```
+
+Vemos que regresión logística a parado rápidamente en un mínimo local y el error Eout es de casi el 50 %
+# 3 Clasificación de Dígitos. Considerar el conjunto de datos de los dígitos manuscritos y seleccionar las muestras de los dígitos 4 y 8. Usar los ficheros de entrenamiento (training) y test que se proporcionan. Extraer las características de intensidad promedio y simetría en la manera que se indicó en el ejercicio 3 del trabajo 1.
+
+Primero realizamos la parte del trabajo1.
+
+```{r warning=FALSE}
+setwd("./datos")
+# Función que lee el archivo, seleccionando instancias de 4 y 8
+lectura = function(file) {
+  # Leemos el archivo
+  digit <- read.table(file, quote="\"", comment.char="", stringsAsFactors=FALSE)
+  # Seleccionamos instancias de 4 y 8
+  digit48 = digit[digit$V1 == 4 | digit$V1 ==8,]
+  # Cogemos sus etiquetas
+  etiquetas = digit48[,1]
+  # Pasamos las etiquetas 4 a 1 y 8 a -1
+  etiquetas[etiquetas == 4] = 1
+  etiquetas[etiquetas == 8] = -1
+  # Sacamos el tamaño del conjunto seleccionado
+  n = nrow(digit48)
+  # Sacamos la matriz de grises
+  grises = array(unlist(subset(digit48,select=-V1)),c(n,16,16))
+  
+  # Devolvemos grises y el etiquetado original
+  list (grises = grises, etiquetas = etiquetas)
+}
+zip_training = lectura("zip.train")
+zip_test = lectura("zip.test")
+
+fsimetria <- function(A){
+  A = abs(A-A[,ncol(A):1])
+  mean(A)
+}
+
+calcula_media_simetria = function(zip = zip_training, pintar = T) {
+  # Calculamos la media
+  media = apply(X=zip$grises, MARGIN = 1, FUN = mean)
+  # Calculamos la simetría
+  simetria = apply(X=zip$grises, MARGIN = 1, FUN = fsimetria)
+  # Pintamos la gráfica con los puntos
+  if (pintar) {
+     plot(x = media, y = simetria, type = "p", xlab = "Media", 
+     ylab = "Simetría", main = "Instancias Training", lwd = 2, pch = 19,
+     col = 32 + 19 * zip$etiquetas)
+  }
+  
+  # Devolvemos la media y la simetría para el siguiente apartado
+  list(media = media, simetria = simetria)
+}
+caracteristicas_training = calcula_media_simetria(pintar = F)
+caracteristicas_test = calcula_media_simetria(zip_test, pintar = F)
+
+
+```
+
+## a) Plantear un problema de clasificación binaria que considere el conjunto de entrenamiento como datos de entrenamiento para aprender la función $g$.
+
+
+
+Para empezar incorporamos el mismo código de la regresión lineal utilizado en la práctica 1 y modificas la versión del PLA que hicimos en esa práctica.
+
+```{r}
+Regress_Lin = function(datos, label) {
+  # Añadimos la columna 1
+  x = cbind(1,datos)
+  # Aplicamos svd
+  svd = svd(x)
+  # Sacamos la matriz ortogonal V
+  V = svd$v
+  # Sacamos la matriz diagonal d
+  d = svd$d
+  # Calculamos la pseudoinversa como la matriz diagonal de d que
+  # si un dato es mayor que el epsilon de la máquina (escogido por mí como 0.0001)
+  # invierte el valor
+  D = diag(ifelse(d > 0.0001, 1/d, d))
+  
+  # Calculamos el vector de pesos (Importante D²)
+  w = V %*% D^2 %*% t(V) %*% t(x) %*% label
+}
+# Esta función nos servirá para calcular el error de clasificación de cada iteración
+# en PLA pocket más adelante
+error_clasificacion = function(w, datos, etiquetasOriginales) {
+  # Calculamos las etiquetas nuevas
+  etiquetasNuevas = apply(X=datos,MARGIN=1, FUN = etiquetar_regresion, w = w)
+  
+  # Devolvemos la diferencia
+  sum(etiquetasNuevas != etiquetasOriginales)*100/nrow(datos)
+}
+
+PLA_pocket = function(datos, label, max_iter, vini) {
+  datos = cbind(1, datos) # Añadimos la columna de 1
+  i = 0 # contador para el número de iteraciones
+  cambio = T # indica si se ha producido algún cambio o se debe parar
+  w = vini # vector de pesos
+  pocket_w = vini # En pocket_w guardamos el mejor w hasta el momento
+  pocket_ein = error_clasificacion(w = w, datos = datos, label)
+  
+  while (i < max_iter & cambio) {
+    cambio = F # puesto que hemos empezado la iteración no se ha podido producir
+               # ningún cambio
+    # recorremos todos los datos
+    for (x in sample(1:nrow(datos))) {
+      # Aplicamos signo
+      signo = sign(sum(datos[x,] * w))
+      if (label[x] != signo) {
+        # Si no coinciden el signo y la etiqueta cambiamos el valor del vector de pesos
+        # wnew = wold + yi * xi
+        w = w + datos[x,] * label[x]
+        # indicamos que se ha producido un cambio
+        cambio = T
+      }
+    }
+    # Guardamos el que nos de mejor Ein
+    actual_ein = error_clasificacion(w = w, datos = datos, label)
+    if (actual_ein < pocket_ein) {
+      pocket_w = w 
+    }
+    i = i + 1 # aumentamos el contador de iteraciones
+  }
+  # parámetros del hiperplano (recta en este caso) y número de iteraciones usadas
+  list(w=pocket_w, iteraciones =i, vini = vini)
+}
+```
+
+## b) Usar un modelo de Regresión Lineal y aplicar PLA-Pocket como mejora. Responder a las siguientes cuestiones.
+
+Ahora aplicamos regresión lineal sobre los datos de entrada y el ajuste obtenido lo ponemos de vector de pesos inicial para nuestro PLA pocket.
+```{r}
+datos_training = cbind(caracteristicas_training$media, caracteristicas_training$simetria)
+training = Regress_Lin(datos_training, zip_training$etiquetas)
+training2 = PLA_pocket(datos_training, zip_training$etiquetas, 1000, training)
+
+datos_test = cbind(caracteristicas_test$media, caracteristicas_test$simetria)
+```
+
+## 1) Generar gráficos separados (en color) de los datos de entrenamiento y test junto con la función estimada.
+Veamos a la izquierda el gráfico con los datos de entrenamiento y a la derecha los de train con la función que hemos estimado.
+
+```{r}
+par(mfrow=c(1,2))
+# Pintamos los datos de entrenamiento
+plot(datos_training, main = "Entrenamiento", xlab = "Media", ylab = "Simetría",
+     col = 32 + 19 * zip_training$etiquetas, pch = 19)
+r = calcula_recta(training2$w, pintar = T)
+# Pintamos los datos de test
+plot(datos_test, main = "Test", xlab = "Media", ylab = "Simetría",
+     col = 32 + 19 * zip_test$etiquetas, pch = 19)
+r = calcula_recta(training2$w, pintar = T)
+par(mfrow=c(1,1))
+```
+
+## 2) Calcular $E_{in}$ y $E_{test}$ (error sobre los datos de test).
+```{r}
+ein = error_clasificacion(training2$w, cbind(1, datos_training), zip_training$etiquetas)
+cat("El error de clasificación en entrenamiento, Ein, es de", ein, '\n')
+etest = error_clasificacion(training2$w, cbind(1, datos_test), zip_test$etiquetas)
+cat("El error de clasificación en test, Etest, es de", etest, '\n')
+```
+
+## 3) Obtener cotas sobre el verdadero valor de $E_{out}$. Pueden calcularse dos cotas una basada en $E_{in}$ y otra basada en $E_{test}$. Usar una tolerancia $\delta = 0.05$. ¿Qué cota es mejor?
+Para calcular la cota utilizo la fórmula explicada en la diapositiva 15 de la sesión 4 de teoría.
+
+\begin{equation}
+\nonumber
+E_{out}(h) \leq E_{in}(h) + \sqrt{\frac{8}{N}\log{\left(\frac{4((2N)^{d_{vc}}+1)}{\delta}\right)}}
+\end{equation}
+
+Vamos a crear una función en R que realice dicha operación.
+
+```{r}
+cota_vc_eout = function(N, dvc, delta, ein) {
+  logaritmo = log((4*( (2*N)^dvc + 1))/delta)
+  raiz = sqrt(8*logaritmo/N)
+  ein + raiz*100 # Para sacarlo en porcentaje directamente ya que ein viene en porcentaje
+}
+```
+
+Obtengamos las dos cotas a partir del Ein y el Etest del apartado anterior. La dimensión de Vapnik-Chervonenkis es 3 en ambos casos.
+```{r}
+eout_in = cota_vc_eout(nrow(datos_training), 3, 0.05, ein)
+cat("La cota de Eout a partir de Ein es de ", eout_in, '\n')
+eout_test = cota_vc_eout(nrow(datos_test), 3, 0.05, etest)
+cat("La cota de Eout a partir de Etest es de ", eout_test, '\n')
+```
+
+Como cabía esperar Ein nos da una cota de Eout considerablemente más pequeña que Etest, aunque los dos, como veíamos en el apartado anterior, eran bastante similares la diferencia radica en el tamaño de N. El gran tamaño de N (como podemos observar en las gráficas) en training en comparación con el test hace que el error que se suma sea mucho menor al estar dividiendo logaritmo de algo en función de N entre N al calcular lo que se suma al error inicial. Por tanto, cuanto más grande sea N menor será el error proporcionado por la cota de generalización.
+
+# 4) En este ejercicio evaluamos el papel de la regularización en la selección de modelos. Para $d = 3$ (dimensión del vector de características) generar un conjunto de N datos aleatorios $\{x_n, y_n\}$ de la siguiente forma:
+## -Las coordenadas de los puntos $x_n$ se generarán como valores aleatorios extraídos de una Gaussiana de media 1 y desviación típica 1.
+## -Para definir el vector de pesos $w_f$ de la función $f$ generaremos $d+1$ valores de una Gaussiana de media 0 y desviación típica 1. Al último valor le sumaremos 1. 
+## -Usando los valores anteriores generamos la etiqueta asociada a cada punto $x_n$ a partir del valor $y_n=w^T_fx_n + \sigma {\epsilon}_n$ donde ${\epsilon}_n$ es un ruido que también sigue una Gaussiana de media 0 y desviación típica 1 y $\sigma^2$ es la varianza del ruido; fijar $\sigma = 0.05$
+
+Para obtener datos de una distribución gaussiana utilizamos la función simula_gauss (modificada para poner la media) de la práctica anterior.
+
+```{r}
+simula_gauss = function(N=2,dim=2,mean,sigma){
+  # genera 1 muestra, con las desviaciones especificadas
+  simula_gauss1 = function() rnorm(dim, mean = mean, sd = sigma)
+  # repite N veces, simula_gauss1 y se hace la traspuesta
+  m = t(replicate(N,simula_gauss1())) 
+  m
+}
+```
+Ahora hagamos una función que dado el N nos genere los puntos con el ruido añadido y las etiquetas correspondientes
+```{r}
+generar_aleatorios_ejer4 = function(N, d = 3, varianza = 0.5) {
+  # Calculamos los puntos 3D
+  puntos = simula_gauss(N = N, dim = d, mean = 0, sigma = 1)
+  # Generamos el vector de pesos de f
+  w_f = simula_gauss(N = d+1, dim = 1, mean = 0, sigma = 1)
+  w_f[length(w_f)-1] = w_f[length(w_f)-1]+1
+  
+  # Generamos el vector de ruido
+  ruido = simula_gauss(N = N, dim = 1, mean = 0, sigma = 1)
+  # Calculamos las etiquetas
+  etiquetas = apply(X = cbind(1,puntos), MARGIN = 1, FUN = function(muestra) w_f%*%muestra)
+  etiquetas = mapply(X = etiquetas, epsilon = ruido, 
+                     FUN = function(X, epsilon) X + varianza*epsilon)
+  # Devolvemos los aleatorios generados
+  list(puntos = puntos, w_f = w_f, etiquetas = etiquetas)
+}
+```
+
+## Ahora vamos a estimar $w_f$ usango $w_{reg}$, es decir los pesos de un modelo de regresión lineal con regularización "weight decay". Fijar el parámetro de regularización a $0.05/N$
+Para calcular el vector de pesos asociados al weight_decay implementamos la fórmula que obtenemos tras el proceso de minimización para obtenerla en la diapositiva 17 de la sesión 6. \begin{equation}
+\nonumber
+H(\lambda) = Z{(Z^TZ + \lambda I)}^{-1}Z^T
+\end{equation}
+
+Por tanto, con esta función, vamos a obtener el H ajustado por *weight decay*. Para obtener las predicciones hay que multiplicar este resultado por las etiquetas.
+```{r}
+weight_decay = function(Z, lambda) {
+  inversa = t(Z) %*% Z
+  identidad = diag(x = 1, nrow = nrow(inversa))
+  invesa = inversa + lambda * identidad
+  inversa = solve(inversa)
+  w = inversa %*% t(Z)
+}
+```
+
+### a) Para $N \in \{d+10, d+20, ..., d+110\}$ calcular los errores de validación cruzada $e_1,...,e_n$ y $E_{cv}$. Repetir el experimento 1000 veces. Anotamos el promedio de la varianza de $e_1, e_2$ y $E_{cv}$ en los experimentos.
+```{r}
+# Experimento 4a (a repetir 1000 veces)
+experimento4a = function(d = 3) {
+  # Generamos la secuencia de N a evaluar
+  Ns = seq(10+d, 110+d, 10)
+  resultados = matrix(nrow = 0, ncol = 3)
+  for (N in Ns) {
+    # El lambda a usar es 0.05 / N
+    lambda = 0.05/N
+    # Generamos las muestras de la distribución gaussiana
+    muestra = generar_aleatorios_ejer4(N)
+    puntos = cbind(1, muestra$puntos)
+    # Calculamos el error e sub i
+    calcula_error = function(w,i) {
+      # Calculo el valor dado por el ajuste para el dato i
+      valor = w %*% puntos[i,]
+      # El error a devolver es el error cuadrático
+      error = (muestra$etiquetas[i] - valor)^2
+    }
+  
+    # Utilizamos sapply para obtener en vector con todos los errores e sub i
+    # Para ello usamos una función anónima
+    # Utilizo -i para excluir el elemento en posición i del vector o matriz
+    errores = sapply(1:N, FUN = function(i) 
+      calcula_error(weight_decay(puntos[-i,], lambda)%*% muestra$etiquetas[-i], i))
+    
+    # Apuntamos los resultados para este N en la matriz a devolver
+    resultados = rbind(resultados, c(errores[1], errores[2], mean(errores)))
+  }
+  
+  c(mean(resultados[,1]), sd(resultados[,1]),
+    mean(resultados[,2]), sd(resultados[,2]),
+    mean(resultados[,3]), sd(resultados[,3]))
+}
+# Repetimos el experimento 1000 veces
+resultados = t(replicate(1000, experimento4a()))
+col_names = c("Media e1", "Desviación e1","Media e2", "Desviación e2", 
+              "Media Ecv", "Desviación Ecv")
+kable(resultados, col.names = col_names,  
+      caption = "Weight decay con validación cruzada")
+```
+
+### b) ¿Cuál debería de ser la relación entre el valor promedio de $e_1$ y el de $E_{cv}$? ¿y entre el valor promedio de $e_1$ y el de $e_2$? Argumentar la respuesta en base a los experimentos.
+El promedio de $E_{cv}$ depende del resto de promedios, por tanto, cabe esperar que sean valores no muy lejanos excepto en casos excepcionales que pueden ocurrir. El valor de los promedios de $e_1$ y $e_2$ serán probablemente todavía más parecidos ya que entre ellos sólo cambia un único valor que afecta al ajuste realizado con weight decay es el del subíndice concreto.
+
+### c) ¿Qué es lo que más contribuye a la varianza de los valores de $e_1$?
+El hecho de que para cada experimento sacamos valores aleatorios nuevos que están limitados principalmento por la media y desviaciones propuestas para las distribuciones gaussianas de los puntos, del vector de pesos de w_f y el ruido.
+
+### d) Diga qué conclusiones sobre regularización y selección de modelos ha sido capaz de extraer de esta experimentación.
+Como podemos observar 
