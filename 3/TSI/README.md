@@ -7,7 +7,7 @@ La organización y docencia de la parte práctica durante mi curso fue vergonzos
 si quieres considerar esta asignatura como optativa aun no siendo muy difícil te recomiendo que te informes de como ha sido 
 impartida los últimos años y consideres otras opciones.
 
-En la primera entrega de la práctica 1 hice ligeras modificacioens por errores pero no he podido llegar a comprobarla. Por favor,
+En la primera entrega de la práctica 1 hice ligeras modificaciones por errores pero no he podido llegar a comprobarla. Por favor,
 abrid un issue si hubiese algo mal.
 
 La segunda entrega de la práctica 1 y la práctica 2 están a la perfección.
@@ -24,4 +24,4 @@ Las prácticas valen 50 % (5 % asistencia a prácticas).
 
 Mínimo 3 puntos en cada parte.
 
-Si hay varas entregas en una práctica vale cada entrega la mitad de la nota.
+Si hay varias entregas en una práctica vale cada entrega la mitad de la nota.
