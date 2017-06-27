@@ -1,0 +1,9 @@
+<launch> 
+    <param name="/use_sim_time" value="true" />   
+    
+    <!-- Launch turtle bot world -->
+    <include file="$(find turtlebot_gazebo)/launch/turtlebot_world.launch"/>       
+ 
+    <!-- Launch stopper node -->
+    <node name="random_walk" pkg="random_walk" type="random_walk" args="0.3" output="screen"/>
+</launch>
