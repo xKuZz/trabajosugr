@@ -8,7 +8,7 @@ Aún siendo una de las asignaturas más difíciles conceptualmente no es difíci
 suele haber un único ejercicio de determinar si ciertos problemas son decidibles, semidicidibles o no semidicibles. Se
 requiere una nota mínima de 3.5 sobre 10 que no debería ser difícil de conseguir estudiándolo aunque sea de memoria todo.
 
-- Las prácticas se reparten en:
+Las prácticas se reparten en:
 - 3 puntos por 3 notas de salir a resolver problemas en clase de prácticas. Debes salir 3 veces y bajo mi punto de vista son mucho
 más fáciles los problemas que se hacen al principio que los que se hacen al final y te quitas la presión de encima. Si sales más
 de 3 veces se tendrá en cuenta para la nota.
