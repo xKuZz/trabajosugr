@@ -1,7 +1,7 @@
 # TÉCNICAS DE LOS SISTEMAS INTELIGENTES (TSI) UGR 2016/2017
 
 La parte teórica de la asignatura está bastatne bien organizada siempre y cuando acudas a clase y hagas las relaciones de ejercicios
-no deberías de tener problema para aprobar esa parte. La única pega es que no propocionan exámenes de otros años.
+no deberías de tener problema para aprobar esa parte. La única pega es que no propocionan exámenes de otros años (yo he dejado subidas las preguntas del que hice en el curso 2016/2017).
 
 La organización y docencia de la parte práctica durante mi curso fue vergonzosa, lo peor que he visto en mi vida. Así pues,
 si quieres considerar esta asignatura como optativa aun no siendo muy difícil te recomiendo que te informes de como ha sido 
