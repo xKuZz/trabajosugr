@@ -1,0 +1,17 @@
+ Uso: /bin/practica1 <algoritmo> <archivo=ALL> <seed = 18>  <statMode>
+               Para ALL todos los .dat han de encontrarse en el directorio de trabajo.
+               Los códigos de los algoritmos son: 
+               Greedy: greedy
+               Búsqueda local del primer mejor: bl 
+               Genético generacional posición: agg-pos
+               Genético generacional OX: agg-ox
+               Genético generacional PMX: agg-pmx
+               Genético estacionario posición: age-pos
+               Genético estacionario OX: age-ox
+               Genético estacionario PMX: age-pmx
+               Memético AM(10, 1.0): mem-todos
+               Memético AM(10, 0.1): mem-random
+               Memético AM(10, 0.1mej): mem-mejor
+               No se distingue entre mayúsculas y minúsculas;
+
+Poner statMode a "on" implica generar nuevos estadísticos sobre la convergencia (que al final no han llegado a ser usados) pero gastar considerbalemente más tiempo con respecto a la ejecución habitual del algoritmo
