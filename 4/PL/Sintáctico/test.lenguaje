@@ -1,0 +1,68 @@
+principal {
+    declaracion
+    lista de caracter lc;
+    lista de entero le;
+    lista de real lr;
+    lista de booleano lb;
+    booleano a, b,c;
+    entero r, x;
+    caracter n;
+    real z;
+    findeclaracion
+
+    entero A() {
+        declaracion
+        booleano x;
+        findeclaracion
+        entero B(booleano x) {
+            declaracion
+            real r;
+            findeclaracion
+            real C(booleano x, real r) {
+                si(x)
+                    devolver r;
+                sino
+                    devolver 1.0;
+            }
+            r = C(x, 3.0);
+            si (x)
+                devolver r;
+            sino
+                devolver r - 1.0;
+        }
+        x = V;
+        devolver B(x);
+
+    }
+
+    lista de caracter D(caracter c, booleano x) {
+        declaracion
+        lista de caracter l;
+        findeclaracion
+        
+        lista de caracter E(lista de caracter l, caracter c, booleano x) {
+            si (x)
+                devolver l++c@0;
+            sino
+                devolver l++c@#l;
+        }
+        l = ['a','b','c'];
+        devolver E(l,c,x);
+    }
+
+    n = 'c';
+    x = 0;
+    repetir
+        x = x + 1;
+    hasta (x == 3);
+    lc = D(n,V);
+    r = A();
+
+    si ((x <= 3 && n == 'c') || lc@1 == 'b')
+        escribir "Parece que funciona.";
+    sino
+        escribir "Parece que hay un problema.";
+
+    z = (r + 3.0)/72+8.0-42;
+
+}

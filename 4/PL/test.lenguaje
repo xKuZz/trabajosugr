@@ -1,0 +1,27 @@
+principal {
+    de···claracion
+    entero ejemplo = 14;
+    caracter a,b,c;
+    booleano 14v;
+    lista de caracter andrea;
+    fin····declaracion
+    leer a,c,b;
+    escri··bir "buenos dias";
+    andrea = ['a','n','d','r','e','a'];
+    repetir {
+        andrea >>;
+    } hasta (?andrea == 'a');
+
+    mientras (ejemplo < 30)
+        ejemplo = ejemplo + 1;
+    
+    si (ejemplo == 29) {
+        $ andrea;
+        devolver V;
+    }
+    sino {
+        andrea <<;
+        copia = andrea++'a'@5;
+        devolver F;
+    }
+}

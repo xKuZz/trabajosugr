@@ -1,0 +1,231 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdbool.h>
+
+typedef enum {
+	entero, real, booleano, caracter,
+} tipo;
+
+typedef union {
+	int entero;
+	bool booleano;
+	float real;
+	char caracter;
+} EntradaLista;
+
+typedef struct {
+	EntradaLista* lista;
+	int n;
+	int posicion;
+	tipo tipo_lista;
+} Lista;
+
+Lista inicializar() {
+	Lista lista;
+	lista.n = 0;
+	lista.lista = NULL;
+	lista.posicion = 0;
+	return lista;
+}
+
+void avanzar(Lista* lista) {
+	if (lista->posicion < (lista->n - 1))
+		++lista->posicion;
+}
+
+void retroceder(Lista* lista) {
+	if (lista->posicion > 0)
+		--lista->posicion;
+}
+
+void comienzo(Lista* lista) {
+	lista->posicion = 0;
+}
+
+int longitud(Lista* lista) {
+	return lista->n;
+}
+
+EntradaLista elemento_actual(Lista* lista) {
+	return lista->lista[lista->posicion];
+}
+
+EntradaLista elemento_posicion(Lista* lista, int posicion) {
+	return lista->lista[posicion];
+}
+
+void copiar(Lista* nueva, Lista* antigua) {
+	nueva->n = antigua->n;
+	nueva->lista = (EntradaLista*) malloc(nueva->n * sizeof(EntradaLista));
+	nueva->tipo_lista = antigua->tipo_lista;
+
+	for (int i = 0; i < nueva->n; ++i)
+		nueva->lista[i] = antigua->lista[i];
+
+}
+
+Lista add_elemento_posicion(Lista* lista, EntradaLista valor, int posicion) {
+	Lista nueva;
+	nueva.n = lista->n + 1;
+	nueva.lista = (EntradaLista*) malloc(nueva.n * sizeof(EntradaLista));
+	nueva.tipo_lista = lista->tipo_lista;
+
+	for (int i = 0; i < posicion; ++i) {
+		nueva.lista[i] = lista->lista[i];
+	}
+	nueva.lista[posicion] = valor;
+
+	for (int i = posicion + 1; i < nueva.n; ++i) {
+		nueva.lista[i] = lista->lista[i-1];
+	}
+
+	return nueva;
+}
+
+Lista borrar_elemento_posicion(Lista* lista, int posicion) {
+	Lista nueva;
+	nueva.n = lista->n - 1;
+	nueva.lista = (EntradaLista*) malloc(nueva.n * sizeof(EntradaLista));
+	nueva.tipo_lista = lista->tipo_lista;
+
+	for (int i = 0; i < posicion; ++i) {
+		nueva.lista[i] = lista->lista[i];
+	}
+
+	for (int i = posicion; i < nueva.n; ++i) {
+		nueva.lista[i] = lista->lista[i+1];
+	}
+
+	return nueva;
+}
+
+Lista borrar_lista_posicion(Lista* lista, int posicion) {
+	Lista nueva;
+	nueva.n = posicion;
+	nueva.lista = (EntradaLista*) malloc(nueva.n * sizeof(EntradaLista));
+	nueva.tipo_lista = lista->tipo_lista;
+
+	for (int i = 0; i < posicion; ++i) {
+		nueva.lista[i] = lista->lista[i];
+	}
+
+	return nueva;
+}
+
+Lista concatenar_listas(Lista* lista1, Lista* lista2) {
+	Lista nueva;
+	nueva.n = lista1->n + lista2->n;
+	nueva.lista = (EntradaLista*) malloc(nueva.n * sizeof(EntradaLista));
+	nueva.tipo_lista = lista1->tipo_lista;
+
+	for (int i = 0; i < lista1->n; ++i)
+		nueva.lista[i] = lista1->lista[i];
+
+	for (int i = 0; i < lista2->n; ++i)
+		nueva.lista[lista1->n+i] = lista2->lista[i];
+
+	return nueva;
+}
+
+Lista sumar(Lista* lista, EntradaLista valor) {
+	Lista nueva;
+	copiar(&nueva, lista);
+
+	for (int i = 0; i < nueva.n; ++i) {
+		if (nueva.tipo_lista == entero) {
+			nueva.lista[i].entero += valor.entero;
+		}
+		else if (nueva.tipo_lista == real) {
+			nueva.lista[i].real += valor.real;
+		}
+		else if (nueva.tipo_lista == caracter) {
+			nueva.lista[i].caracter += valor.caracter;
+		}
+	}
+
+	return nueva;
+}
+
+
+Lista restar(Lista* lista, EntradaLista valor) {
+	Lista nueva;
+	copiar(&nueva, lista);
+
+	for (int i = 0; i < nueva.n; ++i) {
+		if (nueva.tipo_lista == entero) {
+			nueva.lista[i].entero -= valor.entero;
+		}
+		else if (nueva.tipo_lista == real) {
+			nueva.lista[i].real -= valor.real;
+		}
+		else if (nueva.tipo_lista == caracter) {
+			nueva.lista[i].caracter -= valor.caracter;
+		}
+	}
+
+	return nueva;
+}
+
+Lista multiplicar(Lista* lista, EntradaLista valor) {
+	Lista nueva;
+	copiar(&nueva, lista);
+
+	for (int i = 0; i < nueva.n; ++i) {
+		if (nueva.tipo_lista == entero) {
+			nueva.lista[i].entero *= valor.entero;
+		}
+		else if (nueva.tipo_lista == real) {
+			nueva.lista[i].real *= valor.real;
+		}
+		else if (nueva.tipo_lista == caracter) {
+			nueva.lista[i].caracter *= valor.caracter;
+		}
+	}
+
+	return nueva;
+}
+
+
+Lista dividir(Lista* lista, EntradaLista valor) {
+	Lista nueva;
+	copiar(&nueva, lista);
+
+	for (int i = 0; i < nueva.n; ++i) {
+		if (nueva.tipo_lista == entero) {
+			nueva.lista[i].entero /= valor.entero;
+		}
+		else if (nueva.tipo_lista == real) {
+			nueva.lista[i].real /= valor.real;
+		}
+		else if (nueva.tipo_lista == caracter) {
+			nueva.lista[i].caracter /= valor.caracter;
+		}
+	}
+
+	return nueva;
+}
+
+
+void escribir(Lista* lista) {
+	printf("[");
+	
+	
+	for (int i = 0; i < lista->n; ++i) {
+		if (lista->tipo_lista == entero) {
+			printf("%d", lista->lista[i].entero);
+		}
+		else if (lista->tipo_lista == booleano) {
+			printf("%d", lista->lista[i].booleano);
+		}
+		else if (lista->tipo_lista == caracter) {
+			printf("%c", lista->lista[i].caracter);
+		}
+		else if (lista->tipo_lista == real) {
+			printf("%f", lista->lista[i].real);
+		}
+		if (i != lista->n - 1)
+			printf(", ");
+	}
+
+	printf("]\n");
+}

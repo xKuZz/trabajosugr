@@ -1,0 +1,33 @@
+int sumarLista(Lista l) {
+int suma, i;
+int sumarDosElementos(int a,int b) {
+int temp0;
+temp0 = a + b;
+return temp0;
+}
+suma = 0;
+i = 0;
+etiqueta0:
+;
+ {
+ {
+EntradaLista temp2;
+temp2 = elemento_actual(&l);
+int temp1; 
+temp1 = temp2.entero;
+suma = sumarDosElementos(suma, temp1);
+avanzar(&l);
+int temp3;
+temp3 = i + 1;
+i = temp3;
+}
+int temp4 = longitud(&l);
+int temp5;
+temp5 = i == temp4;
+if (temp5) goto etiqueta1;
+goto etiqueta0;
+}
+etiqueta1:
+;
+return suma;
+}

@@ -1,0 +1,2151 @@
+State 75 conflicts: 1 shift/reduce
+
+
+Grammar
+
+    0 $accept: programa $end
+
+    1 $@1: %empty
+
+    2 programa: PRINCIPAL $@1 bloque
+
+    3 $@2: %empty
+
+    4 bloque: ABRE_LLAVE $@2 declar_de_variables_locales declar_de_subprogs sentencias CIERRA_LLAVE
+
+    5 declar_de_subprogs: declar_de_subprogs declar_subprograma
+    6                   | %empty
+
+    7 $@3: %empty
+
+    8 declar_subprograma: cabecera_subprograma $@3 bloque
+
+    9 declar_de_variables_locales: DECLARACION variables_locales FINDECLARACION
+   10                            | %empty
+
+   11 variables_locales: variables_locales cuerpo_declar_variables
+   12                  | cuerpo_declar_variables
+
+   13 $@4: %empty
+
+   14 cuerpo_declar_variables: tipo_t $@4 lista_id PUNTO_COMA
+   15                        | error
+
+   16 lista_id: IDENTIFICADOR
+   17         | lista_id COMA IDENTIFICADOR
+   18         | lista_id error IDENTIFICADOR
+
+   19 $@5: %empty
+
+   20 cabecera_subprograma: tipo_t IDENTIFICADOR $@5 ABRE_PAREN lista_parametros CIERRA_PAREN
+
+   21 lista_parametros: parametro
+   22                 | lista_parametros COMA parametro
+   23                 | lista_parametros error IDENTIFICADOR
+   24                 | %empty
+
+   25 parametro: tipo_t IDENTIFICADOR
+
+   26 sentencias: sentencias sentencia
+   27           | sentencia
+
+   28 sentencia: bloque
+   29          | sentencia_asignacion
+   30          | sentencia_if
+   31          | sentencia_while
+   32          | sentencia_entrada
+   33          | sentencia_salida
+   34          | sentencia_repeat_until
+   35          | sentencia_return_comienzo_lista
+   36          | avanzar_retroceder_lista
+
+   37 sentencia_asignacion: IDENTIFICADOR ASIGNACION expresion PUNTO_COMA
+
+   38 condicion_if: SI ABRE_PAREN expresion CIERRA_PAREN
+
+   39 sentencia_if: condicion_if sentencia
+
+   40 $@6: %empty
+
+   41 sentencia_if: condicion_if sentencia SINO $@6 sentencia
+
+   42 $@7: %empty
+
+   43 $@8: %empty
+
+   44 sentencia_while: MIENTRAS $@7 ABRE_PAREN expresion CIERRA_PAREN $@8 sentencia
+
+   45 sentencia_entrada: LEER lista_leer PUNTO_COMA
+
+   46 lista_leer: IDENTIFICADOR
+   47           | lista_leer COMA IDENTIFICADOR
+   48           | lista_leer error IDENTIFICADOR
+
+   49 sentencia_salida: ESCRIBIR lista_expresiones_o_cadena PUNTO_COMA
+
+   50 lista_expresiones_o_cadena: expr_cad
+   51                           | lista_expresiones_o_cadena COMA expr_cad
+
+   52 expr_cad: expresion
+   53         | CADENA
+
+   54 $@9: %empty
+
+   55 sentencia_repeat_until: REPETIR $@9 sentencia HASTA ABRE_PAREN expresion CIERRA_PAREN PUNTO_COMA
+
+   56 sentencia_return_comienzo_lista: DEVOLVER_DOLAR expresion PUNTO_COMA
+
+   57 avanzar_retroceder_lista: expresion DESPLAZA PUNTO_COMA
+
+   58 expresion: ABRE_PAREN expresion CIERRA_PAREN
+   59          | MAS_MENOS expresion
+   60          | OP_UNARIO expresion
+   61          | expresion OP_TERNARIO1 expresion ARROBA expresion
+   62          | expresion ARROBA expresion
+   63          | expresion OP_BINARIO expresion
+   64          | expresion OP_RELACIONAL_IGUALDAD expresion
+   65          | expresion OP_RELACIONAL_AND expresion
+   66          | expresion OP_RELACIONAL_OR expresion
+   67          | expresion OP_RELACIONAL expresion
+   68          | expresion MAS_MENOS expresion
+   69          | IDENTIFICADOR
+   70          | CONSTANTE
+   71          | funcion
+   72          | agregado_lista
+   73          | error
+
+   74 funcion: IDENTIFICADOR ABRE_PAREN lista_f CIERRA_PAREN
+   75        | IDENTIFICADOR ABRE_PAREN CIERRA_PAREN
+
+   76 tipo_t: TIPO
+   77       | LISTA_DE TIPO
+
+   78 agregado_lista: ABRE_CORCHETE lista CIERRA_CORCHETE
+
+   79 lista_f: expresion
+   80        | lista_f COMA expresion
+
+   81 lista: expresion
+   82      | lista COMA expresion
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256) 15 18 23 48 73
+DECLARACION (258) 9
+FINDECLARACION (259) 9
+PRINCIPAL (260) 2
+ABRE_LLAVE (261) 4
+CIERRA_LLAVE (262) 4
+PUNTO_COMA (263) 14 37 45 49 55 56 57
+ABRE_PAREN (264) 20 38 44 55 58 74 75
+CIERRA_PAREN (265) 20 38 44 55 58 74 75
+DESPLAZA (266) 57
+DEVOLVER_DOLAR (267) 56
+REPETIR (268) 55
+HASTA (269) 55
+ASIGNACION (270) 37
+SI (271) 38
+SINO (272) 41
+MIENTRAS (273) 44
+LEER (274) 45
+ESCRIBIR (275) 49
+LISTA_DE (276) 77
+TIPO (277) 76 77
+CONSTANTE (278) 70
+IDENTIFICADOR (279) 16 17 18 20 23 25 37 46 47 48 69 74 75
+CADENA (280) 53
+COMA (281) 17 22 47 51 80 82
+ABRE_CORCHETE (282) 78
+CIERRA_CORCHETE (283) 78
+OP_TERNARIO1 (284) 61
+OP_RELACIONAL_OR (285) 66
+OP_RELACIONAL_AND (286) 65
+OP_RELACIONAL_IGUALDAD (287) 64
+OP_RELACIONAL (288) 67
+MAS_MENOS (289) 59 68
+OP_BINARIO (290) 63
+ARROBA (291) 61 62
+OP_UNARIO (292) 60
+
+
+Nonterminals, with rules where they appear
+
+$accept (38)
+    on left: 0
+programa (39)
+    on left: 2, on right: 0
+$@1 (40)
+    on left: 1, on right: 2
+bloque (41)
+    on left: 4, on right: 2 8 28
+$@2 (42)
+    on left: 3, on right: 4
+declar_de_subprogs (43)
+    on left: 5 6, on right: 4 5
+declar_subprograma (44)
+    on left: 8, on right: 5
+$@3 (45)
+    on left: 7, on right: 8
+declar_de_variables_locales (46)
+    on left: 9 10, on right: 4
+variables_locales (47)
+    on left: 11 12, on right: 9 11
+cuerpo_declar_variables (48)
+    on left: 14 15, on right: 11 12
+$@4 (49)
+    on left: 13, on right: 14
+lista_id (50)
+    on left: 16 17 18, on right: 14 17 18
+cabecera_subprograma (51)
+    on left: 20, on right: 8
+$@5 (52)
+    on left: 19, on right: 20
+lista_parametros (53)
+    on left: 21 22 23 24, on right: 20 22 23
+parametro (54)
+    on left: 25, on right: 21 22
+sentencias (55)
+    on left: 26 27, on right: 4 26
+sentencia (56)
+    on left: 28 29 30 31 32 33 34 35 36, on right: 26 27 39 41 44 55
+sentencia_asignacion (57)
+    on left: 37, on right: 29
+condicion_if (58)
+    on left: 38, on right: 39 41
+sentencia_if (59)
+    on left: 39 41, on right: 30
+$@6 (60)
+    on left: 40, on right: 41
+sentencia_while (61)
+    on left: 44, on right: 31
+$@7 (62)
+    on left: 42, on right: 44
+$@8 (63)
+    on left: 43, on right: 44
+sentencia_entrada (64)
+    on left: 45, on right: 32
+lista_leer (65)
+    on left: 46 47 48, on right: 45 47 48
+sentencia_salida (66)
+    on left: 49, on right: 33
+lista_expresiones_o_cadena (67)
+    on left: 50 51, on right: 49 51
+expr_cad (68)
+    on left: 52 53, on right: 50 51
+sentencia_repeat_until (69)
+    on left: 55, on right: 34
+$@9 (70)
+    on left: 54, on right: 55
+sentencia_return_comienzo_lista (71)
+    on left: 56, on right: 35
+avanzar_retroceder_lista (72)
+    on left: 57, on right: 36
+expresion (73)
+    on left: 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73, on right:
+    37 38 44 52 55 56 57 58 59 60 61 62 63 64 65 66 67 68 79 80 81
+    82
+funcion (74)
+    on left: 74 75, on right: 71
+tipo_t (75)
+    on left: 76 77, on right: 14 20 25
+agregado_lista (76)
+    on left: 78, on right: 72
+lista_f (77)
+    on left: 79 80, on right: 74 80
+lista (78)
+    on left: 81 82, on right: 78 82
+
+
+State 0
+
+    0 $accept: . programa $end
+
+    PRINCIPAL  shift, and go to state 1
+
+    programa  go to state 2
+
+
+State 1
+
+    2 programa: PRINCIPAL . $@1 bloque
+
+    $default  reduce using rule 1 ($@1)
+
+    $@1  go to state 3
+
+
+State 2
+
+    0 $accept: programa . $end
+
+    $end  shift, and go to state 4
+
+
+State 3
+
+    2 programa: PRINCIPAL $@1 . bloque
+
+    ABRE_LLAVE  shift, and go to state 5
+
+    bloque  go to state 6
+
+
+State 4
+
+    0 $accept: programa $end .
+
+    $default  accept
+
+
+State 5
+
+    4 bloque: ABRE_LLAVE . $@2 declar_de_variables_locales declar_de_subprogs sentencias CIERRA_LLAVE
+
+    $default  reduce using rule 3 ($@2)
+
+    $@2  go to state 7
+
+
+State 6
+
+    2 programa: PRINCIPAL $@1 bloque .
+
+    $default  reduce using rule 2 (programa)
+
+
+State 7
+
+    4 bloque: ABRE_LLAVE $@2 . declar_de_variables_locales declar_de_subprogs sentencias CIERRA_LLAVE
+
+    DECLARACION  shift, and go to state 8
+
+    $default  reduce using rule 10 (declar_de_variables_locales)
+
+    declar_de_variables_locales  go to state 9
+
+
+State 8
+
+    9 declar_de_variables_locales: DECLARACION . variables_locales FINDECLARACION
+
+    error     shift, and go to state 10
+    LISTA_DE  shift, and go to state 11
+    TIPO      shift, and go to state 12
+
+    variables_locales        go to state 13
+    cuerpo_declar_variables  go to state 14
+    tipo_t                   go to state 15
+
+
+State 9
+
+    4 bloque: ABRE_LLAVE $@2 declar_de_variables_locales . declar_de_subprogs sentencias CIERRA_LLAVE
+
+    $default  reduce using rule 6 (declar_de_subprogs)
+
+    declar_de_subprogs  go to state 16
+
+
+State 10
+
+   15 cuerpo_declar_variables: error .
+
+    $default  reduce using rule 15 (cuerpo_declar_variables)
+
+
+State 11
+
+   77 tipo_t: LISTA_DE . TIPO
+
+    TIPO  shift, and go to state 17
+
+
+State 12
+
+   76 tipo_t: TIPO .
+
+    $default  reduce using rule 76 (tipo_t)
+
+
+State 13
+
+    9 declar_de_variables_locales: DECLARACION variables_locales . FINDECLARACION
+   11 variables_locales: variables_locales . cuerpo_declar_variables
+
+    error           shift, and go to state 10
+    FINDECLARACION  shift, and go to state 18
+    LISTA_DE        shift, and go to state 11
+    TIPO            shift, and go to state 12
+
+    cuerpo_declar_variables  go to state 19
+    tipo_t                   go to state 15
+
+
+State 14
+
+   12 variables_locales: cuerpo_declar_variables .
+
+    $default  reduce using rule 12 (variables_locales)
+
+
+State 15
+
+   14 cuerpo_declar_variables: tipo_t . $@4 lista_id PUNTO_COMA
+
+    $default  reduce using rule 13 ($@4)
+
+    $@4  go to state 20
+
+
+State 16
+
+    4 bloque: ABRE_LLAVE $@2 declar_de_variables_locales declar_de_subprogs . sentencias CIERRA_LLAVE
+    5 declar_de_subprogs: declar_de_subprogs . declar_subprograma
+
+    error           shift, and go to state 21
+    ABRE_LLAVE      shift, and go to state 5
+    ABRE_PAREN      shift, and go to state 22
+    DEVOLVER_DOLAR  shift, and go to state 23
+    REPETIR         shift, and go to state 24
+    SI              shift, and go to state 25
+    MIENTRAS        shift, and go to state 26
+    LEER            shift, and go to state 27
+    ESCRIBIR        shift, and go to state 28
+    LISTA_DE        shift, and go to state 11
+    TIPO            shift, and go to state 12
+    CONSTANTE       shift, and go to state 29
+    IDENTIFICADOR   shift, and go to state 30
+    ABRE_CORCHETE   shift, and go to state 31
+    MAS_MENOS       shift, and go to state 32
+    OP_UNARIO       shift, and go to state 33
+
+    bloque                           go to state 34
+    declar_subprograma               go to state 35
+    cabecera_subprograma             go to state 36
+    sentencias                       go to state 37
+    sentencia                        go to state 38
+    sentencia_asignacion             go to state 39
+    condicion_if                     go to state 40
+    sentencia_if                     go to state 41
+    sentencia_while                  go to state 42
+    sentencia_entrada                go to state 43
+    sentencia_salida                 go to state 44
+    sentencia_repeat_until           go to state 45
+    sentencia_return_comienzo_lista  go to state 46
+    avanzar_retroceder_lista         go to state 47
+    expresion                        go to state 48
+    funcion                          go to state 49
+    tipo_t                           go to state 50
+    agregado_lista                   go to state 51
+
+
+State 17
+
+   77 tipo_t: LISTA_DE TIPO .
+
+    $default  reduce using rule 77 (tipo_t)
+
+
+State 18
+
+    9 declar_de_variables_locales: DECLARACION variables_locales FINDECLARACION .
+
+    $default  reduce using rule 9 (declar_de_variables_locales)
+
+
+State 19
+
+   11 variables_locales: variables_locales cuerpo_declar_variables .
+
+    $default  reduce using rule 11 (variables_locales)
+
+
+State 20
+
+   14 cuerpo_declar_variables: tipo_t $@4 . lista_id PUNTO_COMA
+
+    IDENTIFICADOR  shift, and go to state 52
+
+    lista_id  go to state 53
+
+
+State 21
+
+   73 expresion: error .
+
+    $default  reduce using rule 73 (expresion)
+
+
+State 22
+
+   58 expresion: ABRE_PAREN . expresion CIERRA_PAREN
+
+    error          shift, and go to state 21
+    ABRE_PAREN     shift, and go to state 22
+    CONSTANTE      shift, and go to state 29
+    IDENTIFICADOR  shift, and go to state 54
+    ABRE_CORCHETE  shift, and go to state 31
+    MAS_MENOS      shift, and go to state 32
+    OP_UNARIO      shift, and go to state 33
+
+    expresion       go to state 55
+    funcion         go to state 49
+    agregado_lista  go to state 51
+
+
+State 23
+
+   56 sentencia_return_comienzo_lista: DEVOLVER_DOLAR . expresion PUNTO_COMA
+
+    error          shift, and go to state 21
+    ABRE_PAREN     shift, and go to state 22
+    CONSTANTE      shift, and go to state 29
+    IDENTIFICADOR  shift, and go to state 54
+    ABRE_CORCHETE  shift, and go to state 31
+    MAS_MENOS      shift, and go to state 32
+    OP_UNARIO      shift, and go to state 33
+
+    expresion       go to state 56
+    funcion         go to state 49
+    agregado_lista  go to state 51
+
+
+State 24
+
+   55 sentencia_repeat_until: REPETIR . $@9 sentencia HASTA ABRE_PAREN expresion CIERRA_PAREN PUNTO_COMA
+
+    $default  reduce using rule 54 ($@9)
+
+    $@9  go to state 57
+
+
+State 25
+
+   38 condicion_if: SI . ABRE_PAREN expresion CIERRA_PAREN
+
+    ABRE_PAREN  shift, and go to state 58
+
+
+State 26
+
+   44 sentencia_while: MIENTRAS . $@7 ABRE_PAREN expresion CIERRA_PAREN $@8 sentencia
+
+    $default  reduce using rule 42 ($@7)
+
+    $@7  go to state 59
+
+
+State 27
+
+   45 sentencia_entrada: LEER . lista_leer PUNTO_COMA
+
+    IDENTIFICADOR  shift, and go to state 60
+
+    lista_leer  go to state 61
+
+
+State 28
+
+   49 sentencia_salida: ESCRIBIR . lista_expresiones_o_cadena PUNTO_COMA
+
+    error          shift, and go to state 21
+    ABRE_PAREN     shift, and go to state 22
+    CONSTANTE      shift, and go to state 29
+    IDENTIFICADOR  shift, and go to state 54
+    CADENA         shift, and go to state 62
+    ABRE_CORCHETE  shift, and go to state 31
+    MAS_MENOS      shift, and go to state 32
+    OP_UNARIO      shift, and go to state 33
+
+    lista_expresiones_o_cadena  go to state 63
+    expr_cad                    go to state 64
+    expresion                   go to state 65
+    funcion                     go to state 49
+    agregado_lista              go to state 51
+
+
+State 29
+
+   70 expresion: CONSTANTE .
+
+    $default  reduce using rule 70 (expresion)
+
+
+State 30
+
+   37 sentencia_asignacion: IDENTIFICADOR . ASIGNACION expresion PUNTO_COMA
+   69 expresion: IDENTIFICADOR .
+   74 funcion: IDENTIFICADOR . ABRE_PAREN lista_f CIERRA_PAREN
+   75        | IDENTIFICADOR . ABRE_PAREN CIERRA_PAREN
+
+    ABRE_PAREN  shift, and go to state 66
+    ASIGNACION  shift, and go to state 67
+
+    $default  reduce using rule 69 (expresion)
+
+
+State 31
+
+   78 agregado_lista: ABRE_CORCHETE . lista CIERRA_CORCHETE
+
+    error          shift, and go to state 21
+    ABRE_PAREN     shift, and go to state 22
+    CONSTANTE      shift, and go to state 29
+    IDENTIFICADOR  shift, and go to state 54
+    ABRE_CORCHETE  shift, and go to state 31
+    MAS_MENOS      shift, and go to state 32
+    OP_UNARIO      shift, and go to state 33
+
+    expresion       go to state 68
+    funcion         go to state 49
+    agregado_lista  go to state 51
+    lista           go to state 69
+
+
+State 32
+
+   59 expresion: MAS_MENOS . expresion
+
+    error          shift, and go to state 21
+    ABRE_PAREN     shift, and go to state 22
+    CONSTANTE      shift, and go to state 29
+    IDENTIFICADOR  shift, and go to state 54
+    ABRE_CORCHETE  shift, and go to state 31
+    MAS_MENOS      shift, and go to state 32
+    OP_UNARIO      shift, and go to state 33
+
+    expresion       go to state 70
+    funcion         go to state 49
+    agregado_lista  go to state 51
+
+
+State 33
+
+   60 expresion: OP_UNARIO . expresion
+
+    error          shift, and go to state 21
+    ABRE_PAREN     shift, and go to state 22
+    CONSTANTE      shift, and go to state 29
+    IDENTIFICADOR  shift, and go to state 54
+    ABRE_CORCHETE  shift, and go to state 31
+    MAS_MENOS      shift, and go to state 32
+    OP_UNARIO      shift, and go to state 33
+
+    expresion       go to state 71
+    funcion         go to state 49
+    agregado_lista  go to state 51
+
+
+State 34
+
+   28 sentencia: bloque .
+
+    $default  reduce using rule 28 (sentencia)
+
+
+State 35
+
+    5 declar_de_subprogs: declar_de_subprogs declar_subprograma .
+
+    $default  reduce using rule 5 (declar_de_subprogs)
+
+
+State 36
+
+    8 declar_subprograma: cabecera_subprograma . $@3 bloque
+
+    $default  reduce using rule 7 ($@3)
+
+    $@3  go to state 72
+
+
+State 37
+
+    4 bloque: ABRE_LLAVE $@2 declar_de_variables_locales declar_de_subprogs sentencias . CIERRA_LLAVE
+   26 sentencias: sentencias . sentencia
+
+    error           shift, and go to state 21
+    ABRE_LLAVE      shift, and go to state 5
+    CIERRA_LLAVE    shift, and go to state 73
+    ABRE_PAREN      shift, and go to state 22
+    DEVOLVER_DOLAR  shift, and go to state 23
+    REPETIR         shift, and go to state 24
+    SI              shift, and go to state 25
+    MIENTRAS        shift, and go to state 26
+    LEER            shift, and go to state 27
+    ESCRIBIR        shift, and go to state 28
+    CONSTANTE       shift, and go to state 29
+    IDENTIFICADOR   shift, and go to state 30
+    ABRE_CORCHETE   shift, and go to state 31
+    MAS_MENOS       shift, and go to state 32
+    OP_UNARIO       shift, and go to state 33
+
+    bloque                           go to state 34
+    sentencia                        go to state 74
+    sentencia_asignacion             go to state 39
+    condicion_if                     go to state 40
+    sentencia_if                     go to state 41
+    sentencia_while                  go to state 42
+    sentencia_entrada                go to state 43
+    sentencia_salida                 go to state 44
+    sentencia_repeat_until           go to state 45
+    sentencia_return_comienzo_lista  go to state 46
+    avanzar_retroceder_lista         go to state 47
+    expresion                        go to state 48
+    funcion                          go to state 49
+    agregado_lista                   go to state 51
+
+
+State 38
+
+   27 sentencias: sentencia .
+
+    $default  reduce using rule 27 (sentencias)
+
+
+State 39
+
+   29 sentencia: sentencia_asignacion .
+
+    $default  reduce using rule 29 (sentencia)
+
+
+State 40
+
+   39 sentencia_if: condicion_if . sentencia
+   41             | condicion_if . sentencia SINO $@6 sentencia
+
+    error           shift, and go to state 21
+    ABRE_LLAVE      shift, and go to state 5
+    ABRE_PAREN      shift, and go to state 22
+    DEVOLVER_DOLAR  shift, and go to state 23
+    REPETIR         shift, and go to state 24
+    SI              shift, and go to state 25
+    MIENTRAS        shift, and go to state 26
+    LEER            shift, and go to state 27
+    ESCRIBIR        shift, and go to state 28
+    CONSTANTE       shift, and go to state 29
+    IDENTIFICADOR   shift, and go to state 30
+    ABRE_CORCHETE   shift, and go to state 31
+    MAS_MENOS       shift, and go to state 32
+    OP_UNARIO       shift, and go to state 33
+
+    bloque                           go to state 34
+    sentencia                        go to state 75
+    sentencia_asignacion             go to state 39
+    condicion_if                     go to state 40
+    sentencia_if                     go to state 41
+    sentencia_while                  go to state 42
+    sentencia_entrada                go to state 43
+    sentencia_salida                 go to state 44
+    sentencia_repeat_until           go to state 45
+    sentencia_return_comienzo_lista  go to state 46
+    avanzar_retroceder_lista         go to state 47
+    expresion                        go to state 48
+    funcion                          go to state 49
+    agregado_lista                   go to state 51
+
+
+State 41
+
+   30 sentencia: sentencia_if .
+
+    $default  reduce using rule 30 (sentencia)
+
+
+State 42
+
+   31 sentencia: sentencia_while .
+
+    $default  reduce using rule 31 (sentencia)
+
+
+State 43
+
+   32 sentencia: sentencia_entrada .
+
+    $default  reduce using rule 32 (sentencia)
+
+
+State 44
+
+   33 sentencia: sentencia_salida .
+
+    $default  reduce using rule 33 (sentencia)
+
+
+State 45
+
+   34 sentencia: sentencia_repeat_until .
+
+    $default  reduce using rule 34 (sentencia)
+
+
+State 46
+
+   35 sentencia: sentencia_return_comienzo_lista .
+
+    $default  reduce using rule 35 (sentencia)
+
+
+State 47
+
+   36 sentencia: avanzar_retroceder_lista .
+
+    $default  reduce using rule 36 (sentencia)
+
+
+State 48
+
+   57 avanzar_retroceder_lista: expresion . DESPLAZA PUNTO_COMA
+   61 expresion: expresion . OP_TERNARIO1 expresion ARROBA expresion
+   62          | expresion . ARROBA expresion
+   63          | expresion . OP_BINARIO expresion
+   64          | expresion . OP_RELACIONAL_IGUALDAD expresion
+   65          | expresion . OP_RELACIONAL_AND expresion
+   66          | expresion . OP_RELACIONAL_OR expresion
+   67          | expresion . OP_RELACIONAL expresion
+   68          | expresion . MAS_MENOS expresion
+
+    DESPLAZA                shift, and go to state 76
+    OP_TERNARIO1            shift, and go to state 77
+    OP_RELACIONAL_OR        shift, and go to state 78
+    OP_RELACIONAL_AND       shift, and go to state 79
+    OP_RELACIONAL_IGUALDAD  shift, and go to state 80
+    OP_RELACIONAL           shift, and go to state 81
+    MAS_MENOS               shift, and go to state 82
+    OP_BINARIO              shift, and go to state 83
+    ARROBA                  shift, and go to state 84
+
+
+State 49
+
+   71 expresion: funcion .
+
+    $default  reduce using rule 71 (expresion)
+
+
+State 50
+
+   20 cabecera_subprograma: tipo_t . IDENTIFICADOR $@5 ABRE_PAREN lista_parametros CIERRA_PAREN
+
+    IDENTIFICADOR  shift, and go to state 85
+
+
+State 51
+
+   72 expresion: agregado_lista .
+
+    $default  reduce using rule 72 (expresion)
+
+
+State 52
+
+   16 lista_id: IDENTIFICADOR .
+
+    $default  reduce using rule 16 (lista_id)
+
+
+State 53
+
+   14 cuerpo_declar_variables: tipo_t $@4 lista_id . PUNTO_COMA
+   17 lista_id: lista_id . COMA IDENTIFICADOR
+   18         | lista_id . error IDENTIFICADOR
+
+    error       shift, and go to state 86
+    PUNTO_COMA  shift, and go to state 87
+    COMA        shift, and go to state 88
+
+
+State 54
+
+   69 expresion: IDENTIFICADOR .
+   74 funcion: IDENTIFICADOR . ABRE_PAREN lista_f CIERRA_PAREN
+   75        | IDENTIFICADOR . ABRE_PAREN CIERRA_PAREN
+
+    ABRE_PAREN  shift, and go to state 66
+
+    $default  reduce using rule 69 (expresion)
+
+
+State 55
+
+   58 expresion: ABRE_PAREN expresion . CIERRA_PAREN
+   61          | expresion . OP_TERNARIO1 expresion ARROBA expresion
+   62          | expresion . ARROBA expresion
+   63          | expresion . OP_BINARIO expresion
+   64          | expresion . OP_RELACIONAL_IGUALDAD expresion
+   65          | expresion . OP_RELACIONAL_AND expresion
+   66          | expresion . OP_RELACIONAL_OR expresion
+   67          | expresion . OP_RELACIONAL expresion
+   68          | expresion . MAS_MENOS expresion
+
+    CIERRA_PAREN            shift, and go to state 89
+    OP_TERNARIO1            shift, and go to state 77
+    OP_RELACIONAL_OR        shift, and go to state 78
+    OP_RELACIONAL_AND       shift, and go to state 79
+    OP_RELACIONAL_IGUALDAD  shift, and go to state 80
+    OP_RELACIONAL           shift, and go to state 81
+    MAS_MENOS               shift, and go to state 82
+    OP_BINARIO              shift, and go to state 83
+    ARROBA                  shift, and go to state 84
+
+
+State 56
+
+   56 sentencia_return_comienzo_lista: DEVOLVER_DOLAR expresion . PUNTO_COMA
+   61 expresion: expresion . OP_TERNARIO1 expresion ARROBA expresion
+   62          | expresion . ARROBA expresion
+   63          | expresion . OP_BINARIO expresion
+   64          | expresion . OP_RELACIONAL_IGUALDAD expresion
+   65          | expresion . OP_RELACIONAL_AND expresion
+   66          | expresion . OP_RELACIONAL_OR expresion
+   67          | expresion . OP_RELACIONAL expresion
+   68          | expresion . MAS_MENOS expresion
+
+    PUNTO_COMA              shift, and go to state 90
+    OP_TERNARIO1            shift, and go to state 77
+    OP_RELACIONAL_OR        shift, and go to state 78
+    OP_RELACIONAL_AND       shift, and go to state 79
+    OP_RELACIONAL_IGUALDAD  shift, and go to state 80
+    OP_RELACIONAL           shift, and go to state 81
+    MAS_MENOS               shift, and go to state 82
+    OP_BINARIO              shift, and go to state 83
+    ARROBA                  shift, and go to state 84
+
+
+State 57
+
+   55 sentencia_repeat_until: REPETIR $@9 . sentencia HASTA ABRE_PAREN expresion CIERRA_PAREN PUNTO_COMA
+
+    error           shift, and go to state 21
+    ABRE_LLAVE      shift, and go to state 5
+    ABRE_PAREN      shift, and go to state 22
+    DEVOLVER_DOLAR  shift, and go to state 23
+    REPETIR         shift, and go to state 24
+    SI              shift, and go to state 25
+    MIENTRAS        shift, and go to state 26
+    LEER            shift, and go to state 27
+    ESCRIBIR        shift, and go to state 28
+    CONSTANTE       shift, and go to state 29
+    IDENTIFICADOR   shift, and go to state 30
+    ABRE_CORCHETE   shift, and go to state 31
+    MAS_MENOS       shift, and go to state 32
+    OP_UNARIO       shift, and go to state 33
+
+    bloque                           go to state 34
+    sentencia                        go to state 91
+    sentencia_asignacion             go to state 39
+    condicion_if                     go to state 40
+    sentencia_if                     go to state 41
+    sentencia_while                  go to state 42
+    sentencia_entrada                go to state 43
+    sentencia_salida                 go to state 44
+    sentencia_repeat_until           go to state 45
+    sentencia_return_comienzo_lista  go to state 46
+    avanzar_retroceder_lista         go to state 47
+    expresion                        go to state 48
+    funcion                          go to state 49
+    agregado_lista                   go to state 51
+
+
+State 58
+
+   38 condicion_if: SI ABRE_PAREN . expresion CIERRA_PAREN
+
+    error          shift, and go to state 21
+    ABRE_PAREN     shift, and go to state 22
+    CONSTANTE      shift, and go to state 29
+    IDENTIFICADOR  shift, and go to state 54
+    ABRE_CORCHETE  shift, and go to state 31
+    MAS_MENOS      shift, and go to state 32
+    OP_UNARIO      shift, and go to state 33
+
+    expresion       go to state 92
+    funcion         go to state 49
+    agregado_lista  go to state 51
+
+
+State 59
+
+   44 sentencia_while: MIENTRAS $@7 . ABRE_PAREN expresion CIERRA_PAREN $@8 sentencia
+
+    ABRE_PAREN  shift, and go to state 93
+
+
+State 60
+
+   46 lista_leer: IDENTIFICADOR .
+
+    $default  reduce using rule 46 (lista_leer)
+
+
+State 61
+
+   45 sentencia_entrada: LEER lista_leer . PUNTO_COMA
+   47 lista_leer: lista_leer . COMA IDENTIFICADOR
+   48           | lista_leer . error IDENTIFICADOR
+
+    error       shift, and go to state 94
+    PUNTO_COMA  shift, and go to state 95
+    COMA        shift, and go to state 96
+
+
+State 62
+
+   53 expr_cad: CADENA .
+
+    $default  reduce using rule 53 (expr_cad)
+
+
+State 63
+
+   49 sentencia_salida: ESCRIBIR lista_expresiones_o_cadena . PUNTO_COMA
+   51 lista_expresiones_o_cadena: lista_expresiones_o_cadena . COMA expr_cad
+
+    PUNTO_COMA  shift, and go to state 97
+    COMA        shift, and go to state 98
+
+
+State 64
+
+   50 lista_expresiones_o_cadena: expr_cad .
+
+    $default  reduce using rule 50 (lista_expresiones_o_cadena)
+
+
+State 65
+
+   52 expr_cad: expresion .
+   61 expresion: expresion . OP_TERNARIO1 expresion ARROBA expresion
+   62          | expresion . ARROBA expresion
+   63          | expresion . OP_BINARIO expresion
+   64          | expresion . OP_RELACIONAL_IGUALDAD expresion
+   65          | expresion . OP_RELACIONAL_AND expresion
+   66          | expresion . OP_RELACIONAL_OR expresion
+   67          | expresion . OP_RELACIONAL expresion
+   68          | expresion . MAS_MENOS expresion
+
+    OP_TERNARIO1            shift, and go to state 77
+    OP_RELACIONAL_OR        shift, and go to state 78
+    OP_RELACIONAL_AND       shift, and go to state 79
+    OP_RELACIONAL_IGUALDAD  shift, and go to state 80
+    OP_RELACIONAL           shift, and go to state 81
+    MAS_MENOS               shift, and go to state 82
+    OP_BINARIO              shift, and go to state 83
+    ARROBA                  shift, and go to state 84
+
+    $default  reduce using rule 52 (expr_cad)
+
+
+State 66
+
+   74 funcion: IDENTIFICADOR ABRE_PAREN . lista_f CIERRA_PAREN
+   75        | IDENTIFICADOR ABRE_PAREN . CIERRA_PAREN
+
+    error          shift, and go to state 21
+    ABRE_PAREN     shift, and go to state 22
+    CIERRA_PAREN   shift, and go to state 99
+    CONSTANTE      shift, and go to state 29
+    IDENTIFICADOR  shift, and go to state 54
+    ABRE_CORCHETE  shift, and go to state 31
+    MAS_MENOS      shift, and go to state 32
+    OP_UNARIO      shift, and go to state 33
+
+    expresion       go to state 100
+    funcion         go to state 49
+    agregado_lista  go to state 51
+    lista_f         go to state 101
+
+
+State 67
+
+   37 sentencia_asignacion: IDENTIFICADOR ASIGNACION . expresion PUNTO_COMA
+
+    error          shift, and go to state 21
+    ABRE_PAREN     shift, and go to state 22
+    CONSTANTE      shift, and go to state 29
+    IDENTIFICADOR  shift, and go to state 54
+    ABRE_CORCHETE  shift, and go to state 31
+    MAS_MENOS      shift, and go to state 32
+    OP_UNARIO      shift, and go to state 33
+
+    expresion       go to state 102
+    funcion         go to state 49
+    agregado_lista  go to state 51
+
+
+State 68
+
+   61 expresion: expresion . OP_TERNARIO1 expresion ARROBA expresion
+   62          | expresion . ARROBA expresion
+   63          | expresion . OP_BINARIO expresion
+   64          | expresion . OP_RELACIONAL_IGUALDAD expresion
+   65          | expresion . OP_RELACIONAL_AND expresion
+   66          | expresion . OP_RELACIONAL_OR expresion
+   67          | expresion . OP_RELACIONAL expresion
+   68          | expresion . MAS_MENOS expresion
+   81 lista: expresion .
+
+    OP_TERNARIO1            shift, and go to state 77
+    OP_RELACIONAL_OR        shift, and go to state 78
+    OP_RELACIONAL_AND       shift, and go to state 79
+    OP_RELACIONAL_IGUALDAD  shift, and go to state 80
+    OP_RELACIONAL           shift, and go to state 81
+    MAS_MENOS               shift, and go to state 82
+    OP_BINARIO              shift, and go to state 83
+    ARROBA                  shift, and go to state 84
+
+    $default  reduce using rule 81 (lista)
+
+
+State 69
+
+   78 agregado_lista: ABRE_CORCHETE lista . CIERRA_CORCHETE
+   82 lista: lista . COMA expresion
+
+    COMA             shift, and go to state 103
+    CIERRA_CORCHETE  shift, and go to state 104
+
+
+State 70
+
+   59 expresion: MAS_MENOS expresion .
+   61          | expresion . OP_TERNARIO1 expresion ARROBA expresion
+   62          | expresion . ARROBA expresion
+   63          | expresion . OP_BINARIO expresion
+   64          | expresion . OP_RELACIONAL_IGUALDAD expresion
+   65          | expresion . OP_RELACIONAL_AND expresion
+   66          | expresion . OP_RELACIONAL_OR expresion
+   67          | expresion . OP_RELACIONAL expresion
+   68          | expresion . MAS_MENOS expresion
+
+    $default  reduce using rule 59 (expresion)
+
+
+State 71
+
+   60 expresion: OP_UNARIO expresion .
+   61          | expresion . OP_TERNARIO1 expresion ARROBA expresion
+   62          | expresion . ARROBA expresion
+   63          | expresion . OP_BINARIO expresion
+   64          | expresion . OP_RELACIONAL_IGUALDAD expresion
+   65          | expresion . OP_RELACIONAL_AND expresion
+   66          | expresion . OP_RELACIONAL_OR expresion
+   67          | expresion . OP_RELACIONAL expresion
+   68          | expresion . MAS_MENOS expresion
+
+    $default  reduce using rule 60 (expresion)
+
+
+State 72
+
+    8 declar_subprograma: cabecera_subprograma $@3 . bloque
+
+    ABRE_LLAVE  shift, and go to state 5
+
+    bloque  go to state 105
+
+
+State 73
+
+    4 bloque: ABRE_LLAVE $@2 declar_de_variables_locales declar_de_subprogs sentencias CIERRA_LLAVE .
+
+    $default  reduce using rule 4 (bloque)
+
+
+State 74
+
+   26 sentencias: sentencias sentencia .
+
+    $default  reduce using rule 26 (sentencias)
+
+
+State 75
+
+   39 sentencia_if: condicion_if sentencia .
+   41             | condicion_if sentencia . SINO $@6 sentencia
+
+    SINO  shift, and go to state 106
+
+    SINO      [reduce using rule 39 (sentencia_if)]
+    $default  reduce using rule 39 (sentencia_if)
+
+
+State 76
+
+   57 avanzar_retroceder_lista: expresion DESPLAZA . PUNTO_COMA
+
+    PUNTO_COMA  shift, and go to state 107
+
+
+State 77
+
+   61 expresion: expresion OP_TERNARIO1 . expresion ARROBA expresion
+
+    error          shift, and go to state 21
+    ABRE_PAREN     shift, and go to state 22
+    CONSTANTE      shift, and go to state 29
+    IDENTIFICADOR  shift, and go to state 54
+    ABRE_CORCHETE  shift, and go to state 31
+    MAS_MENOS      shift, and go to state 32
+    OP_UNARIO      shift, and go to state 33
+
+    expresion       go to state 108
+    funcion         go to state 49
+    agregado_lista  go to state 51
+
+
+State 78
+
+   66 expresion: expresion OP_RELACIONAL_OR . expresion
+
+    error          shift, and go to state 21
+    ABRE_PAREN     shift, and go to state 22
+    CONSTANTE      shift, and go to state 29
+    IDENTIFICADOR  shift, and go to state 54
+    ABRE_CORCHETE  shift, and go to state 31
+    MAS_MENOS      shift, and go to state 32
+    OP_UNARIO      shift, and go to state 33
+
+    expresion       go to state 109
+    funcion         go to state 49
+    agregado_lista  go to state 51
+
+
+State 79
+
+   65 expresion: expresion OP_RELACIONAL_AND . expresion
+
+    error          shift, and go to state 21
+    ABRE_PAREN     shift, and go to state 22
+    CONSTANTE      shift, and go to state 29
+    IDENTIFICADOR  shift, and go to state 54
+    ABRE_CORCHETE  shift, and go to state 31
+    MAS_MENOS      shift, and go to state 32
+    OP_UNARIO      shift, and go to state 33
+
+    expresion       go to state 110
+    funcion         go to state 49
+    agregado_lista  go to state 51
+
+
+State 80
+
+   64 expresion: expresion OP_RELACIONAL_IGUALDAD . expresion
+
+    error          shift, and go to state 21
+    ABRE_PAREN     shift, and go to state 22
+    CONSTANTE      shift, and go to state 29
+    IDENTIFICADOR  shift, and go to state 54
+    ABRE_CORCHETE  shift, and go to state 31
+    MAS_MENOS      shift, and go to state 32
+    OP_UNARIO      shift, and go to state 33
+
+    expresion       go to state 111
+    funcion         go to state 49
+    agregado_lista  go to state 51
+
+
+State 81
+
+   67 expresion: expresion OP_RELACIONAL . expresion
+
+    error          shift, and go to state 21
+    ABRE_PAREN     shift, and go to state 22
+    CONSTANTE      shift, and go to state 29
+    IDENTIFICADOR  shift, and go to state 54
+    ABRE_CORCHETE  shift, and go to state 31
+    MAS_MENOS      shift, and go to state 32
+    OP_UNARIO      shift, and go to state 33
+
+    expresion       go to state 112
+    funcion         go to state 49
+    agregado_lista  go to state 51
+
+
+State 82
+
+   68 expresion: expresion MAS_MENOS . expresion
+
+    error          shift, and go to state 21
+    ABRE_PAREN     shift, and go to state 22
+    CONSTANTE      shift, and go to state 29
+    IDENTIFICADOR  shift, and go to state 54
+    ABRE_CORCHETE  shift, and go to state 31
+    MAS_MENOS      shift, and go to state 32
+    OP_UNARIO      shift, and go to state 33
+
+    expresion       go to state 113
+    funcion         go to state 49
+    agregado_lista  go to state 51
+
+
+State 83
+
+   63 expresion: expresion OP_BINARIO . expresion
+
+    error          shift, and go to state 21
+    ABRE_PAREN     shift, and go to state 22
+    CONSTANTE      shift, and go to state 29
+    IDENTIFICADOR  shift, and go to state 54
+    ABRE_CORCHETE  shift, and go to state 31
+    MAS_MENOS      shift, and go to state 32
+    OP_UNARIO      shift, and go to state 33
+
+    expresion       go to state 114
+    funcion         go to state 49
+    agregado_lista  go to state 51
+
+
+State 84
+
+   62 expresion: expresion ARROBA . expresion
+
+    error          shift, and go to state 21
+    ABRE_PAREN     shift, and go to state 22
+    CONSTANTE      shift, and go to state 29
+    IDENTIFICADOR  shift, and go to state 54
+    ABRE_CORCHETE  shift, and go to state 31
+    MAS_MENOS      shift, and go to state 32
+    OP_UNARIO      shift, and go to state 33
+
+    expresion       go to state 115
+    funcion         go to state 49
+    agregado_lista  go to state 51
+
+
+State 85
+
+   20 cabecera_subprograma: tipo_t IDENTIFICADOR . $@5 ABRE_PAREN lista_parametros CIERRA_PAREN
+
+    $default  reduce using rule 19 ($@5)
+
+    $@5  go to state 116
+
+
+State 86
+
+   18 lista_id: lista_id error . IDENTIFICADOR
+
+    IDENTIFICADOR  shift, and go to state 117
+
+
+State 87
+
+   14 cuerpo_declar_variables: tipo_t $@4 lista_id PUNTO_COMA .
+
+    $default  reduce using rule 14 (cuerpo_declar_variables)
+
+
+State 88
+
+   17 lista_id: lista_id COMA . IDENTIFICADOR
+
+    IDENTIFICADOR  shift, and go to state 118
+
+
+State 89
+
+   58 expresion: ABRE_PAREN expresion CIERRA_PAREN .
+
+    $default  reduce using rule 58 (expresion)
+
+
+State 90
+
+   56 sentencia_return_comienzo_lista: DEVOLVER_DOLAR expresion PUNTO_COMA .
+
+    $default  reduce using rule 56 (sentencia_return_comienzo_lista)
+
+
+State 91
+
+   55 sentencia_repeat_until: REPETIR $@9 sentencia . HASTA ABRE_PAREN expresion CIERRA_PAREN PUNTO_COMA
+
+    HASTA  shift, and go to state 119
+
+
+State 92
+
+   38 condicion_if: SI ABRE_PAREN expresion . CIERRA_PAREN
+   61 expresion: expresion . OP_TERNARIO1 expresion ARROBA expresion
+   62          | expresion . ARROBA expresion
+   63          | expresion . OP_BINARIO expresion
+   64          | expresion . OP_RELACIONAL_IGUALDAD expresion
+   65          | expresion . OP_RELACIONAL_AND expresion
+   66          | expresion . OP_RELACIONAL_OR expresion
+   67          | expresion . OP_RELACIONAL expresion
+   68          | expresion . MAS_MENOS expresion
+
+    CIERRA_PAREN            shift, and go to state 120
+    OP_TERNARIO1            shift, and go to state 77
+    OP_RELACIONAL_OR        shift, and go to state 78
+    OP_RELACIONAL_AND       shift, and go to state 79
+    OP_RELACIONAL_IGUALDAD  shift, and go to state 80
+    OP_RELACIONAL           shift, and go to state 81
+    MAS_MENOS               shift, and go to state 82
+    OP_BINARIO              shift, and go to state 83
+    ARROBA                  shift, and go to state 84
+
+
+State 93
+
+   44 sentencia_while: MIENTRAS $@7 ABRE_PAREN . expresion CIERRA_PAREN $@8 sentencia
+
+    error          shift, and go to state 21
+    ABRE_PAREN     shift, and go to state 22
+    CONSTANTE      shift, and go to state 29
+    IDENTIFICADOR  shift, and go to state 54
+    ABRE_CORCHETE  shift, and go to state 31
+    MAS_MENOS      shift, and go to state 32
+    OP_UNARIO      shift, and go to state 33
+
+    expresion       go to state 121
+    funcion         go to state 49
+    agregado_lista  go to state 51
+
+
+State 94
+
+   48 lista_leer: lista_leer error . IDENTIFICADOR
+
+    IDENTIFICADOR  shift, and go to state 122
+
+
+State 95
+
+   45 sentencia_entrada: LEER lista_leer PUNTO_COMA .
+
+    $default  reduce using rule 45 (sentencia_entrada)
+
+
+State 96
+
+   47 lista_leer: lista_leer COMA . IDENTIFICADOR
+
+    IDENTIFICADOR  shift, and go to state 123
+
+
+State 97
+
+   49 sentencia_salida: ESCRIBIR lista_expresiones_o_cadena PUNTO_COMA .
+
+    $default  reduce using rule 49 (sentencia_salida)
+
+
+State 98
+
+   51 lista_expresiones_o_cadena: lista_expresiones_o_cadena COMA . expr_cad
+
+    error          shift, and go to state 21
+    ABRE_PAREN     shift, and go to state 22
+    CONSTANTE      shift, and go to state 29
+    IDENTIFICADOR  shift, and go to state 54
+    CADENA         shift, and go to state 62
+    ABRE_CORCHETE  shift, and go to state 31
+    MAS_MENOS      shift, and go to state 32
+    OP_UNARIO      shift, and go to state 33
+
+    expr_cad        go to state 124
+    expresion       go to state 65
+    funcion         go to state 49
+    agregado_lista  go to state 51
+
+
+State 99
+
+   75 funcion: IDENTIFICADOR ABRE_PAREN CIERRA_PAREN .
+
+    $default  reduce using rule 75 (funcion)
+
+
+State 100
+
+   61 expresion: expresion . OP_TERNARIO1 expresion ARROBA expresion
+   62          | expresion . ARROBA expresion
+   63          | expresion . OP_BINARIO expresion
+   64          | expresion . OP_RELACIONAL_IGUALDAD expresion
+   65          | expresion . OP_RELACIONAL_AND expresion
+   66          | expresion . OP_RELACIONAL_OR expresion
+   67          | expresion . OP_RELACIONAL expresion
+   68          | expresion . MAS_MENOS expresion
+   79 lista_f: expresion .
+
+    OP_TERNARIO1            shift, and go to state 77
+    OP_RELACIONAL_OR        shift, and go to state 78
+    OP_RELACIONAL_AND       shift, and go to state 79
+    OP_RELACIONAL_IGUALDAD  shift, and go to state 80
+    OP_RELACIONAL           shift, and go to state 81
+    MAS_MENOS               shift, and go to state 82
+    OP_BINARIO              shift, and go to state 83
+    ARROBA                  shift, and go to state 84
+
+    $default  reduce using rule 79 (lista_f)
+
+
+State 101
+
+   74 funcion: IDENTIFICADOR ABRE_PAREN lista_f . CIERRA_PAREN
+   80 lista_f: lista_f . COMA expresion
+
+    CIERRA_PAREN  shift, and go to state 125
+    COMA          shift, and go to state 126
+
+
+State 102
+
+   37 sentencia_asignacion: IDENTIFICADOR ASIGNACION expresion . PUNTO_COMA
+   61 expresion: expresion . OP_TERNARIO1 expresion ARROBA expresion
+   62          | expresion . ARROBA expresion
+   63          | expresion . OP_BINARIO expresion
+   64          | expresion . OP_RELACIONAL_IGUALDAD expresion
+   65          | expresion . OP_RELACIONAL_AND expresion
+   66          | expresion . OP_RELACIONAL_OR expresion
+   67          | expresion . OP_RELACIONAL expresion
+   68          | expresion . MAS_MENOS expresion
+
+    PUNTO_COMA              shift, and go to state 127
+    OP_TERNARIO1            shift, and go to state 77
+    OP_RELACIONAL_OR        shift, and go to state 78
+    OP_RELACIONAL_AND       shift, and go to state 79
+    OP_RELACIONAL_IGUALDAD  shift, and go to state 80
+    OP_RELACIONAL           shift, and go to state 81
+    MAS_MENOS               shift, and go to state 82
+    OP_BINARIO              shift, and go to state 83
+    ARROBA                  shift, and go to state 84
+
+
+State 103
+
+   82 lista: lista COMA . expresion
+
+    error          shift, and go to state 21
+    ABRE_PAREN     shift, and go to state 22
+    CONSTANTE      shift, and go to state 29
+    IDENTIFICADOR  shift, and go to state 54
+    ABRE_CORCHETE  shift, and go to state 31
+    MAS_MENOS      shift, and go to state 32
+    OP_UNARIO      shift, and go to state 33
+
+    expresion       go to state 128
+    funcion         go to state 49
+    agregado_lista  go to state 51
+
+
+State 104
+
+   78 agregado_lista: ABRE_CORCHETE lista CIERRA_CORCHETE .
+
+    $default  reduce using rule 78 (agregado_lista)
+
+
+State 105
+
+    8 declar_subprograma: cabecera_subprograma $@3 bloque .
+
+    $default  reduce using rule 8 (declar_subprograma)
+
+
+State 106
+
+   41 sentencia_if: condicion_if sentencia SINO . $@6 sentencia
+
+    $default  reduce using rule 40 ($@6)
+
+    $@6  go to state 129
+
+
+State 107
+
+   57 avanzar_retroceder_lista: expresion DESPLAZA PUNTO_COMA .
+
+    $default  reduce using rule 57 (avanzar_retroceder_lista)
+
+
+State 108
+
+   61 expresion: expresion . OP_TERNARIO1 expresion ARROBA expresion
+   61          | expresion OP_TERNARIO1 expresion . ARROBA expresion
+   62          | expresion . ARROBA expresion
+   63          | expresion . OP_BINARIO expresion
+   64          | expresion . OP_RELACIONAL_IGUALDAD expresion
+   65          | expresion . OP_RELACIONAL_AND expresion
+   66          | expresion . OP_RELACIONAL_OR expresion
+   67          | expresion . OP_RELACIONAL expresion
+   68          | expresion . MAS_MENOS expresion
+
+    OP_TERNARIO1            shift, and go to state 77
+    OP_RELACIONAL_OR        shift, and go to state 78
+    OP_RELACIONAL_AND       shift, and go to state 79
+    OP_RELACIONAL_IGUALDAD  shift, and go to state 80
+    OP_RELACIONAL           shift, and go to state 81
+    MAS_MENOS               shift, and go to state 82
+    OP_BINARIO              shift, and go to state 83
+    ARROBA                  shift, and go to state 130
+
+
+State 109
+
+   61 expresion: expresion . OP_TERNARIO1 expresion ARROBA expresion
+   62          | expresion . ARROBA expresion
+   63          | expresion . OP_BINARIO expresion
+   64          | expresion . OP_RELACIONAL_IGUALDAD expresion
+   65          | expresion . OP_RELACIONAL_AND expresion
+   66          | expresion . OP_RELACIONAL_OR expresion
+   66          | expresion OP_RELACIONAL_OR expresion .
+   67          | expresion . OP_RELACIONAL expresion
+   68          | expresion . MAS_MENOS expresion
+
+    OP_RELACIONAL_AND       shift, and go to state 79
+    OP_RELACIONAL_IGUALDAD  shift, and go to state 80
+    OP_RELACIONAL           shift, and go to state 81
+    MAS_MENOS               shift, and go to state 82
+    OP_BINARIO              shift, and go to state 83
+    ARROBA                  shift, and go to state 84
+
+    $default  reduce using rule 66 (expresion)
+
+
+State 110
+
+   61 expresion: expresion . OP_TERNARIO1 expresion ARROBA expresion
+   62          | expresion . ARROBA expresion
+   63          | expresion . OP_BINARIO expresion
+   64          | expresion . OP_RELACIONAL_IGUALDAD expresion
+   65          | expresion . OP_RELACIONAL_AND expresion
+   65          | expresion OP_RELACIONAL_AND expresion .
+   66          | expresion . OP_RELACIONAL_OR expresion
+   67          | expresion . OP_RELACIONAL expresion
+   68          | expresion . MAS_MENOS expresion
+
+    OP_RELACIONAL_IGUALDAD  shift, and go to state 80
+    OP_RELACIONAL           shift, and go to state 81
+    MAS_MENOS               shift, and go to state 82
+    OP_BINARIO              shift, and go to state 83
+    ARROBA                  shift, and go to state 84
+
+    $default  reduce using rule 65 (expresion)
+
+
+State 111
+
+   61 expresion: expresion . OP_TERNARIO1 expresion ARROBA expresion
+   62          | expresion . ARROBA expresion
+   63          | expresion . OP_BINARIO expresion
+   64          | expresion . OP_RELACIONAL_IGUALDAD expresion
+   64          | expresion OP_RELACIONAL_IGUALDAD expresion .
+   65          | expresion . OP_RELACIONAL_AND expresion
+   66          | expresion . OP_RELACIONAL_OR expresion
+   67          | expresion . OP_RELACIONAL expresion
+   68          | expresion . MAS_MENOS expresion
+
+    OP_RELACIONAL  shift, and go to state 81
+    MAS_MENOS      shift, and go to state 82
+    OP_BINARIO     shift, and go to state 83
+    ARROBA         shift, and go to state 84
+
+    $default  reduce using rule 64 (expresion)
+
+
+State 112
+
+   61 expresion: expresion . OP_TERNARIO1 expresion ARROBA expresion
+   62          | expresion . ARROBA expresion
+   63          | expresion . OP_BINARIO expresion
+   64          | expresion . OP_RELACIONAL_IGUALDAD expresion
+   65          | expresion . OP_RELACIONAL_AND expresion
+   66          | expresion . OP_RELACIONAL_OR expresion
+   67          | expresion . OP_RELACIONAL expresion
+   67          | expresion OP_RELACIONAL expresion .
+   68          | expresion . MAS_MENOS expresion
+
+    MAS_MENOS   shift, and go to state 82
+    OP_BINARIO  shift, and go to state 83
+    ARROBA      shift, and go to state 84
+
+    $default  reduce using rule 67 (expresion)
+
+
+State 113
+
+   61 expresion: expresion . OP_TERNARIO1 expresion ARROBA expresion
+   62          | expresion . ARROBA expresion
+   63          | expresion . OP_BINARIO expresion
+   64          | expresion . OP_RELACIONAL_IGUALDAD expresion
+   65          | expresion . OP_RELACIONAL_AND expresion
+   66          | expresion . OP_RELACIONAL_OR expresion
+   67          | expresion . OP_RELACIONAL expresion
+   68          | expresion . MAS_MENOS expresion
+   68          | expresion MAS_MENOS expresion .
+
+    ARROBA  shift, and go to state 84
+
+    $default  reduce using rule 68 (expresion)
+
+
+State 114
+
+   61 expresion: expresion . OP_TERNARIO1 expresion ARROBA expresion
+   62          | expresion . ARROBA expresion
+   63          | expresion . OP_BINARIO expresion
+   63          | expresion OP_BINARIO expresion .
+   64          | expresion . OP_RELACIONAL_IGUALDAD expresion
+   65          | expresion . OP_RELACIONAL_AND expresion
+   66          | expresion . OP_RELACIONAL_OR expresion
+   67          | expresion . OP_RELACIONAL expresion
+   68          | expresion . MAS_MENOS expresion
+
+    ARROBA  shift, and go to state 84
+
+    $default  reduce using rule 63 (expresion)
+
+
+State 115
+
+   61 expresion: expresion . OP_TERNARIO1 expresion ARROBA expresion
+   62          | expresion . ARROBA expresion
+   62          | expresion ARROBA expresion .
+   63          | expresion . OP_BINARIO expresion
+   64          | expresion . OP_RELACIONAL_IGUALDAD expresion
+   65          | expresion . OP_RELACIONAL_AND expresion
+   66          | expresion . OP_RELACIONAL_OR expresion
+   67          | expresion . OP_RELACIONAL expresion
+   68          | expresion . MAS_MENOS expresion
+
+    ARROBA  shift, and go to state 84
+
+    $default  reduce using rule 62 (expresion)
+
+
+State 116
+
+   20 cabecera_subprograma: tipo_t IDENTIFICADOR $@5 . ABRE_PAREN lista_parametros CIERRA_PAREN
+
+    ABRE_PAREN  shift, and go to state 131
+
+
+State 117
+
+   18 lista_id: lista_id error IDENTIFICADOR .
+
+    $default  reduce using rule 18 (lista_id)
+
+
+State 118
+
+   17 lista_id: lista_id COMA IDENTIFICADOR .
+
+    $default  reduce using rule 17 (lista_id)
+
+
+State 119
+
+   55 sentencia_repeat_until: REPETIR $@9 sentencia HASTA . ABRE_PAREN expresion CIERRA_PAREN PUNTO_COMA
+
+    ABRE_PAREN  shift, and go to state 132
+
+
+State 120
+
+   38 condicion_if: SI ABRE_PAREN expresion CIERRA_PAREN .
+
+    $default  reduce using rule 38 (condicion_if)
+
+
+State 121
+
+   44 sentencia_while: MIENTRAS $@7 ABRE_PAREN expresion . CIERRA_PAREN $@8 sentencia
+   61 expresion: expresion . OP_TERNARIO1 expresion ARROBA expresion
+   62          | expresion . ARROBA expresion
+   63          | expresion . OP_BINARIO expresion
+   64          | expresion . OP_RELACIONAL_IGUALDAD expresion
+   65          | expresion . OP_RELACIONAL_AND expresion
+   66          | expresion . OP_RELACIONAL_OR expresion
+   67          | expresion . OP_RELACIONAL expresion
+   68          | expresion . MAS_MENOS expresion
+
+    CIERRA_PAREN            shift, and go to state 133
+    OP_TERNARIO1            shift, and go to state 77
+    OP_RELACIONAL_OR        shift, and go to state 78
+    OP_RELACIONAL_AND       shift, and go to state 79
+    OP_RELACIONAL_IGUALDAD  shift, and go to state 80
+    OP_RELACIONAL           shift, and go to state 81
+    MAS_MENOS               shift, and go to state 82
+    OP_BINARIO              shift, and go to state 83
+    ARROBA                  shift, and go to state 84
+
+
+State 122
+
+   48 lista_leer: lista_leer error IDENTIFICADOR .
+
+    $default  reduce using rule 48 (lista_leer)
+
+
+State 123
+
+   47 lista_leer: lista_leer COMA IDENTIFICADOR .
+
+    $default  reduce using rule 47 (lista_leer)
+
+
+State 124
+
+   51 lista_expresiones_o_cadena: lista_expresiones_o_cadena COMA expr_cad .
+
+    $default  reduce using rule 51 (lista_expresiones_o_cadena)
+
+
+State 125
+
+   74 funcion: IDENTIFICADOR ABRE_PAREN lista_f CIERRA_PAREN .
+
+    $default  reduce using rule 74 (funcion)
+
+
+State 126
+
+   80 lista_f: lista_f COMA . expresion
+
+    error          shift, and go to state 21
+    ABRE_PAREN     shift, and go to state 22
+    CONSTANTE      shift, and go to state 29
+    IDENTIFICADOR  shift, and go to state 54
+    ABRE_CORCHETE  shift, and go to state 31
+    MAS_MENOS      shift, and go to state 32
+    OP_UNARIO      shift, and go to state 33
+
+    expresion       go to state 134
+    funcion         go to state 49
+    agregado_lista  go to state 51
+
+
+State 127
+
+   37 sentencia_asignacion: IDENTIFICADOR ASIGNACION expresion PUNTO_COMA .
+
+    $default  reduce using rule 37 (sentencia_asignacion)
+
+
+State 128
+
+   61 expresion: expresion . OP_TERNARIO1 expresion ARROBA expresion
+   62          | expresion . ARROBA expresion
+   63          | expresion . OP_BINARIO expresion
+   64          | expresion . OP_RELACIONAL_IGUALDAD expresion
+   65          | expresion . OP_RELACIONAL_AND expresion
+   66          | expresion . OP_RELACIONAL_OR expresion
+   67          | expresion . OP_RELACIONAL expresion
+   68          | expresion . MAS_MENOS expresion
+   82 lista: lista COMA expresion .
+
+    OP_TERNARIO1            shift, and go to state 77
+    OP_RELACIONAL_OR        shift, and go to state 78
+    OP_RELACIONAL_AND       shift, and go to state 79
+    OP_RELACIONAL_IGUALDAD  shift, and go to state 80
+    OP_RELACIONAL           shift, and go to state 81
+    MAS_MENOS               shift, and go to state 82
+    OP_BINARIO              shift, and go to state 83
+    ARROBA                  shift, and go to state 84
+
+    $default  reduce using rule 82 (lista)
+
+
+State 129
+
+   41 sentencia_if: condicion_if sentencia SINO $@6 . sentencia
+
+    error           shift, and go to state 21
+    ABRE_LLAVE      shift, and go to state 5
+    ABRE_PAREN      shift, and go to state 22
+    DEVOLVER_DOLAR  shift, and go to state 23
+    REPETIR         shift, and go to state 24
+    SI              shift, and go to state 25
+    MIENTRAS        shift, and go to state 26
+    LEER            shift, and go to state 27
+    ESCRIBIR        shift, and go to state 28
+    CONSTANTE       shift, and go to state 29
+    IDENTIFICADOR   shift, and go to state 30
+    ABRE_CORCHETE   shift, and go to state 31
+    MAS_MENOS       shift, and go to state 32
+    OP_UNARIO       shift, and go to state 33
+
+    bloque                           go to state 34
+    sentencia                        go to state 135
+    sentencia_asignacion             go to state 39
+    condicion_if                     go to state 40
+    sentencia_if                     go to state 41
+    sentencia_while                  go to state 42
+    sentencia_entrada                go to state 43
+    sentencia_salida                 go to state 44
+    sentencia_repeat_until           go to state 45
+    sentencia_return_comienzo_lista  go to state 46
+    avanzar_retroceder_lista         go to state 47
+    expresion                        go to state 48
+    funcion                          go to state 49
+    agregado_lista                   go to state 51
+
+
+State 130
+
+   61 expresion: expresion OP_TERNARIO1 expresion ARROBA . expresion
+   62          | expresion ARROBA . expresion
+
+    error          shift, and go to state 21
+    ABRE_PAREN     shift, and go to state 22
+    CONSTANTE      shift, and go to state 29
+    IDENTIFICADOR  shift, and go to state 54
+    ABRE_CORCHETE  shift, and go to state 31
+    MAS_MENOS      shift, and go to state 32
+    OP_UNARIO      shift, and go to state 33
+
+    expresion       go to state 136
+    funcion         go to state 49
+    agregado_lista  go to state 51
+
+
+State 131
+
+   20 cabecera_subprograma: tipo_t IDENTIFICADOR $@5 ABRE_PAREN . lista_parametros CIERRA_PAREN
+
+    LISTA_DE  shift, and go to state 11
+    TIPO      shift, and go to state 12
+
+    $default  reduce using rule 24 (lista_parametros)
+
+    lista_parametros  go to state 137
+    parametro         go to state 138
+    tipo_t            go to state 139
+
+
+State 132
+
+   55 sentencia_repeat_until: REPETIR $@9 sentencia HASTA ABRE_PAREN . expresion CIERRA_PAREN PUNTO_COMA
+
+    error          shift, and go to state 21
+    ABRE_PAREN     shift, and go to state 22
+    CONSTANTE      shift, and go to state 29
+    IDENTIFICADOR  shift, and go to state 54
+    ABRE_CORCHETE  shift, and go to state 31
+    MAS_MENOS      shift, and go to state 32
+    OP_UNARIO      shift, and go to state 33
+
+    expresion       go to state 140
+    funcion         go to state 49
+    agregado_lista  go to state 51
+
+
+State 133
+
+   44 sentencia_while: MIENTRAS $@7 ABRE_PAREN expresion CIERRA_PAREN . $@8 sentencia
+
+    $default  reduce using rule 43 ($@8)
+
+    $@8  go to state 141
+
+
+State 134
+
+   61 expresion: expresion . OP_TERNARIO1 expresion ARROBA expresion
+   62          | expresion . ARROBA expresion
+   63          | expresion . OP_BINARIO expresion
+   64          | expresion . OP_RELACIONAL_IGUALDAD expresion
+   65          | expresion . OP_RELACIONAL_AND expresion
+   66          | expresion . OP_RELACIONAL_OR expresion
+   67          | expresion . OP_RELACIONAL expresion
+   68          | expresion . MAS_MENOS expresion
+   80 lista_f: lista_f COMA expresion .
+
+    OP_TERNARIO1            shift, and go to state 77
+    OP_RELACIONAL_OR        shift, and go to state 78
+    OP_RELACIONAL_AND       shift, and go to state 79
+    OP_RELACIONAL_IGUALDAD  shift, and go to state 80
+    OP_RELACIONAL           shift, and go to state 81
+    MAS_MENOS               shift, and go to state 82
+    OP_BINARIO              shift, and go to state 83
+    ARROBA                  shift, and go to state 84
+
+    $default  reduce using rule 80 (lista_f)
+
+
+State 135
+
+   41 sentencia_if: condicion_if sentencia SINO $@6 sentencia .
+
+    $default  reduce using rule 41 (sentencia_if)
+
+
+State 136
+
+   61 expresion: expresion . OP_TERNARIO1 expresion ARROBA expresion
+   61          | expresion OP_TERNARIO1 expresion ARROBA expresion .
+   62          | expresion . ARROBA expresion
+   62          | expresion ARROBA expresion .
+   63          | expresion . OP_BINARIO expresion
+   64          | expresion . OP_RELACIONAL_IGUALDAD expresion
+   65          | expresion . OP_RELACIONAL_AND expresion
+   66          | expresion . OP_RELACIONAL_OR expresion
+   67          | expresion . OP_RELACIONAL expresion
+   68          | expresion . MAS_MENOS expresion
+
+    ARROBA  shift, and go to state 84
+
+    PUNTO_COMA       reduce using rule 61 (expresion)
+    CIERRA_PAREN     reduce using rule 61 (expresion)
+    DESPLAZA         reduce using rule 61 (expresion)
+    COMA             reduce using rule 61 (expresion)
+    CIERRA_CORCHETE  reduce using rule 61 (expresion)
+    $default         reduce using rule 62 (expresion)
+
+
+State 137
+
+   20 cabecera_subprograma: tipo_t IDENTIFICADOR $@5 ABRE_PAREN lista_parametros . CIERRA_PAREN
+   22 lista_parametros: lista_parametros . COMA parametro
+   23                 | lista_parametros . error IDENTIFICADOR
+
+    error         shift, and go to state 142
+    CIERRA_PAREN  shift, and go to state 143
+    COMA          shift, and go to state 144
+
+
+State 138
+
+   21 lista_parametros: parametro .
+
+    $default  reduce using rule 21 (lista_parametros)
+
+
+State 139
+
+   25 parametro: tipo_t . IDENTIFICADOR
+
+    IDENTIFICADOR  shift, and go to state 145
+
+
+State 140
+
+   55 sentencia_repeat_until: REPETIR $@9 sentencia HASTA ABRE_PAREN expresion . CIERRA_PAREN PUNTO_COMA
+   61 expresion: expresion . OP_TERNARIO1 expresion ARROBA expresion
+   62          | expresion . ARROBA expresion
+   63          | expresion . OP_BINARIO expresion
+   64          | expresion . OP_RELACIONAL_IGUALDAD expresion
+   65          | expresion . OP_RELACIONAL_AND expresion
+   66          | expresion . OP_RELACIONAL_OR expresion
+   67          | expresion . OP_RELACIONAL expresion
+   68          | expresion . MAS_MENOS expresion
+
+    CIERRA_PAREN            shift, and go to state 146
+    OP_TERNARIO1            shift, and go to state 77
+    OP_RELACIONAL_OR        shift, and go to state 78
+    OP_RELACIONAL_AND       shift, and go to state 79
+    OP_RELACIONAL_IGUALDAD  shift, and go to state 80
+    OP_RELACIONAL           shift, and go to state 81
+    MAS_MENOS               shift, and go to state 82
+    OP_BINARIO              shift, and go to state 83
+    ARROBA                  shift, and go to state 84
+
+
+State 141
+
+   44 sentencia_while: MIENTRAS $@7 ABRE_PAREN expresion CIERRA_PAREN $@8 . sentencia
+
+    error           shift, and go to state 21
+    ABRE_LLAVE      shift, and go to state 5
+    ABRE_PAREN      shift, and go to state 22
+    DEVOLVER_DOLAR  shift, and go to state 23
+    REPETIR         shift, and go to state 24
+    SI              shift, and go to state 25
+    MIENTRAS        shift, and go to state 26
+    LEER            shift, and go to state 27
+    ESCRIBIR        shift, and go to state 28
+    CONSTANTE       shift, and go to state 29
+    IDENTIFICADOR   shift, and go to state 30
+    ABRE_CORCHETE   shift, and go to state 31
+    MAS_MENOS       shift, and go to state 32
+    OP_UNARIO       shift, and go to state 33
+
+    bloque                           go to state 34
+    sentencia                        go to state 147
+    sentencia_asignacion             go to state 39
+    condicion_if                     go to state 40
+    sentencia_if                     go to state 41
+    sentencia_while                  go to state 42
+    sentencia_entrada                go to state 43
+    sentencia_salida                 go to state 44
+    sentencia_repeat_until           go to state 45
+    sentencia_return_comienzo_lista  go to state 46
+    avanzar_retroceder_lista         go to state 47
+    expresion                        go to state 48
+    funcion                          go to state 49
+    agregado_lista                   go to state 51
+
+
+State 142
+
+   23 lista_parametros: lista_parametros error . IDENTIFICADOR
+
+    IDENTIFICADOR  shift, and go to state 148
+
+
+State 143
+
+   20 cabecera_subprograma: tipo_t IDENTIFICADOR $@5 ABRE_PAREN lista_parametros CIERRA_PAREN .
+
+    $default  reduce using rule 20 (cabecera_subprograma)
+
+
+State 144
+
+   22 lista_parametros: lista_parametros COMA . parametro
+
+    LISTA_DE  shift, and go to state 11
+    TIPO      shift, and go to state 12
+
+    parametro  go to state 149
+    tipo_t     go to state 139
+
+
+State 145
+
+   25 parametro: tipo_t IDENTIFICADOR .
+
+    $default  reduce using rule 25 (parametro)
+
+
+State 146
+
+   55 sentencia_repeat_until: REPETIR $@9 sentencia HASTA ABRE_PAREN expresion CIERRA_PAREN . PUNTO_COMA
+
+    PUNTO_COMA  shift, and go to state 150
+
+
+State 147
+
+   44 sentencia_while: MIENTRAS $@7 ABRE_PAREN expresion CIERRA_PAREN $@8 sentencia .
+
+    $default  reduce using rule 44 (sentencia_while)
+
+
+State 148
+
+   23 lista_parametros: lista_parametros error IDENTIFICADOR .
+
+    $default  reduce using rule 23 (lista_parametros)
+
+
+State 149
+
+   22 lista_parametros: lista_parametros COMA parametro .
+
+    $default  reduce using rule 22 (lista_parametros)
+
+
+State 150
+
+   55 sentencia_repeat_until: REPETIR $@9 sentencia HASTA ABRE_PAREN expresion CIERRA_PAREN PUNTO_COMA .
+
+    $default  reduce using rule 55 (sentencia_repeat_until)

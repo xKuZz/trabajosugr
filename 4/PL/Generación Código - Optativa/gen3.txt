@@ -1,0 +1,28 @@
+principal {
+	declaracion
+	lista de entero lalista;
+	findeclaracion
+	entero sumarLista(lista de entero l) {
+		declaracion
+		entero suma, i;
+		findeclaracion
+		entero sumarDosElementos(entero a, entero b) {
+			devolver a + b;
+		}
+		suma = 0;
+		i = 0;
+		repetir {
+		  	suma = sumarDosElementos(suma, ?l);
+		  	l>>;
+		  	i = i + 1;
+		} hasta (i == #l);
+		devolver suma;
+	}
+	lalista = [1,2,3,4,5,6];
+	escribir "La sumatoria de los elementos de la lista es: ", sumarLista(lalista), "\n";
+	lalista<<;
+	escribir "El penúltimo elemento de lista es: ", ?lalista, "\n";
+	escribir "El elemento en la posición 2 de la lista es: ", lalista@2, "\n";
+	escribir "Si añadimos al final de lista un 7 nos queda: ", lalista++7@#lalista, "\n";
+}
+

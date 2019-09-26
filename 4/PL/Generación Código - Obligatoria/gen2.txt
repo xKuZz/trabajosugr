@@ -1,0 +1,53 @@
+principal {
+	declaracion
+	entero n, curr, ultim, cuenta, primero;
+	findeclaracion
+	curr = 2;
+	ultim = 0;
+	cuenta = 0;
+	primero = 1;
+	escribir "Introduce número: ";
+	leer n;
+	escribir n, " == ";
+	curr = 2;
+
+	mientras (curr <= n) {
+		declaracion
+		entero d;
+		findeclaracion
+		d = n / curr;
+
+		si ( d * curr == n) {
+			si (curr != ultim) {
+				ultim = curr;
+				cuenta = 1;
+			}
+			sino
+				cuenta = cuenta + 1;
+
+			n = n / curr;
+		}
+		sino {
+			si (cuenta > 0) {
+				si (primero == 0) escribir " *";
+				primero = 0;
+				escribir " ", curr;
+				si (cuenta > 1) escribir "^", cuenta;
+			}
+
+			curr = curr + 1;
+			cuenta = 0;
+		}
+	}
+
+	si (cuenta > 0) {
+		si (primero == 0) escribir " *";
+		primero = 0;
+		escribir " ", curr;
+		si (cuenta > 1) escribir "^", cuenta;
+	}
+	
+
+	escribir "\n";
+}
+

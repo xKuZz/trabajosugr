@@ -1,0 +1,6 @@
+lexico.l
+main.c
+semantico.c
+semantico.h
+sintactico.y
+test.lenguaje

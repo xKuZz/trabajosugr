@@ -1,0 +1,25 @@
+principal {
+	declaracion
+	entero n, curr;
+	findeclaracion
+	escribir "Introduce número: ";
+	leer n;
+	escribir " ", n, " == ";
+	curr = 2;
+
+	mientras (curr <= n) {
+		declaracion
+		entero d;
+		findeclaracion
+		d = n/curr;
+
+		si (d * curr == n) {
+			escribir "* ", curr, " ";
+			n = n /curr;
+		}
+		sino 
+			curr = curr+1;
+	}
+	escribir "\n";
+}
+
