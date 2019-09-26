@@ -1,0 +1,149 @@
+﻿<grammar version="1.0" xml:lang="es-ES" root="rootRule" tag-format="semantics-ms/1.0" xmlns="http://www.w3.org/2001/06/grammar">
+  <rule id="rootRule">
+    <one-of>
+      <item>
+        <tag>$="AMPLIAR";</tag>
+        <one-of>
+          <item> Zum </item>
+          <item> Hacer Zum </item>
+          <item> Aumentar </item>
+          <item> Ampliar </item>
+          <item> Mas cerca </item>
+        </one-of>
+      </item>
+      <item>
+        <tag>$="REDUCIR";</tag>
+        <one-of>
+          <item> Menos zum </item>
+          <item> Quitar Zum </item>
+          <item> Reducir </item>
+          <item> Alejar </item>
+          <item> Mas pequeño </item>
+        </one-of>
+      </item>
+      <item>
+        <tag>$="DERECHA";</tag>
+        <one-of>
+          <item> siguiente anio </item>
+          <item> desplazar derecha </item>
+          <item> pasar anio </item>
+          <item> siguiente época </item>
+        </one-of>
+      </item>
+      <item>
+        <tag>$="IZQUIERDA";</tag>
+        <one-of>
+          <item> anio anterior </item>
+          <item> desplazar izquierda </item>
+          <item> anterior anio </item>
+          <item> época anterior </item>
+        </one-of>
+      </item>
+    <item>
+        <tag>$="ARRIBA";</tag>
+        <one-of>
+          <item> anterior evento </item>
+          <item> anterior acontecimiento </item>
+          <item> desplazar arriba </item>
+          <item> mover arriba </item>
+        </one-of>
+    </item>
+    <item>
+        <tag>$="ABAJO";</tag>
+        <one-of>
+          <item> evento siguiente </item>
+          <item> acontecimiento siguiente </item>
+          <item> desplazar abajo </item>
+          <item> mover abajo </item>
+        </one-of>
+    </item>
+    <item>
+        <tag>$="ABRIR";</tag>
+        <one-of>
+          <item> ampliar información </item>
+          <item> abrir información </item>
+          <item> ver información </item>
+          <item> mas información </item>
+        </one-of>
+    </item>
+      <item>
+        <tag>$="CERRAR";</tag>
+        <one-of>
+          <item> cerrar información </item>
+          <item> minimizar información </item>
+          <item> cerrar ventana </item>
+        </one-of>
+      </item>
+      <item>
+        <tag>$.accion="RECONOCER";</tag>
+        <one-of>
+          <item> ir al anio <ruleref uri="#anios"/> <tag>$.year=$$;</tag> </item>
+        </one-of>
+      </item>
+      <item>
+        <tag>$.accion="INFORMACION";</tag>
+        <one-of>
+          <item> infórmame sobre </item>
+          <item> ver evento </item>
+        </one-of>
+        <ruleref uri="#sucesos"/> <tag>$.year=$$.year;$.pos=$$.pos;</tag>
+      </item>
+    </one-of>
+  </rule>
+  <rule id="anios">
+    <one-of>
+      <item>
+        <tag>$="1996";</tag>
+        <one-of>
+          <item> mil novecientos noventa y seis </item>
+          <item> noventa y seis </item>
+        </one-of>
+      </item>
+      <item>
+        <tag>$="1492";</tag>
+        <one-of>
+          <item> mil cuatrocientos noventa y dos </item>
+        </one-of>
+      </item>
+    <item>
+        <tag>$="1936";</tag>
+        <one-of>
+          <item> mil novecientos treinta y seis </item>
+          <item> treinta y seis </item>
+        </one-of>
+      </item>
+    </one-of>
+  </rule>
+  <rule id="sucesos" scope="public">
+    <one-of>
+      <item>
+        <tag>$.year=1936; $.pos=0;</tag>
+        Fallecimiento de Federico García Lorca
+      </item>
+      <item>
+        <tag>$.year=1936; $.pos=1;</tag>
+        Guerra Civil Española
+      </item>
+      <item>
+        <tag>$.year=1492; $.pos=0;</tag>
+        Toma de Granada
+      </item>
+      <item>
+        <tag>$.year=1492; $.pos=1;</tag>
+        Descubrimiento de América
+      </item>
+      <item>
+        <tag>$.year=1996; $.pos=0;</tag>
+        Mes de diciembre más lluvioso del siglo
+      </item>
+      <item>
+        <tag>$.year=1996; $.pos=1;</tag>
+        Elecciones generales mil novecientos noventa y seis
+      </item>
+      <item>
+        <tag>$.year=1996; $.pos=2;</tag>
+        EL ÓPALO Y LA SERPIENTE
+      </item>
+    </one-of>
+  </rule>
+</grammar>

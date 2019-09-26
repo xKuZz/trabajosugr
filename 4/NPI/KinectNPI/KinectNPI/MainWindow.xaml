@@ -1,0 +1,25 @@
+﻿<Window x:Class="NPIGrupo7Kinect.MainWindow"
+        WindowState="Maximized"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NPIGrupo7Kinect"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.Background>
+        <ImageBrush ImageSource="/NPIGrupo7Kinect;component/Resources/Fondo_1.png"/>
+    </Window.Background>
+    <Grid HorizontalAlignment="Center">
+        <Label x:Name="Año" Content="Año" VerticalAlignment="Top" Margin="241,10,244,0" HorizontalAlignment="Center" FontSize="72" FontWeight="Bold"/>
+        <ListBox x:Name="Sucesos" HorizontalAlignment="Center" Height="500" VerticalAlignment="Center" Margin="10,41,10,10" FontFamily="Elephant" FontSize="22" Foreground="#FF1B0EA0" Width="1000">
+            <ListBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="0.5">
+                    <GradientStop Color="#FFBDA0B2" Offset="1"/>
+                    <GradientStop Color="#FFD1E5E1"/>
+                </LinearGradientBrush>
+            </ListBox.Background>
+        </ListBox>
+
+    </Grid>
+</Window>

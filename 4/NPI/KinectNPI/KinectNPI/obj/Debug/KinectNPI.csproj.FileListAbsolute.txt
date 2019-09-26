@@ -1,0 +1,46 @@
+C:\Users\Carlos Morales\Desktop\KinectNPI\KinectNPI\bin\Debug\NPIGrupo7Kinect.exe.config
+C:\Users\Carlos Morales\Desktop\KinectNPI\KinectNPI\bin\Debug\NPIGrupo7Kinect.exe
+C:\Users\Carlos Morales\Desktop\KinectNPI\KinectNPI\bin\Debug\NPIGrupo7Kinect.pdb
+C:\Users\Carlos Morales\Desktop\KinectNPI\KinectNPI\bin\Debug\Microsoft.Kinect.dll
+C:\Users\Carlos Morales\Desktop\KinectNPI\KinectNPI\bin\Debug\Microsoft.Kinect.xml
+C:\Users\Carlos Morales\Desktop\KinectNPI\KinectNPI\obj\Debug\KinectNPI.csprojResolveAssemblyReference.cache
+C:\Users\Carlos Morales\Desktop\KinectNPI\KinectNPI\obj\Debug\MainWindow.g.cs
+C:\Users\Carlos Morales\Desktop\KinectNPI\KinectNPI\obj\Debug\App.g.cs
+C:\Users\Carlos Morales\Desktop\KinectNPI\KinectNPI\obj\Debug\NPIGrupo7Kinect_MarkupCompile.cache
+C:\Users\Carlos Morales\Desktop\KinectNPI\KinectNPI\obj\Debug\NPIGrupo7Kinect_MarkupCompile.lref
+C:\Users\Carlos Morales\Desktop\KinectNPI\KinectNPI\obj\Debug\MainWindow.baml
+C:\Users\Carlos Morales\Desktop\KinectNPI\KinectNPI\obj\Debug\NPIGrupo7Kinect.g.resources
+C:\Users\Carlos Morales\Desktop\KinectNPI\KinectNPI\obj\Debug\NPIGrupo7Kinect.Properties.Resources.resources
+C:\Users\Carlos Morales\Desktop\KinectNPI\KinectNPI\obj\Debug\KinectNPI.csproj.GenerateResource.Cache
+C:\Users\Carlos Morales\Desktop\KinectNPI\KinectNPI\obj\Debug\KinectNPI.csproj.CoreCompileInputs.cache
+C:\Users\Carlos Morales\Desktop\KinectNPI\KinectNPI\obj\Debug\NPIGrupo7Kinect.exe
+C:\Users\Carlos Morales\Desktop\KinectNPI\KinectNPI\obj\Debug\NPIGrupo7Kinect.pdb
+C:\Users\Carlos Morales\Desktop\KinectNPI\KinectNPI\obj\Debug\Window1.g.cs
+C:\Users\Carlos Morales\Desktop\KinectNPI\KinectNPI\obj\Debug\Window1.baml
+C:\Users\Carlos Morales\Desktop\KinectNPI\KinectNPI\bin\Debug\Microsoft.Speech.dll
+C:\Users\Carlos Morales\Desktop\KinectNPI\KinectNPI\obj\Debug\Themes\BureauBlack.baml
+C:\Users\Carlos Morales\Desktop\KinectNPI\KinectNPI\obj\Debug\Themes\BureauBlue.baml
+C:\Users\Carlos Morales\Desktop\KinectNPI\KinectNPI\obj\Debug\Themes\ExpressionDark.baml
+C:\Users\Carlos Morales\Desktop\KinectNPI\KinectNPI\obj\Debug\Themes\ExpressionLight.baml
+C:\Users\Carlos Morales\Desktop\KinectNPI\KinectNPI\obj\Debug\Themes\ShinyBlue.baml
+C:\Users\Carlos Morales\Desktop\KinectNPI\KinectNPI\obj\Debug\Themes\ShinyRed.baml
+C:\Users\Carlos Morales\Desktop\KinectNPI\KinectNPI\obj\Debug\Themes\WhistlerBlue.baml
+C:\Users\David Criado Ramón\Desktop\KinectNPI\KinectNPI\KinectNPI\bin\Debug\NPIGrupo7Kinect.exe.config
+C:\Users\David Criado Ramón\Desktop\KinectNPI\KinectNPI\KinectNPI\bin\Debug\NPIGrupo7Kinect.exe
+C:\Users\David Criado Ramón\Desktop\KinectNPI\KinectNPI\KinectNPI\bin\Debug\NPIGrupo7Kinect.pdb
+C:\Users\David Criado Ramón\Desktop\KinectNPI\KinectNPI\KinectNPI\bin\Debug\Microsoft.Kinect.dll
+C:\Users\David Criado Ramón\Desktop\KinectNPI\KinectNPI\KinectNPI\bin\Debug\Microsoft.Kinect.xml
+C:\Users\David Criado Ramón\Desktop\KinectNPI\KinectNPI\KinectNPI\obj\Debug\KinectNPI.csprojResolveAssemblyReference.cache
+C:\Users\David Criado Ramón\Desktop\KinectNPI\KinectNPI\KinectNPI\obj\Debug\MainWindow.g.cs
+C:\Users\David Criado Ramón\Desktop\KinectNPI\KinectNPI\KinectNPI\obj\Debug\Window1.g.cs
+C:\Users\David Criado Ramón\Desktop\KinectNPI\KinectNPI\KinectNPI\obj\Debug\App.g.cs
+C:\Users\David Criado Ramón\Desktop\KinectNPI\KinectNPI\KinectNPI\obj\Debug\NPIGrupo7Kinect_MarkupCompile.cache
+C:\Users\David Criado Ramón\Desktop\KinectNPI\KinectNPI\KinectNPI\obj\Debug\NPIGrupo7Kinect_MarkupCompile.lref
+C:\Users\David Criado Ramón\Desktop\KinectNPI\KinectNPI\KinectNPI\obj\Debug\MainWindow.baml
+C:\Users\David Criado Ramón\Desktop\KinectNPI\KinectNPI\KinectNPI\obj\Debug\Window1.baml
+C:\Users\David Criado Ramón\Desktop\KinectNPI\KinectNPI\KinectNPI\obj\Debug\NPIGrupo7Kinect.g.resources
+C:\Users\David Criado Ramón\Desktop\KinectNPI\KinectNPI\KinectNPI\obj\Debug\NPIGrupo7Kinect.Properties.Resources.resources
+C:\Users\David Criado Ramón\Desktop\KinectNPI\KinectNPI\KinectNPI\obj\Debug\KinectNPI.csproj.GenerateResource.Cache
+C:\Users\David Criado Ramón\Desktop\KinectNPI\KinectNPI\KinectNPI\obj\Debug\KinectNPI.csproj.CoreCompileInputs.cache
+C:\Users\David Criado Ramón\Desktop\KinectNPI\KinectNPI\KinectNPI\obj\Debug\NPIGrupo7Kinect.exe
+C:\Users\David Criado Ramón\Desktop\KinectNPI\KinectNPI\KinectNPI\obj\Debug\NPIGrupo7Kinect.pdb

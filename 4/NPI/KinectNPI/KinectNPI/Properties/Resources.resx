@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="descubrimiento" xml:space="preserve">
+    <value>Se denomina descubrimiento de América al acontecimiento histórico que comenzó, el 12 de octubre de 1492, con la llegada a América de una expedición capitaneada por Cristóbal Colón por mandato de los reyes Isabel y Fernando de Castilla, la cual había partido del Puerto de Palos dos meses y nueve días antes y que, tras cruzar el océano Atlántico, llegó a una isla del continente americano, Guanahaní, a lo que creía que era la India. Este acontecimiento constituye uno de los momentos fundamentales de la historia universal y representa el encuentro de dos mundos que habían evolucionado independientemente desde el origen de la humanidad,1​ lo cual cambió el rumbo de la historia.
+
+Varios años después de la llegada de Colón, los europeos fueron dándose cuenta de que las tierras a las que habían llegado no estaban conectadas por tierra a Europa y el resto de la «tierra conocida», como se esperaba de la India, sino que formaban un continente distinto, lo que hizo que a partir de 1507 se le empezara a llamar América. En los siglos posteriores desde el descubrimiento del nuevo mundo, España, Portugal y en menor medida Inglaterra, Francia, Holanda y otras potencias europeas compitieron por la exploración, conquista y colonización del continente americano, resultando en el nacimiento de nuevos pueblos, culturas y estados.
+
+Existe controversia respecto al empleo del término «descubrimiento» con la llegada de la expedición de Colón, ya que, por un lado y desde el punto de vista de la humanidad, América ya estaba poblada y había sido descubierta por los primeros seres humanos que llegaron al continente hace aproximadamente 14.000 años, y, por otro lado, existe un probable primer arribo europeo realizado por los vikingos en el siglo X, aunque sin evidencias de contacto.
+
+El contacto con los españoles tuvo un enorme impacto en América, como la introducción de diferentes especies vegetales y animales, por ejemplo el caballo, especie introducida en el segundo viaje de Cristóbal Colón, extinguido en América en tiempos remotos.
+
+En el artículo se distingue claramente entre el «acto mismo del descubrimiento», entendido como una serie de viajes que hicieron navegantes españoles que llegaron a América y la dimensión del encuentro entre culturas, y el posterior proceso histórico conocido como la conquista de América que los europeos realizaron a continuación. Así, el encuentro entre esas dos culturas tuvo importantísimas consecuencias para ambos.</value>
+  </data>
+  <data name="elecciones" xml:space="preserve">
+    <value>El domingo 3 de marzo de 1996 se celebraron elecciones generales en España. El presidente del Gobierno, el socialista Felipe González, se vio obligado a convocar elecciones cuando aún no habían pasado tres años de las anteriores, después de que su socio de gobierno Convergencia i Unió rompiera el pacto de legislatura y fuese imposible aprobar los presupuestos de aquel año. De hecho, las elecciones estaban originalmente previstas para el domingo 6 de julio de 1997, adelantándose 70 semanas.
+
+La de 1996 fue la elección más reñida del período democrático de España. El PSOE, en el gobierno desde hacía 14 años, perdió las elecciones en favor del Partido Popular, siendo su líder en aquel momento José María Aznar. Por su parte, la Izquierda Unida de Julio Anguita aumentó su número de escaños hasta conseguir su máximo histórico, 21 escaños. El Partido Popular se convirtió en el partido vencedor con el menor número de escaños hasta la fecha, 156, y con una diferencia de sólo un 1,16% de votos y 15 escaños sobre el PSOE, que se despedía del poder después de 14 años seguidos de gobierno. El triunfo por la mínima de los populares requirió dos meses de negociaciones hasta que en mayo, Aznar logra ser investido presidente con el apoyo de los nacionalistas de CIU (16, Pacto del Majestic), PNV (5) y Coalición Canaria (4).
+
+Respecto a 1993 el PP ganó al PSOE en las provincias de Asturias, Cantabria, Álava, Huesca, Zaragoza, Teruel, Albacete, Toledo y en la ciudad autónoma de Melilla.
+
+El mismo día tuvieron lugar elecciones parlamentarias en Andalucía. Al igual que las generales, fueron anticipadas debido a la imposibilidad de aprobar los presupuestos, ya que el PSOE no contaba con mayoría en el Parlamento andaluz y no obtuvo el apoyo de ninguno de los otros grupos con representación en la cámara.2​</value>
+  </data>
+  <data name="guerra" xml:space="preserve">
+    <value>La Guerra Civil Española, o Guerra de España,3​4​5​6​ fue un conflicto social, político y bélico —que más tarde repercutiría también en una crisis económica— que se desencadenó en España tras el fracaso parcial del golpe de Estado del 17 y 18 de julio de 1936 llevado a cabo por una parte del Ejército contra el gobierno de la Segunda República. Tras el bloqueo del Estrecho y el posterior puente aéreo que, gracias a la rápida colaboración de la Alemania nazi y la Italia fascista, trasladó las tropas rebeldes a la Península en las últimas semanas de julio,7​8​ comenzó una guerra civil que concluiría el 1 de abril de 1939 con el último parte de guerra firmado por Francisco Franco, declarando su victoria y estableciendo una dictadura que duraría hasta su muerte el 20 de noviembre de 1975.</value>
+  </data>
+  <data name="lluvioso" xml:space="preserve">
+    <value>Los expertos del Instituto Nacional de Meteorología sabían que en diciembre cayó mucha agua en Andalucía, pero no esperaban lo que ellos llaman una efeméride, un récord de precipitaciones. Sólo hasta la primera semana de enero, cuando han llegado los datos de los observatorios provinciales, pudieron afirmar que nunca el suelo andaluz recibió tanta en ese mes. Al menos, en lo concerniente a la Andalucía occidental y desde finales del siglo XIX, época desde la que se dispone de datos fiables.Incluso en las provincias en las que no se ha batido, como Almería, Cádiz o Granada, se ha rozado la plusmarca. En Cádiz, donde se encuentra desde 1805 el observatorio más antiguo de España, han caído 320 litros por metro cuadrado, más que en 1890 (315) y que en 1962 (308), aunque menos que en 1958 (377).
+
+En Sevilla, Huelva, Málaga y Córdoba las cifras son inapalebles. Ningún anciano podrá recordar un diciembre más lluvioso. Hay que remontarse a otros meses y otros años, como el 13 de enero de 1561, cuando Málaga quedó aislada por las aguas y tuvo que ser abastecida de víveres por el mar. La Nochevieja de Sevilla no se había adornado con tanta agua desde diciembre de 1958, cuando cayeron 295 litros. Esta vez fueron 311.
+
+"Rezaremos para que no, llueva igual en enero", dice Angel Rivera, el jefe del Area de Predicción del Instituto. Ni él ni ninguno de sus compañeros pueden vaticinar a mucho más allá de cinco días vista. En 1996 enero fue el mes de invierno más lluvioso. Si éste de 1997 se deja caer con las mismas aguas, nadie podrá predecir los desastres.
+
+Lo que ocurre en Andalucía no guarda mucha relación con el resto del país. En regiones como Galicia o Cantabria, a pesar de haberse registrado un invierno muy húmedo, no se ha batido ningún récord.</value>
+  </data>
+  <data name="lorca" xml:space="preserve">
+    <value>Federico García Lorca (Fuente Vaqueros,1​ Granada, 5 de junio de 1898-camino de Víznar a Alfacar, Granada, 18 de agosto de 1936)2​ fue un poeta, dramaturgo y prosista español, también conocido por su destreza en muchas otras artes. Adscrito a la llamada Generación del 27, fue el poeta de mayor influencia y popularidad de la literatura española del siglo xx. Como dramaturgo se le considera una de las cimas del teatro español del siglo xx, junto con Valle-Inclán y Buero Vallejo. Murió fusilado tras el golpe de Estado que dio origen a la Guerra Civil Española un mes después de iniciada esta.</value>
+  </data>
+  <data name="opalo" xml:space="preserve">
+    <value>En 1973, un equipo de arqueólogos descubre en el oasis egipcio de Kiffa las ruinas de una iglesia copta. Durante las excavaciones se desentierra la biblioteca del convento y en ella se localizan casi un centenar de manuscritos escritos en árabe, griego y latín. Uno de estos manuscritos, el libro de la luz en las sombras, data del siglo XII y puede ser la obra inédita del Avempace. El azar quiere que entre los paleógrafos encargados de estudiar los pergaminos se encuentren el español Julián Mestre y la doctora Susan Friedemann, quienes realizan una serie de descubrimientos en torno al enigmático libro. Un destino común les hará seguir las huellas del manuscrito a través de la historia de España durante los años de dominación musulmana. Ese mismo destino guiará los pasos de Julián Mestre por Fez, donde conoce a Said el alfaquí, y por la mítica ciudad de Bagdad, donde alguien intentará hacerle creer que está enfrentándose a algo sobrenatural.
+
+Esta novela de intriga, en la que suceden las muertes de aquellos que han querido conocer el contenido del Libro de la luz en las sombras, es un recorrido por las ancestrales tradiciones de los pueblos que poblaron Al Andalus durante la Edad Media. Es también una novela sobre el amor y la codicia, sobre la ambición de saber y sobre las miserias del hombre que pierde la cordura persiguiendo un sueño imposible. Finalmente el libro desvelará su secreto y el ouroboros, la serpiente que se muerde la cola, mostrará su verdadero aspecto.</value>
+  </data>
+  <data name="tomaGranada" xml:space="preserve">
+    <value>La Guerra de Granada fue el conjunto de campañas militares que tuvieron lugar entre 1482 y 1491, emprendidas por la reina Isabel I de Castilla y su esposo el rey Fernando II de Aragón en el interior del reino nazarí de Granada, que culminaron con la Capitulaciones de Granada del rey Boabdil, quien había oscilado entre la alianza, el doble juego, la contemporización y el enfrentamiento abierto con ambos bandos y que tuvo como consecuencias la integración en la Corona de Castilla del último reino musulmán de la península ibérica finalizándose el proceso histórico de la Reconquista que los reinos cristianos habían comenzado en el siglo VIII y por el cual el papa Alejandro VI reconoció a Isabel y Fernando con el título de Reyes Católicos en 1496.
+
+Los diez años de guerra no fueron un esfuerzo continuo: solía marcar un ritmo estacional de campañas iniciadas en primavera y detenidas en el invierno.
+
+Además, el conflicto estuvo sujeto a numerosas vicisitudes bélicas y civiles. En el bando cristiano fue decisiva la capacidad de integración en una misión común que emprendió principalmente la Corona de Castilla apoyada por la nobleza castellana y el imprescindible impulso del clero bajo la autoridad de la emergente Monarquía Católica. La participación de la Corona de Aragón fue de menor importancia: aparte de la presencia del propio rey Fernando, consistió en la colaboración naval, la aportación de expertos artilleros y el empréstito financiero. En el bando musulmán fueron notables los enfrentamientos internos que favorecieron el éxito de sus contrarios.
+
+La protocolaria entrega de las llaves de la ciudad y la fortaleza-palacio de la Alhambra, el 2 de enero de 1492 se sigue conmemorando todos los años en esa fecha con un tremolar de banderas desde el Ayuntamiento de la Ciudad de Granada</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="XMLSpeech" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\XMLSpeech.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+</root>
