@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="grupo7npi.npiinterfazoral.MainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBlack">
+
+        <ImageView
+            android:id="@+id/personaje"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scaleX="1"
+            android:scaleY="1"
+            app:srcCompat="@drawable/personaje"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/Centro"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/InferiorIzquierda"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/subSpanish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            android:onClick="listenButtonOnClick"
+            android:layout_marginStart="22dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginBottom="22dp"
+            app:fabSize="mini"
+            android:clickable="true"
+            app:srcCompat="@drawable/spain_sub" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/InferiorCentral"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        >
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/hablar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="22dp"
+            android:clickable="true"
+            android:onClick="listenButtonOnClick"
+            android:scaleX="2"
+            android:scaleY="2"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/ic_activar_micro"
+            tools:layout_editor_absoluteX="172dp"
+            tools:layout_editor_absoluteY="422dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/InferiorDerecha"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        >
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/subEnglish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="22dp"
+            android:layout_marginEnd="22dp"
+            android:onClick="listenButtonOnClick"
+            android:layout_marginBottom="22dp"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/eng_cc" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/SuperiorIzquierda"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteY="25dp">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/spanishButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginStart="22dp"
+            android:onClick="listenButtonOnClick"
+            android:scaleX="1.8"
+            android:scaleY="1.8"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/ic_spain"
+            tools:layout_editor_absoluteX="22dp"
+            tools:layout_editor_absoluteY="23dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/SuperiorCentral"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="25dp"
+        android:gravity="center_horizontal"
+        tools:layout_editor_absoluteY="22dp">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/iconoPreguntas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:onClick="listenButtonOnClick"
+            android:clickable="true"
+            app:srcCompat="@android:drawable/ic_menu_help"
+            tools:layout_editor_absoluteX="172dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/SuperiorDerecha"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="right"
+        tools:layout_editor_absoluteY="22dp">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/englishButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="22dp"
+            android:layout_marginRight="22dp"
+            android:layout_marginTop="25dp"
+
+            android:clickable="true"
+            android:onClick="listenButtonOnClick"
+            android:scaleX="2"
+            android:scaleY="2"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/ic_uk"
+            tools:layout_editor_absoluteX="322dp"
+            tools:layout_editor_absoluteY="22dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/Centro"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/texto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textColor="@color/colorAccent"
+            android:text="TextView"
+            android:textAlignment="center"
+            tools:layout_editor_absoluteX="35dp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="92dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="375dp">
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
